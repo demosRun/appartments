@@ -103,7 +103,6 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-
             <div class="card-body px-0 pb-2">
               <div class="table-responsive p-0">
                 <table class="table align-items-center justify-content-center mb-0">
@@ -128,13 +127,42 @@
             </div>
           </div>
         </div>
+        <!-- 分页 -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+          </ul>
+        </nav>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">住宿ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">佣金</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订日期</th>
+                    </tr>
+                  </thead>
+                  <tbody id="graphqlTable2">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- 分页 -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-      </ul>
-    </nav>
+    
     <!-- End Navbar -->
     <div class="container-fluid py-2">
       <footer class="footer py-4  ">
@@ -234,6 +262,24 @@
         </li>`
           }
           document.querySelector('.pagination').innerHTML = pageHtmlStr
+          break;
+        case "searchReservations2":
+          let tempData2 = ``
+          for (let index = 0; index < meg.value.length; index++) {
+            const element = meg.value[index];
+            tempData2 += `<tr>
+              <td><p class="text-sm font-weight-bold mb-0">${element.hotel}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.clientName}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.arrival.split(' ')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.departure.split(' ')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderStatusDesc}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.amount}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0"></p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderId}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderDate}</p></td>
+              </tr>`
+          }
+          window.graphqlTable2.innerHTML = tempData2
           break;
       
         default:
