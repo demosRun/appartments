@@ -133,7 +133,6 @@
             </div>
           </div>
         </div>
-        
       </div>
       <!-- 分页 -->
       <nav aria-label="Page navigation example">
@@ -191,29 +190,29 @@
     wsOptions.messageCallBack = (meg) => {
       console.log(meg)
       switch (meg.type) {
-        case "searchReservations":
-          let tempData = ``
-          for (let index = 0; index < meg.value.reservations.length; index++) {
-            const element = meg.value.reservations[index];
-            tempData += `<tr>
-              <td><p class="text-sm font-weight-bold mb-0">${element.propertyId}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.bookerFirstName} ${element.bookerLastName}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.checkin}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.checkout}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.aggregatedRoomStatus}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.amountInvoicedOrRoomPriceSum}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.actualCommissionRaw}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.id}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.createdAt.split(' ')[0]}</p></td>
+        case "searchReservations2":
+          let tempData2 = ``
+          for (let index = 0; index < meg.value.orderList.length; index++) {
+            const element = meg.value.orderList[index];
+            tempData2 += `<tr>
+              <td><p class="text-sm font-weight-bold mb-0">${element.hotel}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.clientName}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.arrival.split(' ')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.departure.split(' ')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderStatusDesc}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.amount}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0"></p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderId}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.orderDate}</p></td>
               </tr>`
           }
-          window.graphqlTable.innerHTML = tempData
+          window.graphqlTable.innerHTML = tempData2
           // 生成页码
-          const pageNum = Math.ceil(meg.value.totalRecords / 100)
+          const pageNum = Math.ceil(meg.value.total / 10)
           let pageHtmlStr = ``
           if (nowPage > 1) {
             pageHtmlStr += `<li class="page-item">
-          <a class="page-link" href="./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${nowPage - 1}" aria-label="Previous">
+          <a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${nowPage - 1}" aria-label="Previous">
             <span class="material-symbols-rounded">
               keyboard_arrow_left
             </span>
@@ -223,9 +222,9 @@
           for (let index = 0; index < pageNum; index++) {
             if (index > nowPage - 10 && index < nowPage + 10) {
               if (index + 1 == nowPage) {
-                pageHtmlStr += `<li class="page-item"><a class="page-link active" href="./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
+                pageHtmlStr += `<li class="page-item"><a class="page-link active" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
               } else {
-                pageHtmlStr += `<li class="page-item"><a class="page-link" href="./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
+                pageHtmlStr += `<li class="page-item"><a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
               }
             }
             
@@ -233,7 +232,7 @@
           }
           if (nowPage < pageNum) {
             pageHtmlStr += `<li class="page-item">
-          <a class="page-link" href="./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${pageNum}" aria-label="Next">
+          <a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${pageNum}" aria-label="Next">
             <span class="material-symbols-rounded">
               keyboard_arrow_right
             </span>
@@ -242,19 +241,20 @@
           }
           document.querySelector('.pagination').innerHTML = pageHtmlStr
           break;
+      
         default:
           break;
       }
     }
     wsOptions.onReady = (meg) => {
-      window.owoSocket.send('getSearchReservations', {
+      window.owoSocket.send('getSearchReservations2', {
         page: nowPage - 1,
         propertyId: getQueryParam('propertyId'),
         start:  getQueryParam('start'),
         end:  getQueryParam('end'),
       })
       setInterval(() => {
-        window.owoSocket.send('getSearchReservations', {
+        window.owoSocket.send('getSearchReservations2', {
           page: nowPage - 1,
           propertyId: getQueryParam('propertyId'),
           start:  getQueryParam('start'),
@@ -264,7 +264,7 @@
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
     function search () {
-      location.href = `./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
+      location.href = `./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
     function getDateNDaysAgo (n) {
       const date = new Date();
