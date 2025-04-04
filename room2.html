@@ -118,9 +118,10 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">佣金</th>
+                      
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订日期</th>
                     </tr>
@@ -196,12 +197,13 @@
             const element = meg.value.orderList[index];
             tempData2 += `<tr>
               <td><p class="text-sm font-weight-bold mb-0">${element.hotel}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.clientName}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.clientName.split(',').join('<br>')}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.arrival.split(' ')[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.departure.split(' ')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.merchantRoomName}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.orderStatusDesc}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.amount}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0"></p></td>
+              
               <td><p class="text-sm font-weight-bold mb-0">${element.orderId}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.orderDate}</p></td>
               </tr>`
