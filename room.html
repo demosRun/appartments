@@ -119,6 +119,8 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间数</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">佣金</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
@@ -180,6 +182,8 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
   <script>
+    window.dataInfoS = {}
+    window.needUpdata = []
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param) ? urlParams.get(param) : '';
@@ -189,7 +193,7 @@
       isAdmin: true
     }
     wsOptions.messageCallBack = (meg) => {
-      console.log(meg)
+      // console.log(meg)
       switch (meg.type) {
         case "searchReservations":
           let tempData = ``
@@ -200,10 +204,12 @@
               <td><p class="text-sm font-weight-bold mb-0">${element.bookerFirstName} ${element.bookerLastName}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.checkin}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.checkout}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.aggregatedRoomStatus}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.aggregatedRoomStatus == 'ok' ? '正常' : '已取消'}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 room_info_${element.id}">${window.dataInfoS[element.id] ? window.dataInfoS[element.id][0] : ""}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 num_guests_${element.id}">${window.dataInfoS[element.id] ? window.dataInfoS[element.id][1] : ""}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.amountInvoicedOrRoomPriceSum}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.actualCommissionRaw}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.id}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.id} ${window.dataInfoS[element.id] ? 'checked' : 'n_check'}" onclick="getReservationDetails(${element.id}, ${element.propertyId})">${element.id}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.createdAt.split(' ')[0]}</p></td>
               </tr>`
           }
@@ -242,6 +248,17 @@
           }
           document.querySelector('.pagination').innerHTML = pageHtmlStr
           break;
+        case "reservationDetails":
+          const roomInfo = meg.value.room_info[0] ? meg.value.room_info[0] : '/'
+          document.querySelector(`.room_info_${meg.value.id}`).innerText = roomInfo
+          document.querySelector(`.num_guests_${meg.value.id}`).innerText = meg.value.num_guests ? meg.value.num_guests : '0'
+          window.needUpdata.push([meg.value.id, roomInfo, meg.value.room_info.length])
+          window.dataInfoS[meg.value.id] = [roomInfo, meg.value.room_info.length]
+          if (document.querySelector(`.n_check_${meg.value.id}`)) {
+            document.querySelector(`.n_check_${meg.value.id}`).classList.remove('n_check')
+          }
+          console.log(meg.value)
+          break
         default:
           break;
       }
@@ -260,7 +277,7 @@
           start:  getQueryParam('start'),
           end:  getQueryParam('end'),
         })
-      }, 10000);
+      }, 16000);
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
     function search () {
@@ -276,6 +293,11 @@
 
       return `${year}-${month}-${day}`;
     }
+
+    function getReservationDetails (book_id, hotel_id) {
+      window.owoSocket.send('getReservationDetails', {book_id, hotel_id})
+    }
+
     if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
     else window.startDate.value = getDateNDaysAgo(0)
 
@@ -283,6 +305,56 @@
     else window.endDate.value = getDateNDaysAgo(30)
 
     if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+
+    function getNewData () {
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+      };
+
+      fetch("https://cunchu.site/work/storage/appartment/booking.json", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          window.dataInfoS = result
+          console.log(result)
+        })
+        .catch((error) => console.error(error));
+    }
+    getNewData()
+    // 定期保存更新的信息
+    setInterval(() => {
+      if (window.needUpdata.length > 0) {
+        console.log(window.needUpdata)
+        
+        window.needUpdata.forEach(element => {
+          window.dataInfoS[element[0]] = [element[1], element[2]]
+        });
+        window.needUpdata = []
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          "path": "appartment/booking.json",
+          "data": JSON.stringify(window.dataInfoS)
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow"
+        };
+
+        fetch("https://cos.lamp.run/write", requestOptions)
+        setTimeout(() => {
+          getNewData ()
+        }, 1000);
+      }
+      // 检查是否有没有获取的
+      if (document.querySelector('.n_check')) {
+        document.querySelector('.n_check').click()
+      }
+    }, 10000);
   </script>
 </body>
 

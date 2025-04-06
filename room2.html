@@ -116,9 +116,11 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">住宿ID</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间数</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
                       
@@ -135,13 +137,13 @@
           </div>
         </div>
       </div>
-      <!-- 分页 -->
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-        </ul>
-      </nav>
+      
     </div>
-    
+    <!-- 分页 -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      </ul>
+    </nav>
     <!-- End Navbar -->
     <div class="container-fluid py-2">
       <footer class="footer py-4  ">
@@ -180,6 +182,8 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
   <script>
+    window.dataInfoS = {}
+    window.needUpdata = []
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param) ? urlParams.get(param) : '';
@@ -189,22 +193,28 @@
       isAdmin: true
     }
     wsOptions.messageCallBack = (meg) => {
-      console.log(meg)
+      // console.log(meg)
       switch (meg.type) {
         case "searchReservations2":
           let tempData2 = ``
           for (let index = 0; index < meg.value.orderList.length; index++) {
             const element = meg.value.orderList[index];
+            let orderStatusDesc = element.orderStatusDesc
+            if (orderStatusDesc == '已取消' && dataInfoS[element.orderId]) {
+              orderStatusDesc = (dataInfoS[element.orderId] ? dataInfoS[element.orderId][1] : 0)
+            }
             tempData2 += `<tr>
               <td><p class="text-sm font-weight-bold mb-0">${element.hotel}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.clientName.split(',').join('<br>')}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 phone_${element.orderId}">${window.dataInfoS[element.orderId] ? window.dataInfoS[element.orderId][0] : ""}</p></td>
+              
               <td><p class="text-sm font-weight-bold mb-0">${element.arrival.split(' ')[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.departure.split(' ')[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.merchantRoomName}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.orderStatusDesc}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.quantity}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${orderStatusDesc}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.amount}</p></td>
-              
-              <td><p class="text-sm font-weight-bold mb-0">${element.orderId}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.orderId} ${window.dataInfoS[element.orderId] ? 'checked' : 'n_check'}" onclick="getReservationDetails('${element.orderId}', '${element.hotel}', '${element.formId}')">${element.orderId}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.orderDate}</p></td>
               </tr>`
           }
@@ -243,7 +253,23 @@
           }
           document.querySelector('.pagination').innerHTML = pageHtmlStr
           break;
-      
+        case "reservationDetails2":
+          console.log(meg.value.orderID)
+          const value = meg.value
+          if (document.querySelector(`.phone_${value.orderID}`)) {
+            const phone = value.clientPhone ? value.clientPhone : '/'
+            const penaltyAmount = value.cancelApplyInfo ? value.cancelApplyInfo.penaltyAmount : '0'
+            document.querySelector(`.phone_${value.orderID}`).innerText = phone
+            window.dataInfoS[meg.value.orderID] = [phone, meg.value.num_guests, penaltyAmount]
+            if (document.querySelector(`.n_check_${value.orderID}`)) {
+              document.querySelector(`.n_check_${value.orderID}`).classList.remove('n_check')
+            }
+            window.needUpdata.push([value.orderID, phone, penaltyAmount])
+          } else {
+            console.error(`${value.orderID}不存在!`)
+          }
+          
+          break
         default:
           break;
       }
@@ -262,7 +288,7 @@
           start:  getQueryParam('start'),
           end:  getQueryParam('end'),
         })
-      }, 10000);
+      }, 17000);
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
     function search () {
@@ -285,6 +311,60 @@
     else window.endDate.value = getDateNDaysAgo(30)
 
     if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+
+    function getReservationDetails (book_id, hotel_id, formId) {
+      console.log(book_id, hotel_id, formId)
+      window.owoSocket.send('getReservationDetails2', {book_id, hotel_id, formId})
+    }
+    function getNewData (callBack) {
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+      };
+
+      fetch("https://cunchu.site/work/storage/appartment/ctrip.json", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          window.dataInfoS = result
+          // console.log(result)
+          if (callBack) callBack()
+        })
+        .catch((error) => console.error(error));
+    }
+    getNewData()
+    // 定期保存更新的信息
+    setInterval(() => {
+      if (window.needUpdata.length > 0) {
+        console.log(window.needUpdata)
+        getNewData(() => {
+          window.needUpdata.forEach(element => {
+            window.dataInfoS[element[0]] = [element[1], element[2]]
+          });
+          window.needUpdata = []
+          const myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/json");
+
+          const raw = JSON.stringify({
+            "path": "appartment/ctrip.json",
+            "data": JSON.stringify(window.dataInfoS)
+          });
+
+          const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+          };
+
+          fetch("https://cos.lamp.run/write", requestOptions)
+        })
+        
+      }
+      // 检查是否有没有获取的
+      if (document.querySelector('.n_check')) {
+        document.querySelector('.n_check').click()
+      }
+    }, 10000);
   </script>
 </body>
 
