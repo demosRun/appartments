@@ -91,11 +91,13 @@
                 <table class="table justify-content-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">address</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">cityName</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">消息</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间名称</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Homes</th>
+                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda homes upc</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Hotel</th> -->
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expedia</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trip</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">操作</th>
                     </tr>
                   </thead>
@@ -191,12 +193,48 @@
       }
     }
     wsOptions.onReady = (meg) => {
-      window.owoSocket.send('getGroupHomeListProperties', '')
+      // window.owoSocket.send('getGroupHomeListProperties', '')
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
-    setInterval(() => {
-      getMessage()
-    }, 10000);
+    // setInterval(() => {
+    //   getMessage()
+    // }, 10000);
+
+    // 获取房间数据
+    const myHeaders = new Headers();
+    myHeaders.append("content-type", "application/json");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch("/room.json", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        let tempData = ``
+        for (const key in result) {
+          if (Object.prototype.hasOwnProperty.call(result, key)) {
+            const element = result[key];
+            console.log(element)
+            tempData += `<tr>
+            <td><p class="text-sm font-weight-bold mb-0">${key}</p></td>
+            <td><p class="text-sm font-weight-bold mb-0">${element["Agoda Homes"].join('<br>')}</p></td>
+            <td><p class="text-sm font-weight-bold mb-0">${element["Booking"].join('<br>')}</p></td>
+            <td><p class="text-sm font-weight-bold mb-0">${element["Expedia"].join('<br>')}</p></td>
+            <td><p class="text-sm font-weight-bold mb-0">${element["Trip"].join('<br>')}</p></td>
+            <td class="align-items-center">
+              <a href="./inventory.html?hotelID=${element.id}" class="text-secondary font-weight-normal text-xs">
+                编辑
+              </a>
+            </td>
+            </tr>`   
+          }
+        }
+        window.graphqlTable.innerHTML = tempData
+      })
+      .catch((error) => console.error(error));
   </script>
 </body>
 
