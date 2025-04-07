@@ -203,74 +203,141 @@
     let wsOptions = {
       isAdmin: true
     }
-    wsOptions.messageCallBack = (meg) => {
-      console.log(meg)
-      switch (meg.type) {
-        case "inventory":
-          let tempData = ``
-          // 先生成卡片
-          meg.value.list.forEach(element => {
-            tempData += `<div class="item">
+
+    function creatCardBooking(meg) {
+      let tempData = ``
+      // 先生成卡片
+      meg.value.list.forEach(element => {
+        tempData += `<div class="item">
+        <div class="card h-100">
+          <div class="card-header pb-0 p-3">
+            <div class="row">
+              <div class="col-12 d-flex align-items-center">
+                <h6 class="mb-0">Booking:${element[1]}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-3 pb-0">
+            <ul class="list-group list-group-${element[0]}">
+            </ul>
+          </div>
+        </div>
+      </div>`
+      });
+      window.viewBox.innerHTML += tempData
+      let nameList = Object.fromEntries(meg.value.list)
+      for (const key in meg.value.rooms) {
+        if (Object.prototype.hasOwnProperty.call(meg.value.rooms, key)) {
+          let tempData2 = ``
+          const element = meg.value.rooms[key];
+          const datesList = element.rates[element.rate_ids[0]].dates
+          // 先对日期进行排序
+          let dateList = Object.keys(datesList).sort((a, b) => new Date(a) - new Date(b));
+          dateList.forEach(datesKey => {
+            const element2 = datesList[datesKey];
+            tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+              <div class="d-flex flex-column">
+                <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.dates[datesKey].rooms_to_sell}）</h6>
+                <span class="text-xs">${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}</span>
+              </div>
+              <div class="d-flex align-items-center text-sm">
+                ${element2.status}
+                <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg(${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}, '${key}', '${element.rate_ids[0]}', '${datesKey}', '${datesKey}', '${element.num_guests}', ${element.dates[datesKey].rooms_to_sell})">修改</button>
+              </div>
+            </li>`
+          });
+          console.log(element)
+          setTimeout(() => {
+            document.querySelector('.list-group-' + key).innerHTML = tempData2
+          }, 0);
+        }
+      }
+    }
+
+    function creatCardCtrip(meg) {
+      let tempData = ``
+      // 先生成卡片
+      for (const key in meg.value.roomTypeInfo) {
+        if (Object.prototype.hasOwnProperty.call(meg.value.roomTypeInfo, key)) {
+          const element = meg.value.roomTypeInfo[key];
+          tempData += `<div class="item">
             <div class="card h-100">
               <div class="card-header pb-0 p-3">
                 <div class="row">
                   <div class="col-12 d-flex align-items-center">
-                    <h6 class="mb-0">Booking:${element[1]}</h6>
+                    <h6 class="mb-0">Ctrip:${element.name}</h6>
                   </div>
                 </div>
               </div>
               <div class="card-body p-3 pb-0">
-                <ul class="list-group list-group-${element[0]}">
+                <ul class="list-group list-group-${element.id}">
                 </ul>
               </div>
             </div>
           </div>`
-          });
-          window.viewBox.innerHTML = tempData
-          let nameList = Object.fromEntries(meg.value.list)
-          for (const key in meg.value.rooms) {
-            if (Object.prototype.hasOwnProperty.call(meg.value.rooms, key)) {
-              let tempData2 = ``
-              const element = meg.value.rooms[key];
-              const datesList = element.rates[element.rate_ids[0]].dates
-              // 先对日期进行排序
-              let dateList = Object.keys(datesList).sort((a, b) => new Date(a) - new Date(b));
-              dateList.forEach(datesKey => {
-                const element2 = datesList[datesKey];
-                // tempData += `<tr>
-                // <td><p class="text-sm font-weight-bold mb-0">${key}</p></td>
-                // <td><p class="text-sm font-weight-bold mb-0">${nameList[key]}</p></td>
-                // <td><p class="text-sm font-weight-bold mb-0">${datesKey}</p></td>
-                // <td><p class="text-sm font-weight-bold mb-0">${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}</p></td>
-                // <td class="align-middle text-sm"><span class="badge badge-sm bg-gradient-success">${element2.status}</span></td>
-                // <td class="align-middle">
-                //   <a href="javascript:xgjg(${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}, '${key}', '${element.rate_ids[0]}', '${datesKey}', '${datesKey}', '${element.num_guests}');" class="text-secondary font-weight-normal text-xs">
-                //     改价格
-                //   </a>
-                // </td>
-                // </tr>`
-                tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.dates[datesKey].rooms_to_sell}）</h6>
-                    <span class="text-xs">${element2.status}</span>
-                  </div>
-                  <div class="d-flex align-items-center text-sm">
-                    ${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}
-                    <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg(${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}, '${key}', '${element.rate_ids[0]}', '${datesKey}', '${datesKey}', '${element.num_guests}', ${element.dates[datesKey].rooms_to_sell})">修改</button>
-                  </div>
-                </li>`
-              });
-              console.log(element)
-              setTimeout(() => {
-                document.querySelector('.list-group-' + key).innerHTML = tempData2
-              }, 0);
-            }
-          }
+          // 获取房价详情
+          window.owoSocket.send('queryRoomTypeDetail', {
+            page: nowPage - 1,
+            productId: element.productIds[0],
+            roomTypeId: element.id,
+            ebooking: ebookingID,
+            cipher: meg.value.cipher,
+            start:  window.startDate.value.replaceAll('-', ''),
+            end:  window.endDate.value.replaceAll('-', ''),
+          })
+        }
+      }
+      window.viewBox.innerHTML += tempData
 
-          
+    }
+    // 遍历取价格
+    function findRoomPriceInfo(obj, results = []) {
+      if (typeof obj === 'object' && obj !== null) {
+        for (let key in obj) {
+          if (key === 'roomPriceInfo') {
+            results.push(obj[key].price);
+          } else {
+            findRoomPriceInfo(obj[key], results);
+          }
+        }
+      }
+      return results;
+    }
+    function queryRoomTypeDetailCtrip (meg) {
+      let tempData2 = ``
+      for (const datesKey in meg.value.rangData) {
+        if (Object.prototype.hasOwnProperty.call(meg.value.rangData, datesKey)) {
+          const element = meg.value.rangData[datesKey];
+          tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+            <div class="d-flex flex-column">
+              <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.roomToSell.value}）</h6>
+              <span class="text-xs">${findRoomPriceInfo(element.product)}</span>
+            </div>
+            <div class="d-flex align-items-center text-sm">
+              ${element.roomToSell.freeSale}
+              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form">修改</button>
+            </div>
+          </li>`
+        }
+      }
+      setTimeout(() => {
+        document.querySelector('.list-group-' + meg.value.roomTypeId).innerHTML = tempData2
+      }, 0);
+    }
+    wsOptions.messageCallBack = (meg) => {
+      console.log(meg)
+      switch (meg.type) {
+        case "inventory":
+          creatCardBooking(meg)
+          break;
+        case "inventoryCtrip":
+          creatCardCtrip(meg)
           break;
         case "updatePriceCallBack":
           location.reload()
+          break
+        case "queryRoomTypeDetailCtrip":
+          queryRoomTypeDetailCtrip(meg)
           break
         default:
           break;
@@ -290,13 +357,17 @@
       fetch("/room.json", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-          let bookingID = result[getQueryParam('hotelID')].Booking[0]
+          window.bookingID = result[getQueryParam('hotelID')].Booking[0]
+          window.ebookingID = result[getQueryParam('hotelID')].Trip[0]
+          // booking
           window.owoSocket.send('getInventory', {
             page: nowPage - 1,
             hotelID: bookingID,
+            ebooking: ebookingID,
             start:  getQueryParam('start'),
             end:  getQueryParam('end'),
           })
+          
         })
         .catch((error) => console.error(error));
       
