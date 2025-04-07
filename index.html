@@ -92,12 +92,12 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间名称</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Homes</th>
-                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda homes upc</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Hotel</th> -->
+                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Homes</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda homes upc</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Hotel</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expedia</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trip</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trip</th> -->
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">操作</th>
                     </tr>
                   </thead>
@@ -220,12 +220,8 @@
             console.log(element)
             tempData += `<tr>
             <td><p class="text-sm font-weight-bold mb-0">${key}</p></td>
-            <td><p class="text-sm font-weight-bold mb-0">${element["Agoda Homes"].join('<br>')}</p></td>
-            <td><p class="text-sm font-weight-bold mb-0">${element["Booking"].join('<br>')}</p></td>
-            <td><p class="text-sm font-weight-bold mb-0">${element["Expedia"].join('<br>')}</p></td>
-            <td><p class="text-sm font-weight-bold mb-0">${element["Trip"].join('<br>')}</p></td>
             <td class="align-items-center">
-              <a href="./inventory.html?hotelID=${element.id}" class="text-secondary font-weight-normal text-xs">
+              <a href="./inventory.html?hotelID=${key}" class="text-secondary font-weight-normal text-xs">
                 编辑
               </a>
             </td>
