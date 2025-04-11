@@ -30,57 +30,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="https://cunchu.site/work/material-dashboard/assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-        <span class="ms-1 text-sm text-dark">酒店管理后台</span>
-      </a>
-    </div>
-    <hr class="horizontal dark mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./index.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">房间管理</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./room.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">Booking订单</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./room2.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">携程管理</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">退出登录</a>
-      </div>
-    </div>
-  </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">房间管理</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">定价管理</li>
-          </ol>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        </div>
-      </div>
-    </nav>
     <!-- 日期搜索框 -->
      
     <div class="container" style="height: 40px;">
@@ -116,25 +66,6 @@
       <ul class="pagination">
       </ul>
     </nav>
-    <!-- End Navbar -->
-    <div class="container-fluid py-2">
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://github.com/PUGE/" class="font-weight-bold" target="_blank">PUGE</a>
-                for a better web.
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
     <!-- 弹出层 -->
     <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -198,6 +129,9 @@
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
+    }
+    function sendMessage (type, data) {
+      window.parent.postMessage({ type: type, data: data }, '*');
     }
     const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
     let wsOptions = {
@@ -276,11 +210,12 @@
             </div>
           </div>`
           // 获取房价详情
-          window.owoSocket.send('queryRoomTypeDetail', {
+          window.cipher = meg.value.cipher
+          sendMessage('queryRoomTypeDetail', {
             page: nowPage - 1,
             productId: element.productIds[0],
             roomTypeId: element.id,
-            ebooking: ebookingID,
+            ebooking: window.ctripID,
             cipher: meg.value.cipher,
             start:  window.startDate.value.replaceAll('-', ''),
             end:  window.endDate.value.replaceAll('-', ''),
@@ -315,7 +250,7 @@
             </div>
             <div class="d-flex align-items-center text-sm">
               ${element.roomToSell.freeSale}
-              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form">修改</button>
+              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg2(${findRoomPriceInfo(element.product)}, '${Object.keys(element.product)[0]}', ${element.basicRoomQuantityInfo.basicRoomId}, '${datesKey}', '${datesKey}', ${Object.keys(element.product[Object.keys(element.product)[0]].person)[0]}, ${element.roomToSell.value})">修改</button>
             </div>
           </li>`
         }
@@ -324,7 +259,8 @@
         document.querySelector('.list-group-' + meg.value.roomTypeId).innerHTML = tempData2
       }, 0);
     }
-    wsOptions.messageCallBack = (meg) => {
+    window.addEventListener('message', function(event) {
+      const meg = event.data
       console.log(meg)
       switch (meg.type) {
         case "inventory":
@@ -342,37 +278,9 @@
         default:
           break;
       }
-    }
-    wsOptions.onReady = (meg) => {
-      // 获取房间数据
-      const myHeaders = new Headers();
-      myHeaders.append("content-type", "application/json");
+    })
 
-      const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-      };
 
-      fetch("/room.json", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          window.bookingID = result[getQueryParam('hotelID')].Booking[0]
-          window.ebookingID = result[getQueryParam('hotelID')].Trip[0]
-          // booking
-          window.owoSocket.send('getInventory', {
-            page: nowPage - 1,
-            hotelID: bookingID,
-            ebooking: ebookingID,
-            start:  getQueryParam('start'),
-            end:  getQueryParam('end'),
-          })
-          
-        })
-        .catch((error) => console.error(error));
-      
-    }
-    window.owoSocket = new owoSocket('住宿管理', wsOptions)
     function search () {
       location.href = `./inventory.html?hotelID=${getQueryParam('hotelID')}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
@@ -399,12 +307,63 @@
       window.room_id = room_id
       window.rate_id = rate_id
       window.occupancy = occupancy
-      // const newPrice = prompt("请输入新的价格：", oldPrice);
-      // window.owoSocket.send('updatePrice', {hotel_id: getQueryParam('hotelID'), room_id, rate_id, rate_id, field_value: newPrice, from_date, until_date, occupancy})
+    }
+    function xgjg2 (oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum) {
+      window.startDateC.value = from_date
+      window.endDateC.value = until_date
+      window.roomP.value = oldPrice
+      window.room_id_ctrip = room_id
+      window.roomN.value = roomNum
+      window.basicRoomId = basicRoomId
+      window.person = person
     }
     function xgxx () {
-      window.owoSocket.send('updatePrice', {hotel_id: getQueryParam('hotelID'), room_id: window.room_id, rate_id: window.rate_id, field_value: window.roomP.value, from_date: window.startDateC.value, until_date: window.endDateC.value, occupancy: window.occupancy, roomNum: window.roomN.value})
+      let cipher = {}
+      cipher[window.room_id_ctrip] = window.cipher[window.room_id_ctrip]
+      cipher[window.basicRoomId] = window.cipher[window.basicRoomId]
+      sendMessage('updatePrice', {
+        hotel_id: window.bookingID,
+        ctripID: window.ctripID,
+        room_id: window.room_id,
+        room_id_ctrip: window.room_id_ctrip,
+        rate_id: window.rate_id,
+        field_value: window.roomP.value,
+        from_date: window.startDateC.value,
+        until_date: window.endDateC.value,
+        occupancy: window.occupancy,
+        roomNum: window.roomN.value,
+        basicRoomId: window.basicRoomId,
+        person: window.person,
+        cipher: cipher
+      })
     }
+
+    // 获取房间数据
+    const myHeaders = new Headers();
+    myHeaders.append("content-type", "application/json");
+
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow"
+    };
+
+    fetch("./room.json", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        window.bookingID = result[getQueryParam('hotelID')].Booking[0]
+        window.ctripID = result[getQueryParam('hotelID')].Trip[0]
+        // booking
+        sendMessage('getInventory', {
+          page: nowPage - 1,
+          hotelID: bookingID,
+          ebooking: window.ctripID,
+          start:  getQueryParam('start'),
+          end:  getQueryParam('end'),
+        })
+        
+      })
+      .catch((error) => console.error(error));
   </script>
 </body>
 

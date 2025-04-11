@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cunchu.site/work/material-dashboard/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="https://cunchu.site/work/material-dashboard/assets/img/favicon.png">
+  <title>
+    酒店后台管理
+  </title>
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cunchu.site/work/login/standard.css">
+  <link charset="utf-8"  rel="stylesheet" href="https://cunchu.site/work/login/mini.css">
+  <style>
+
+  </style>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- 日期搜索框 -->
+    <div class="container" style="height: 40px;">
+      <div class="row" style=" display: flex; justify-content: end; ">
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="startDate" class="form-control input-item-1">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="endDate" class="form-control input-item-2">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-outline">
+            <label class="form-label">关键词</label>
+            <input type="text" id="propertyId" class="form-control input-item-3">
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn bg-gradient-info" onclick="search()">搜索</button>
+        </div>
+        
+      </div>
+    </div>
+
+    
+    <div class="container-box container-fluid py-2">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
+                      
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                    </tr>
+                  </thead>
+                  <tbody id="graphqlTable">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <!-- 分页 -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      </ul>
+    </nav>
+
+  </main>
+  <!--   Core JS Files   -->
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/popper.min.js"></script>
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param) ? urlParams.get(param) : '';
+    }
+    function sendMessage (type, data) {
+      window.parent.postMessage({ type: type, data: data }, '*');
+    }
+    const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
+    const typeNnme = {
+      "1": "Confirmed",
+      "2": "Cancelled",
+      "3": "Amended",
+    }
+    window.addEventListener('message', function(event) {
+      const meg = event.data
+      // console.log(meg)
+      switch (meg.type) {
+        case "searchReservations3":
+          let tempData2 = ``
+          for (let index = 0; index < meg.value.bookings.length; index++) {
+            const element = meg.value.bookings[index];
+            let orderStatusDesc = element.orderStatusDesc
+            tempData2 += `<tr>
+              <td><p class="text-sm font-weight-bold mb-0">${element.guestName}</p></td>
+              
+              <td><p class="text-sm font-weight-bold mb-0">${element.checkinDate}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.checkoutDate}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.roomTypeName}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 status_${element.bookingId}">${typeNnme[element.ackRequestType]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.bookingId} n_check">${element.bookingId}</p></td>
+              </tr>`
+          }
+          window.graphqlTable.innerHTML = tempData2
+          
+          break;
+        default:
+          break;
+      }
+    });
+    sendMessage('getSearchReservations3', {
+      page: nowPage - 1,
+      propertyId: getQueryParam('propertyId'),
+      start:  getQueryParam('start'),
+      end:  getQueryParam('end'),
+    })
+    setInterval(() => {
+      sendMessage('getSearchReservations3', {
+        page: nowPage - 1,
+        propertyId: getQueryParam('propertyId'),
+        start:  getQueryParam('start'),
+        end:  getQueryParam('end'),
+      })
+    }, 15000);
+    function search () {
+      location.href = `./room3.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
+    }
+    function getDateNDaysAgo (n) {
+      const date = new Date();
+      date.setDate(date.getDate() + n); // 获取 N 天前的日期
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份从 0 开始，所以要 +1
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}`;
+    }
+    if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
+    else window.startDate.value = getDateNDaysAgo(0)
+
+    if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
+    else window.endDate.value = getDateNDaysAgo(30)
+
+    if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+
+    function getReservationDetails (book_id, hotel_id, formId) {
+      console.log(book_id, hotel_id, formId)
+      sendMessage('getReservationDetails2', {book_id, hotel_id, formId})
+    }
+
+  </script>
+</body>
+
+</html>

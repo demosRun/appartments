@@ -21,7 +21,16 @@
   <link rel="stylesheet" href="https://cunchu.site/work/login/standard.css">
   <link charset="utf-8"  rel="stylesheet" href="https://cunchu.site/work/login/mini.css">
   <style>
-
+    html, body, .main-content {
+      height: 100%;
+    }
+    .container-box {
+      height: calc(100% - 90px);
+    }
+    .container-iframe {
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 
@@ -38,21 +47,27 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark" href="./index.html">
+          <a class="nav-link text-dark" href="./roomList.html" target="iframeContainer">
             <i class="material-symbols-rounded opacity-5">dashboard</i>
             <span class="nav-link-text ms-1">房间管理</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="./room.html">
+          <a class="nav-link text-dark" href="./room.html" target="iframeContainer">
             <i class="material-symbols-rounded opacity-5">dashboard</i>
             <span class="nav-link-text ms-1">Booking订单</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="./room2.html">
+          <a class="nav-link text-dark" href="./room2.html" target="iframeContainer">
             <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">携程管理</span>
+            <span class="nav-link-text ms-1">携程订单</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="./room3.html" target="iframeContainer">
+            <i class="material-symbols-rounded opacity-5">dashboard</i>
+            <span class="nav-link-text ms-1">Agoda订单</span>
           </a>
         </li>
       </ul>
@@ -77,43 +92,12 @@
         </div>
       </div>
     </nav>
-    <div class="container-box container-fluid py-2">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">房间管理</h6>
-              </div>
-            </div>
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table justify-content-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间名称</th>
-                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Homes</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda homes upc</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Agoda Hotel</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Expedia</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Trip</th> -->
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">操作</th>
-                    </tr>
-                  </thead>
-                  <tbody id="graphqlTable">
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container-box container-fluid">
+      <iframe id="iframeContainer" name="iframeContainer" class="container-iframe" src="./roomList.html"></iframe>
     </div>
     <!-- End Navbar -->
-    <div class="container-fluid py-2">
-      <footer class="footer py-4  ">
+    <div class="container-fluid py-0">
+      <footer class="footer py-1  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
@@ -149,88 +133,25 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
   <script>
+    window.addEventListener('message', function(event) {
+      console.log('父页面收到子页面消息:', event.data);
+      window.owoSocket.send(event.data.type, event.data.data)
+    });
+    const iframe = document.getElementById('iframeContainer');
+
+    // 等 iframe 加载完成再发消息
+    // iframe.onload = () => {
+    //   iframe.contentWindow.postMessage({ type: 'hello', data: 'Hello from parent!' }, '*');
+    // };
     let wsOptions = {
       isAdmin: true
     }
     wsOptions.messageCallBack = (meg) => {
       console.log(meg)
-      switch (meg.type) {
-        case "groupHomeListProperties":
-          let tempData = ``
-          meg.value.forEach(element => {
-            tempData += `<tr>
-              <td><p class="text-sm font-weight-bold mb-0 partnerid"<p class="text-sm font-weight-bold mb-0">${element.id}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.address}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.cityName}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.name}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 align-items-center"><span class="gkxx${element.id}">0</span>&nbsp;<span class="ptxx${element.id}">0</span></p></td>
-              <td class="align-items-center">
-                <a href="./inventory.html?hotelID=${element.id}" class="text-secondary font-weight-normal text-xs">
-                  编辑
-                </a>
-              </td>
-              </tr>`
-          });
-          window.graphqlTable.innerHTML = tempData
-          break;
-        case 'partnerMessagesCount':
-          meg.value.forEach(element => {
-            document.querySelector(`.gkxx${element.propertyId}`).innerText = element.guestMessagesCount
-            document.querySelector(`.ptxx${element.propertyId}`).innerText = element.bookingMessagesCount
-          });
-          break
-        default:
-          break;
-      }
-    }
-    function getMessage () {
-      let searchList = []
-      document.querySelectorAll('.partnerid').forEach(element => {
-        searchList.push(parseInt(element.innerText))
-      });
-      if (searchList.length > 0) {
-        window.owoSocket.send('getPartnerMessagesCount', JSON.stringify(searchList))
-      }
-    }
-    wsOptions.onReady = (meg) => {
-      // window.owoSocket.send('getGroupHomeListProperties', '')
+      iframe.contentWindow.postMessage(meg, '*');
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
-    // setInterval(() => {
-    //   getMessage()
-    // }, 10000);
 
-    // 获取房间数据
-    const myHeaders = new Headers();
-    myHeaders.append("content-type", "application/json");
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    };
-
-    fetch("/room.json", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        let tempData = ``
-        for (const key in result) {
-          if (Object.prototype.hasOwnProperty.call(result, key)) {
-            const element = result[key];
-            console.log(element)
-            tempData += `<tr>
-            <td><p class="text-sm font-weight-bold mb-0">${key}</p></td>
-            <td class="align-items-center">
-              <a href="./inventory.html?hotelID=${key}" class="text-secondary font-weight-normal text-xs">
-                编辑
-              </a>
-            </td>
-            </tr>`   
-          }
-        }
-        window.graphqlTable.innerHTML = tempData
-      })
-      .catch((error) => console.error(error));
   </script>
 </body>
 

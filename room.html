@@ -26,57 +26,8 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand px-4 py-3 m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="https://cunchu.site/work/material-dashboard/assets/img/logo-ct-dark.png" class="navbar-brand-img" width="26" height="26" alt="main_logo">
-        <span class="ms-1 text-sm text-dark">酒店管理后台</span>
-      </a>
-    </div>
-    <hr class="horizontal dark mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./index.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">房间管理</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./room.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">Booking订单</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" href="./room2.html">
-            <i class="material-symbols-rounded opacity-5">dashboard</i>
-            <span class="nav-link-text ms-1">携程管理</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">退出登录</a>
-      </div>
-    </div>
-  </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">订单管理</li>
-          </ol>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        </div>
-      </div>
-    </nav>
+
     <!-- 日期搜索框 -->
      
     <div class="container" style="height: 40px;">
@@ -144,26 +95,6 @@
       </nav>
     </div>
     
-    <!-- End Navbar -->
-    <div class="container-fluid py-2">
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://github.com/PUGE/" class="font-weight-bold" target="_blank">PUGE</a>
-                for a better web.
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </main>
   <!--   Core JS Files   -->
   <script src="https://cunchu.site/work/material-dashboard/assets/js/core/popper.min.js"></script>
   <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
@@ -180,18 +111,19 @@
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
   <script>
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param) ? urlParams.get(param) : '';
     }
-    const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
-    let wsOptions = {
-      isAdmin: true
+    function sendMessage (type, data) {
+      window.parent.postMessage({ type: type, data: data }, '*');
     }
-    wsOptions.messageCallBack = (meg) => {
-      // console.log(meg)
+    const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
+
+    window.addEventListener('message', function(event) {
+      const meg = event.data
+      console.log(meg)
       switch (meg.type) {
         case "searchReservations":
           let tempData = ``
@@ -266,24 +198,22 @@
         default:
           break;
       }
-    }
-    wsOptions.onReady = (meg) => {
-      window.owoSocket.send('getSearchReservations', {
+    });
+    sendMessage('getSearchReservations', {
+      page: nowPage - 1,
+      propertyId: getQueryParam('propertyId'),
+      start:  getQueryParam('start'),
+      end:  getQueryParam('end'),
+    })
+    setInterval(() => {
+      sendMessage('getSearchReservations', {
         page: nowPage - 1,
         propertyId: getQueryParam('propertyId'),
         start:  getQueryParam('start'),
         end:  getQueryParam('end'),
       })
-      setInterval(() => {
-        window.owoSocket.send('getSearchReservations', {
-          page: nowPage - 1,
-          propertyId: getQueryParam('propertyId'),
-          start:  getQueryParam('start'),
-          end:  getQueryParam('end'),
-        })
-      }, 16000);
-    }
-    window.owoSocket = new owoSocket('住宿管理', wsOptions)
+    }, 16000);
+
     function search () {
       location.href = `./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
@@ -300,7 +230,7 @@
 
     function getReservationDetails (book_id, hotel_id) {
       console.log({book_id, hotel_id})
-      window.owoSocket.send('getReservationDetails', {book_id, hotel_id})
+      sendMessage('getReservationDetails', {book_id, hotel_id})
     }
 
     if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
