@@ -225,6 +225,49 @@
       window.viewBox.innerHTML += tempData
 
     }
+
+    function creatAgodaHotelCtrip(meg) {
+      let tempData = ``
+      let liData = {}
+      for (let index = 0; index < meg.value.RateList.length; index++) {
+        const element = meg.value.RateList[index];
+        if (!liData[element.RoomTypeID]) liData[element.RoomTypeID] = ""
+        liData[element.RoomTypeID] += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+            <div class="d-flex flex-column">
+              <h6 class="mb-1 text-dark font-weight-bold text-sm">${element.Date}</h6>
+              <span class="text-xs">${element.BasePrice}</span>
+            </div>
+            <div class="d-flex align-items-center text-sm">
+              ${element.DeviationType}
+              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg3()">修改</button>
+            </div>
+          </li>`
+      }
+      // 先生成卡片
+      for (const key in meg.value.Rooms) {
+        if (Object.prototype.hasOwnProperty.call(meg.value.Rooms, key)) {
+          const element = meg.value.Rooms[key];
+          tempData += `<div class="item">
+            <div class="card h-100">
+              <div class="card-header pb-0 p-3">
+                <div class="row">
+                  <div class="col-12 d-flex align-items-center">
+                    <h6 class="mb-0">Ctrip:${element.RoomTypeName}</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body p-3 pb-0">
+                <ul class="list-group list-group-${element.RoomTypeID}">
+                  ${liData[element.RoomTypeID]}
+                </ul>
+              </div>
+            </div>
+          </div>`
+        }
+      }
+      window.viewBox.innerHTML += tempData
+
+    }
     // 遍历取价格
     function findRoomPriceInfo(obj, results = []) {
       if (typeof obj === 'object' && obj !== null) {
@@ -268,6 +311,9 @@
           break;
         case "inventoryCtrip":
           creatCardCtrip(meg)
+          break;
+        case "inventoryAgodaHotel":
+          creatAgodaHotelCtrip(meg)
           break;
         case "updatePriceCallBack":
           location.reload()
@@ -353,11 +399,13 @@
       .then((result) => {
         window.bookingID = result[getQueryParam('hotelID')].Booking[0]
         window.ctripID = result[getQueryParam('hotelID')].Trip[0]
+        window.AgodaHotelID= result[getQueryParam('hotelID')]["Agoda Hotel"][0]
         // booking
         sendMessage('getInventory', {
           page: nowPage - 1,
           hotelID: bookingID,
           ebooking: window.ctripID,
+          AgodaHotelID: window.AgodaHotel,
           start:  getQueryParam('start'),
           end:  getQueryParam('end'),
         })

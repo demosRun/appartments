@@ -122,14 +122,15 @@
       switch (meg.type) {
         case "searchReservations3":
           let tempData2 = ``
+          meg.value.bookings.sort((a, b) => new Date(a.checkinDate) - new Date(b.checkinDate));
           for (let index = 0; index < meg.value.bookings.length; index++) {
             const element = meg.value.bookings[index];
             let orderStatusDesc = element.orderStatusDesc
             tempData2 += `<tr>
               <td><p class="text-sm font-weight-bold mb-0">${element.guestName}</p></td>
               
-              <td><p class="text-sm font-weight-bold mb-0">${element.checkinDate}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.checkoutDate}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.checkinDate.split('T')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.checkoutDate.split('T')[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.roomTypeName}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 status_${element.bookingId}">${typeNnme[element.ackRequestType]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 n_check_${element.bookingId} n_check">${element.bookingId}</p></td>
