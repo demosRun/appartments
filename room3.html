@@ -13,8 +13,6 @@
 
   <!-- CSS Files -->
   <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cunchu.site/work/login/standard.css">
-  <link charset="utf-8"  rel="stylesheet" href="https://cunchu.site/work/login/mini.css">
   <style>
 
   </style>
@@ -62,9 +60,10 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间数</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
-                      
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                     </tr>
                   </thead>
@@ -87,21 +86,8 @@
 
   </main>
   <!--   Core JS Files   -->
-  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/popper.min.js"></script>
   <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
-  <script src="https://cunchu.site/work/material-dashboard/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="https://cunchu.site/work/material-dashboard/assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <script>
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -122,23 +108,41 @@
       switch (meg.type) {
         case "searchReservations3":
           let tempData2 = ``
+          let roomList = []
           meg.value.bookings.sort((a, b) => new Date(a.checkinDate) - new Date(b.checkinDate));
           for (let index = 0; index < meg.value.bookings.length; index++) {
             const element = meg.value.bookings[index];
+            roomList.push(element.bookingId)
             let orderStatusDesc = element.orderStatusDesc
             tempData2 += `<tr>
               <td><p class="text-sm font-weight-bold mb-0">${element.guestName}</p></td>
               
               <td><p class="text-sm font-weight-bold mb-0">${element.checkinDate.split('T')[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.checkoutDate.split('T')[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 roomnum_${element.bookingId}"></p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.roomTypeName}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 status_${element.bookingId}">${typeNnme[element.ackRequestType]}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.bookingId} n_check">${element.bookingId}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 booktime_${element.bookingId}"></p></td>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.bookingId} n_check"  onclick="getReservationDetails('${element.propertyId}', '${element.bookingToken}')">${element.bookingId}</p></td>
               </tr>`
           }
           window.graphqlTable.innerHTML = tempData2
-          
+          getNewData(roomList)
           break;
+        case "reservationDetails3":
+          const value = meg.value
+          if (document.querySelector(`.n_check_${value.bookingId}`)) {
+            const bookingDate = value.bookingDate ? value.bookingDate : 0
+            const numberOfRoom = value.numberOfRoom ? value.numberOfRoom : 0
+            document.querySelector(`.roomnum_${value.bookingId}`).innerText = numberOfRoom
+            document.querySelector(`.booktime_${value.bookingId}`).innerText = bookingDate
+            addNewData(meg.value.bookingId, "Agoda", numberOfRoom, new Date(bookingDate).valueOf())
+            if (document.querySelector(`.n_check_${value.bookingId}`)) {
+              document.querySelector(`.n_check_${value.bookingId}`).classList.remove('n_check')
+            }
+          } else {
+            console.error(`${value.bookingId}不存在!`)
+          }
         default:
           break;
       }
@@ -160,6 +164,66 @@
     function search () {
       location.href = `./room3.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
+    function addNewData(orderID, orderType, roomNum, orderTime) {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        "orderID": orderID,
+        "orderType": orderType,
+        "roomNum": roomNum,
+        "orderTime": orderTime
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch("https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/addRoom", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.error(error));
+    }
+
+    function getNewData (roomList) {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        "orderID": roomList.join(',')
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch("https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/selectRoom", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          result.forEach(element => {
+            if (document.querySelector(`.n_check_${element[0]}`)) {
+              document.querySelector(`.n_check_${element[0]}`).classList.remove('n_check')
+              document.querySelector(`.roomnum_${element[0]}`).innerText = element[3]
+              document.querySelector(`.booktime_${element[0]}`).innerText = new Date(element[6]).toLocaleString()
+            }
+          });
+          setTimeout(() => {
+            if (document.querySelector('.n_check')) {
+              console.log(document.querySelector('.n_check'))
+              document.querySelector('.n_check').click()
+            }
+          }, 1000);
+        })
+        .catch((error) => console.error(error));
+    }
+
+
     function getDateNDaysAgo (n) {
       const date = new Date();
       date.setDate(date.getDate() + n); // 获取 N 天前的日期
@@ -178,9 +242,8 @@
 
     if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
 
-    function getReservationDetails (book_id, hotel_id, formId) {
-      console.log(book_id, hotel_id, formId)
-      sendMessage('getReservationDetails2', {book_id, hotel_id, formId})
+    function getReservationDetails (propertyId, bookingToken) {
+      sendMessage('getReservationDetails3', {propertyId, bookingToken})
     }
 
   </script>
