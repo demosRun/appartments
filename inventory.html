@@ -273,7 +273,7 @@
           <div class="card-header pb-0 p-3">
             <div class="row">
               <div class="col-12 d-flex align-items-center">
-                <h6 class="mb-0">Agoda Homes:${meg.value.AgodaHomesID}</h6>
+                <h6 class="mb-0">Agoda Homes upc:${meg.value.AgodaHomesID}</h6>
               </div>
             </div>
           </div>
@@ -285,7 +285,6 @@
         </div>
       </div>`
       window.viewBox.innerHTML += tempData
-
     }
     // 遍历取价格
     function findRoomPriceInfo(obj, results = []) {
@@ -321,6 +320,75 @@
         document.querySelector('.list-group-' + meg.value.roomTypeId).innerHTML = tempData2
       }, 0);
     }
+
+    
+
+    function creatExpedia(meg) {
+      let tempData = ``
+      let ratePlanMapName = {}
+      // 生成价格ID对应房屋ID
+      meg.value.roomTypeSummary.forEach(element => {
+        element.ratePlanIds.forEach(element2 => {
+          ratePlanMapName[element2] = element.roomTypeId
+        });
+      });
+      console.log(ratePlanMapName)
+      // 先生成卡片
+      for (const key in meg.value.ratesRestrictionsAndInventory.ratePlanMap) {
+        if (Object.prototype.hasOwnProperty.call(meg.value.ratesRestrictionsAndInventory.ratePlanMap, key)) {
+          const roomID = ratePlanMapName[key]
+          const element = meg.value.ratesRestrictionsAndInventory.ratePlanMap[key];
+          // 生成价格方案ID对应方案名称
+          // 只生成根方案 因为子方案的价格不能改
+          if (element.linkageTree.rootRatePlan.ratePlanId == key) {
+            let ratePlanNameWithType = element.linkageTree.rootRatePlan.ratePlanNameWithType
+            let liData = ``
+            for (const key2 in element.rateAndRestrictionByDate) {
+              if (Object.prototype.hasOwnProperty.call(element.rateAndRestrictionByDate, key2)) {
+                const element2 = element.rateAndRestrictionByDate[key2];
+                const roomNum = meg.value.ratesRestrictionsAndInventory
+                .roomMap[roomID].inventoryDateMap[key2].inventoryInformationModel.inventoryAvailable
+                // console.log(element2)
+                liData += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+                  <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark font-weight-bold text-sm">${key2} （${roomNum}）</h6>
+                    <span class="text-xs">${element2[0].rateInformation[0].amount}</span>
+                  </div>
+                  <div class="d-flex align-items-center text-sm">
+                    ${element2[0].rateInformation[0].activeStatus}
+                    <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg5('${key2}', '${key}', '${element2[0].rateInformation[0].amount}', ${roomNum}, '${roomID}', '${element.linkageTree.rootRatePlan.associatedRoomTypeName}')">修改</button>
+                  </div>
+                </li>`   
+              }
+            }
+            
+            tempData += `<div class="item">
+              <div class="card h-100">
+                <div class="card-header pb-0 p-3">
+                  <div class="row">
+                    <div class="col-12 d-flex align-items-center">
+                      <h6 class="mb-0">Expediap:${element.linkageTree.rootRatePlan.associatedRoomTypeName}</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-3 pb-0">
+                  <ul class="list-group list-group-${key}">
+                    ${liData}
+                  </ul>
+                </div>
+              </div>
+            </div>`
+          }
+          // element.linkageTree.rootRatePlan.childRatePlans.forEach(element3 => {
+          //   if (element3.ratePlanId == key) ratePlanNameWithType = element3.ratePlanNameWithType
+
+          // });
+          
+        }
+      }
+      
+      window.viewBox.innerHTML += tempData
+    }
     window.addEventListener('message', function(event) {
       const meg = event.data
       console.log(meg)
@@ -336,6 +404,9 @@
           break;
         case "inventoryAgodaHomes":
           creatAgodaHomes(meg)
+          break;
+        case "inventoryExpedia":
+          creatExpedia(meg)
           break;
         case "updatePriceCallBack":
           location.reload()
@@ -400,7 +471,14 @@
       window.roomP.value = oldPrice
       window.roomN.value = 2
       window.AgodaHomeslID = room_id
-      
+    }
+    function xgjg5 (StartDateStr, ratePlanId, oldPrice, roomNum, roomID, roomTypeName) {
+      window.startDateC.value = StartDateStr
+      window.endDateC.value = StartDateStr
+      window.roomP.value = oldPrice
+      window.roomN.value = roomNum
+      window.ExpediapID = ratePlanId
+      window.roomID = roomID
     }
     function xgxx () {
       let cipher = {}
@@ -414,6 +492,7 @@
         ctripID: window.ctripID,
         room_id: window.room_id,
         room_id_ctrip: window.room_id_ctrip,
+        room_id_expediap: 325405295,
         rate_id: window.rate_id,
         field_value: window.roomP.value,
         from_date: window.startDateC.value,
@@ -422,11 +501,13 @@
         roomNum: window.roomN.value,
         basicRoomId: window.basicRoomId,
         person: window.person,
+        roomID: window.roomID,
         cipher: cipher,
-        RoomTypeID: window.RoomTypeID,
+        roomTypeId: window.roomTypeId,
         AgodaHotelID: window.AgodaHotelID,
         RateCategoryID: window.RateCategoryID,
-        AgodaHomesID: window.AgodaHomeslID
+        ExpediapID: window.ExpediapID,
+        ExpediapHtid: window.ExpediaID
       })
     }
 
@@ -446,14 +527,18 @@
         window.bookingID = result[getQueryParam('hotelID')].Booking[0]
         window.ctripID = result[getQueryParam('hotelID')].Trip[0]
         window.AgodaHotelID= result[getQueryParam('hotelID')]["Agoda Hotel"][0]
-        window.AgodaHomesID= result[getQueryParam('hotelID')]["Agoda Homes"]
+        // window.AgodaHomesID= result[getQueryParam('hotelID')]["Agoda Homes"]
+        window.AgodaHotelID= result[getQueryParam('hotelID')]["Agoda homes upc"][0]
+        window.ExpediaID= result[getQueryParam('hotelID')]["Expedia"][0]
         // booking
         sendMessage('getInventory', {
           page: nowPage - 1,
           hotelID: bookingID,
           ebooking: window.ctripID,
           AgodaHotelID: window.AgodaHotelID,
-          AgodaHomesID: window.AgodaHomesID,
+          ExpediaID: window.ExpediaID,
+          // AgodaHomesID: window.AgodaHomesID,
+          // AgodaHomesUpcID: window.AgodaHomesUpcID,
           start:  getQueryParam('start') ? getQueryParam('start'): getDateNDaysAgo(0),
           end:  getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(30),
         })
