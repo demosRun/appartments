@@ -137,7 +137,7 @@
   <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
   <script>
     window.addEventListener('message', function(event) {
-      console.log('父页面收到子页面消息:', event.data);
+      // console.log('父页面收到子页面消息:', event.data);
       window.owoSocket.send(event.data.type, event.data.data)
     });
     const iframe = document.getElementById('iframeContainer');
@@ -150,7 +150,6 @@
       isAdmin: true
     }
     wsOptions.messageCallBack = (meg) => {
-      console.log(meg)
       iframe.contentWindow.postMessage(meg, '*');
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)

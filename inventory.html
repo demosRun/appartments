@@ -210,6 +210,10 @@
       let tempData = ``
       let liData = {}
       // 筛选第一个价格类型的
+      if (!meg.value.RateList) {
+        console.error(meg.value)
+        return
+      }
       const filtered = meg.value.RateList.filter(item => item.RateCategoryID === meg.value.RatePlanList[0].RateCategoryID);
       for (let index = 0; index < filtered.length; index++) {
         const element = filtered[index];
@@ -304,6 +308,12 @@
       for (const datesKey in meg.value.rangData) {
         if (Object.prototype.hasOwnProperty.call(meg.value.rangData, datesKey)) {
           const element = meg.value.rangData[datesKey];
+          let personNum = 2
+          const IDlist = Object.keys(element.product)
+          if (element.product[IDlist[0]].person) {
+            personNum = Object.keys(element.product[IDlist[0]].person)[0]
+          }
+          // console.log(element, Object.keys(element.product)[0])
           tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
             <div class="d-flex flex-column">
               <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.roomToSell.value}）</h6>
@@ -311,7 +321,7 @@
             </div>
             <div class="d-flex align-items-center text-sm">
               ${element.roomToSell.freeSale}
-              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg2(${findRoomPriceInfo(element.product)}, '${Object.keys(element.product)[0]}', ${element.basicRoomQuantityInfo.basicRoomId}, '${datesKey}', '${datesKey}', ${Object.keys(element.product[Object.keys(element.product)[0]].person)[0]}, ${element.roomToSell.value})">修改</button>
+              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg2(${findRoomPriceInfo(element.product)}, '${IDlist[0]}', ${element.basicRoomQuantityInfo.basicRoomId}, '${datesKey}', '${datesKey}', ${personNum}, ${element.roomToSell.value})">修改</button>
             </div>
           </li>`
         }
