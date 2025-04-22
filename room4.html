@@ -89,6 +89,7 @@
   <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
   <script src="./main.js"></script>
   <script>
+    
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param) ? urlParams.get(param) : '';
@@ -148,20 +149,7 @@
           break;
       }
     });
-    sendMessage('getSearchReservations4', {
-      page: nowPage - 1,
-      propertyId: getQueryParam('propertyId'),
-      start:  getQueryParam('start'),
-      end:  getQueryParam('end'),
-    })
-    setInterval(() => {
-      sendMessage('getSearchReservations4', {
-        page: nowPage - 1,
-        propertyId: getQueryParam('propertyId'),
-        start:  getQueryParam('start'),
-        end:  getQueryParam('end'),
-      })
-    }, 15000);
+    
     function search () {
       location.href = `./room4.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
@@ -235,18 +223,34 @@
 
       return `${year}-${month}-${day}`;
     }
-    if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
-    else window.startDate.value = getDateNDaysAgo(0)
 
-    if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
-    else window.endDate.value = getDateNDaysAgo(30)
-
-    if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
 
     function getReservationDetails (propertyId, bookingToken) {
       sendMessage('getReservationDetails3', {propertyId, bookingToken})
     }
+    window.onload = function() {
+      if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
+      else window.startDate.value = getDateNDaysAgo(0)
 
+      if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
+      else window.endDate.value = getDateNDaysAgo(30)
+
+      if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+      sendMessage('getSearchReservations4', {
+        page: nowPage - 1,
+        propertyId: getQueryParam('propertyId'),
+        start:  window.startDate.value,
+        end:  window.endDate.value,
+      })
+      setInterval(() => {
+        sendMessage('getSearchReservations4', {
+          page: nowPage - 1,
+          propertyId: getQueryParam('propertyId'),
+          start:  window.startDate.value,
+          end:  window.endDate.value,
+        })
+      }, 15000);
+    }
   </script>
 </body>
 
