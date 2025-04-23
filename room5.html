@@ -57,6 +57,7 @@
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
@@ -64,7 +65,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
                     </tr>
                   </thead>
                   <tbody id="graphqlTable">
@@ -119,20 +120,20 @@
       fetch("https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result)
           let tempData2 = ``
           // meg.value.bookings.sort((a, b) => new Date(a.checkInDate) - new Date(b.checkInDate));
           for (let index = 0; index < result.length; index++) {
             const element = result[index];
             tempData2 += `<tr>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element[10]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${getDay(element[7])}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${getDay(element[8])}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element[9]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element[5]}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : ''}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 booktime_${element[0]}">${getDay(element[6])}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[11]}</p></td>
               </tr>`
           }
           window.graphqlTable.innerHTML = tempData2
@@ -141,7 +142,7 @@
     }
     getOrder()
     function search () {
-      location.href = `./room3.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
+      location.href = `./room5.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
     
     function getDateNDaysAgo (n) {

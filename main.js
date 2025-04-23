@@ -53,3 +53,19 @@ function addRoom (orderID, orderType, phone, roomNum, cancelMoney, roomInfo, ord
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 }
+
+
+function dateToTimestamp (str) {
+  // const str = "2025-04-23 01:40:18";
+
+  // 将字符串中的空格替换成 T，使其成为 ISO 标准格式
+  const isoStr = str.replace(" ", "T");
+
+  // 创建 Date 对象
+  const date = new Date(isoStr);
+
+  // 获取秒时间戳
+  const timestamp = Math.floor(date.getTime() / 1000);
+
+  return timestamp
+}

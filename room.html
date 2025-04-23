@@ -65,6 +65,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间数</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">手机号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">佣金</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
@@ -138,6 +139,7 @@
               <td><p class="text-sm font-weight-bold mb-0">${element.aggregatedRoomStatus == 'ok' ? '正常' : '已取消'}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 room_info_${element.id}"></p></td>
               <td><p class="text-sm font-weight-bold mb-0 num_rooms_${element.id}"></p></td>
+              <td><p class="text-sm font-weight-bold mb-0 room_phone_${element.id}"></p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.amountInvoicedOrRoomPriceSum}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.actualCommissionRaw}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 n_check n_check_${element.id}" onclick="getReservationDetails(${element.id}, ${element.propertyId})">${element.id}</p></td>
@@ -157,7 +159,8 @@
           const roomNum = meg.value.num_rooms ? meg.value.num_rooms : 0
           document.querySelector(`.room_info_${meg.value.id}`).innerHTML = roomInfo
           document.querySelector(`.num_rooms_${meg.value.id}`).innerText = roomNum
-          addRoom(meg.value.id, "Booking", "", roomNum, 0.00, roomInfo, getTimestampSeconds(meg.value.transaction_date), getTimestampSeconds(meg.value.arrival), getTimestampSeconds(meg.value.departure), meg.value.price.split(' ')[1], meg.value.guest_name, meg.value.hotel_id, meg.value.is_cancelled == 0 ? 'Confirmed': 'Cancelled')
+          document.querySelector(`.room_phone_${meg.value.id}`).innerText = meg.value.phone
+          addRoom(meg.value.id, "Booking", meg.value.phone, roomNum, 0.00, roomInfo, getTimestampSeconds(meg.value.transaction_date), getTimestampSeconds(meg.value.arrival), getTimestampSeconds(meg.value.departure), meg.value.price.split(' ')[1], meg.value.guest_name, meg.value.hotel_id, meg.value.is_cancelled == 0 ? 'Confirmed': 'Cancelled')
           if (document.querySelector(`.n_check_${meg.value.id}`)) {
             document.querySelector(`.n_check_${meg.value.id}`).classList.remove('n_check')
           }
@@ -232,6 +235,7 @@
               document.querySelector(`.n_check_${element[0]}`).classList.remove('n_check')
               document.querySelector(`.room_info_${element[0]}`).innerHTML = element[5]
               document.querySelector(`.num_rooms_${element[0]}`).innerText = element[3]
+              document.querySelector(`.room_phone_${element[0]}`).innerText = element[2]
             }
           });
           setTimeout(() => {
