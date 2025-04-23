@@ -102,6 +102,9 @@
 
       return `${year}-${month}-${day}`;
     }
+    function getTimestamp(dateStr) {
+      return Math.floor(new Date(dateStr).getTime() / 1000);
+    }
     function getOrder () {
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -117,7 +120,7 @@
         redirect: "follow"
       };
 
-      fetch("https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList", requestOptions)
+      fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(window.startDate.value)}&endDate=${getTimestamp(window.endDate.value)}&search=${window.propertyId.value}`, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           let tempData2 = ``
@@ -140,10 +143,11 @@
         })
         .catch((error) => console.error(error));
     }
-    getOrder()
+    
     function search () {
       location.href = `./room5.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
+    
     
     function getDateNDaysAgo (n) {
       const date = new Date();
@@ -155,13 +159,17 @@
 
       return `${year}-${month}-${day}`;
     }
-    if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
-    else window.startDate.value = getDateNDaysAgo(0)
+    window.onload = function() {
+      if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
+      else window.startDate.value = getDateNDaysAgo(0)
 
-    if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
-    else window.endDate.value = getDateNDaysAgo(30)
+      if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
+      else window.endDate.value = getDateNDaysAgo(30)
 
-    if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+      if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+      getOrder()
+    }
+    
 
     function getReservationDetails (propertyId, bookingToken) {
       sendMessage('getReservationDetails3', {propertyId, bookingToken})
