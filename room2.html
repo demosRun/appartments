@@ -61,6 +61,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">价格</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
@@ -133,6 +134,7 @@
               <td><p class="text-sm font-weight-bold mb-0">${element[10]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${getDay(element[7])}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${getDay(element[8])}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[2]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element[9]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element[5]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
@@ -147,7 +149,7 @@
     }
     
     function search () {
-      location.href = `./room5.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
+      location.href = `./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
     
     
