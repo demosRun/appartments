@@ -1,561 +1,866 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="https://cunchu.site/work/material-dashboard/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="https://cunchu.site/work/material-dashboard/assets/img/favicon.png">
-  <title>
-    酒店后台管理
-  </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="https://cunchu.site/work/material-dashboard/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="https://cunchu.site/work/material-dashboard/assets/img/favicon.png">
+    <title>
+        酒店后台管理
+    </title>
 
-  <!-- CSS Files -->
-  <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
-  <style>
-    .view-box .item {
-      margin: 10px;
-      float: left;
-      width: 300px;
-    }
-  </style>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0"
+        rel="stylesheet" />
+    <style>
+        .view-box .item {
+            margin: 10px;
+            float: left;
+            width: 300px;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- 日期搜索框 -->
-     
-    <div class="container" style="height: 40px;">
-      <div class="row" style=" display: flex; justify-content: end; ">
-        <div class="col-md-2">
-          <div class="input-group input-group-static">
-            <input type="date" id="startDate" class="form-control input-item-1">
-          </div>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Date picker -->
+        <div class="container" style="height: 40px;">
+            <div class="row" style=" display: flex; justify-content: end; ">
+                <div class="col-md-2">
+                    <div class="input-group input-group-static">
+                        <input type="date" id="startDate" class="form-control input-item-1">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group input-group-static">
+                        <input type="date" id="endDate" class="form-control input-item-2">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn bg-gradient-info" onclick="search()">Search</button>
+                </div>
+
+            </div>
         </div>
-        <div class="col-md-2">
-          <div class="input-group input-group-static">
-            <input type="date" id="endDate" class="form-control input-item-2">
-          </div>
+
+
+        <div class="container-box container-fluid py-2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="view-box" id="viewBox"></div>
+
+                </div>
+            </div>
         </div>
-        <div class="col-md-1">
-          <button type="button" class="btn bg-gradient-info" onclick="search()">搜索</button>
+        <!-- 分页 -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            </ul>
+        </nav>
+        <!-- 弹出层 -->
+        <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-form" style="display: none;"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="card card-plain">
+                            <div class="card-header pb-0 text-left">
+                                <h3 class="">Edit Room</h3>
+                                <p id="modal-room-info" class="text-sm text-secondary mb-0"></p>
+                            </div>
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static">
+                                        <label>Start Date</label>
+                                        <input type="date" id="startDateC" class="form-control input-item-1">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static">
+                                        <label>End Date</label>
+                                        <input type="date" id="endDateC" class="form-control input-item-1">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static">
+                                        <label>Room Price</label>
+                                        <input type="number" id="roomP" class="form-control input-item-1">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group input-group-static">
+                                        <label>Room Availability</label>
+                                        <input type="number" id="roomN" class="form-control input-item-1">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-lg w-100" onclick="xgxx()">Update
+                                    Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
+
+    <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+        function sendMessage(type, data) {
+            window.parent.postMessage({ type: type, data: data }, '*');
+        }
+        const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
+        let wsOptions = {
+            isAdmin: true
+        }
+
+        // Booking
+        function creatCardBooking(meg) {
+            let tempData = ``
+            // Generate card
+            meg.value.list.forEach(element => {
+                tempData += createCommonCard(
+                    "Booking",
+                    {},
+                    element[0],
+                    element[1],
+                    ""
+                );
+            });
+            window.viewBox.innerHTML += tempData
+            let nameList = Object.fromEntries(meg.value.list)
+            for (const key in meg.value.rooms) {
+                if (Object.prototype.hasOwnProperty.call(meg.value.rooms, key)) {
+                    let tempData2 = ``
+                    const element = meg.value.rooms[key];
+                    const datesList = element.rates[element.rate_ids[0]].dates
+                    // Sort the dates
+                    let dateList = Object.keys(datesList).sort((a, b) => new Date(a) - new Date(b));
+                    dateList.forEach(datesKey => {
+                        const element2 = datesList[datesKey];
+                        tempData2 += createCommonListItem(
+                            datesKey,
+                            element.dates[datesKey].rooms_to_sell,
+                            element2.price[element.rates[element.rate_ids[0]].occupancies[0]],
+                            element2.status,
+                            `xgjg(${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}, '${key}', '${element.rate_ids[0]}', '${datesKey}', '${datesKey}', '${element.num_guests}', ${element.dates[datesKey].rooms_to_sell})`
+                        );
+                    });
+                    setTimeout(() => {
+                        document.querySelector('.list-group-' + key).innerHTML = tempData2
+                    }, 0);
+                }
+            }
+        }
+
+        // Ctrip
+        function creatCardCtrip(meg) {
+            let tempData = ``
+            // Generate card
+            for (const key in meg.value.roomTypeInfo) {
+                if (Object.prototype.hasOwnProperty.call(meg.value.roomTypeInfo, key)) {
+                    const element = meg.value.roomTypeInfo[key];
+                    tempData += createCommonCard(
+                        "Ctrip",
+                        element,
+                        element.id,
+                        element.name,
+                        ""
+                    );
+                    // Get room price detail
+                    window.cipher = meg.value.cipher
+                    sendMessage('queryRoomTypeDetail', {
+                        page: nowPage - 1,
+                        productId: element.productIds[0],
+                        roomTypeId: element.id,
+                        ebooking: window.ctripID,
+                        cipher: meg.value.cipher,
+                        start: window.startDate.value.replaceAll('-', ''),
+                        end: window.endDate.value.replaceAll('-', ''),
+                    })
+                }
+            }
+            window.viewBox.innerHTML += tempData
+        }
+
+        // Common function to create cards for any platform
+        function createCommonCard(platformName, roomData, roomId, roomName, listItems) {
+            return `
+            <div class="item">
+                <div class="card h-100">
+                    <div class="card-header pb-0 p-3">
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center">
+                                <h6 class="mb-0">${platformName}:${roomName}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-3 pb-0">
+                        <ul class="list-group list-group-${roomId}">
+                            ${listItems}
+                        </ul>
+                    </div>
+                </div>
+            </div>`;
+        }
         
-      </div>
-    </div>
-
-    
-    <div class="container-box container-fluid py-2">
-      <div class="row">
-        <div class="col-12">
-          <div class="view-box" id="viewBox"></div>
-
-        </div>
-      </div>
-    </div>
-    <!-- 分页 -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-      </ul>
-    </nav>
-    <!-- 弹出层 -->
-    <div class="modal fade" id="modal-form" tabindex="-1" aria-labelledby="modal-form" style="display: none;" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="card card-plain">
-              <div class="card-header pb-0 text-left">
-                <h3 class="">编辑房间</h3>
-              </div>
-              <div class="card-body">
-                <div class="col-md-12">
-                  <div class="input-group input-group-static">
-                    <label>起始时间</label>
-                    <input type="date" id="startDateC" class="form-control input-item-1">
-                  </div>
+        // Common function to create list items 
+        function createCommonListItem(date, roomQty, price, status, editBtnOnClick, isPriceMinimum = false) {
+            const priceDisplay = isPriceMinimum ? 
+                `<span class="text-xs text-warning" title="Minimum rate (actual rate not set)">${price} (min)</span>` : 
+                `<span class="text-xs">${price}</span>`;
+                
+            return `
+            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+                <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark font-weight-bold text-sm">${date}（${roomQty}）</h6>
+                    ${priceDisplay}
                 </div>
-                <div class="col-md-12">
-                  <div class="input-group input-group-static">
-                    <label>结束时间</label>
-                    <input type="date" id="endDateC" class="form-control input-item-1">
-                  </div>
+                <div class="d-flex align-items-center text-sm">
+                    ${status || ''}
+                    <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="${editBtnOnClick}">
+                        Edit
+                    </button>
                 </div>
-                <div class="col-md-12">
-                  <div class="input-group input-group-static">
-                    <label>房间价格</label>
-                    <input type="number" id="roomP" class="form-control input-item-1">
-                  </div>
-                </div>
-                <div class="col-md-12">
-                  <div class="input-group input-group-static">
-                    <label>房间数量</label>
-                    <input type="number" id="roomN" class="form-control input-item-1">
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-lg w-100" onclick="xgxx()">修改信息</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  <!--   Core JS Files   -->
-  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
-
-  <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
-  <script>
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-    function sendMessage (type, data) {
-      window.parent.postMessage({ type: type, data: data }, '*');
-    }
-    const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
-    let wsOptions = {
-      isAdmin: true
-    }
-
-    function creatCardBooking(meg) {
-      let tempData = ``
-      // 先生成卡片
-      meg.value.list.forEach(element => {
-        tempData += `<div class="item">
-        <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-            <div class="row">
-              <div class="col-12 d-flex align-items-center">
-                <h6 class="mb-0">Booking:${element[1]}</h6>
-              </div>
-            </div>
-          </div>
-          <div class="card-body p-3 pb-0">
-            <ul class="list-group list-group-${element[0]}">
-            </ul>
-          </div>
-        </div>
-      </div>`
-      });
-      window.viewBox.innerHTML += tempData
-      let nameList = Object.fromEntries(meg.value.list)
-      for (const key in meg.value.rooms) {
-        if (Object.prototype.hasOwnProperty.call(meg.value.rooms, key)) {
-          let tempData2 = ``
-          const element = meg.value.rooms[key];
-          const datesList = element.rates[element.rate_ids[0]].dates
-          // 先对日期进行排序
-          let dateList = Object.keys(datesList).sort((a, b) => new Date(a) - new Date(b));
-          dateList.forEach(datesKey => {
-            const element2 = datesList[datesKey];
-            tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-              <div class="d-flex flex-column">
-                <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.dates[datesKey].rooms_to_sell}）</h6>
-                <span class="text-xs">${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}</span>
-              </div>
-              <div class="d-flex align-items-center text-sm">
-                ${element2.status}
-                <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg(${element2.price[element.rates[element.rate_ids[0]].occupancies[0]]}, '${key}', '${element.rate_ids[0]}', '${datesKey}', '${datesKey}', '${element.num_guests}', ${element.dates[datesKey].rooms_to_sell})">修改</button>
-              </div>
-            </li>`
-          });
-          console.log(element)
-          setTimeout(() => {
-            document.querySelector('.list-group-' + key).innerHTML = tempData2
-          }, 0);
+            </li>`;
         }
-      }
-    }
-
-    function creatCardCtrip(meg) {
-      let tempData = ``
-      // 先生成卡片
-      for (const key in meg.value.roomTypeInfo) {
-        if (Object.prototype.hasOwnProperty.call(meg.value.roomTypeInfo, key)) {
-          const element = meg.value.roomTypeInfo[key];
-          tempData += `<div class="item">
-            <div class="card h-100">
-              <div class="card-header pb-0 p-3">
-                <div class="row">
-                  <div class="col-12 d-flex align-items-center">
-                    <h6 class="mb-0">Ctrip:${element.name}</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body p-3 pb-0">
-                <ul class="list-group list-group-${element.id}">
-                </ul>
-              </div>
-            </div>
-          </div>`
-          // 获取房价详情
-          window.cipher = meg.value.cipher
-          sendMessage('queryRoomTypeDetail', {
-            page: nowPage - 1,
-            productId: element.productIds[0],
-            roomTypeId: element.id,
-            ebooking: window.ctripID,
-            cipher: meg.value.cipher,
-            start:  window.startDate.value.replaceAll('-', ''),
-            end:  window.endDate.value.replaceAll('-', ''),
-          })
+        
+        // Agoda
+        function creatAgodaHotelCtrip(meg) {
+            let tempData = ``
+            let liData = {}
+            // Filter the first price type
+            if (!meg.value.RateList) {
+                console.error(meg.value)
+                return
+            }
+            const filtered = meg.value.RateList.filter(item => item.RateCategoryID === meg.value.RatePlanList[0].RateCategoryID);
+            for (let index = 0; index < filtered.length; index++) {
+                const element = filtered[index];
+                if (!liData[element.RoomTypeID]) liData[element.RoomTypeID] = ""
+                liData[element.RoomTypeID] += createCommonListItem(
+                    element.Date,
+                    meg.value.AllotmentList[index].Regular,
+                    element.BasePrice,
+                    element.DeviationType,
+                    `xgjg3('${element.BasePrice}', '${element.RoomTypeID}', '${element.Date}', '${element.Date}', 2, '${meg.value.AllotmentList[index].Regular}', '${element.RateCategoryID}')`
+                );
+            }
+            // Generate card
+            for (const key in meg.value.Rooms) {
+                if (Object.prototype.hasOwnProperty.call(meg.value.Rooms, key)) {
+                    const element = meg.value.Rooms[key];
+                    tempData += createCommonCard(
+                        "Agoda", 
+                        element, 
+                        element.RoomTypeID, 
+                        element.RoomTypeName, 
+                        liData[element.RoomTypeID] || ''
+                    );
+                }
+            }
+            window.viewBox.innerHTML += tempData
         }
-      }
-      window.viewBox.innerHTML += tempData
 
-    }
-
-    function creatAgodaHotelCtrip(meg) {
-      let tempData = ``
-      let liData = {}
-      // 筛选第一个价格类型的
-      if (!meg.value.RateList) {
-        console.error(meg.value)
-        return
-      }
-      const filtered = meg.value.RateList.filter(item => item.RateCategoryID === meg.value.RatePlanList[0].RateCategoryID);
-      for (let index = 0; index < filtered.length; index++) {
-        const element = filtered[index];
-        if (!liData[element.RoomTypeID]) liData[element.RoomTypeID] = ""
-        liData[element.RoomTypeID] += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-            <div class="d-flex flex-column">
-              <h6 class="mb-1 text-dark font-weight-bold text-sm">${element.Date}（${meg.value.AllotmentList[index].Regular}）</h6>
-              <span class="text-xs">${element.BasePrice}</span>
-            </div>
-            <div class="d-flex align-items-center text-sm">
-              ${element.DeviationType}
-              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg3('${element.BasePrice}', '${element.RoomTypeID}', '${element.Date}', '${element.Date}', 2, '${meg.value.AllotmentList[index].Regular}', '${element.RateCategoryID}')">修改</button>
-            </div>
-          </li>`
-      }
-      // 先生成卡片
-      for (const key in meg.value.Rooms) {
-        if (Object.prototype.hasOwnProperty.call(meg.value.Rooms, key)) {
-          const element = meg.value.Rooms[key];
-          tempData += `<div class="item">
-            <div class="card h-100">
-              <div class="card-header pb-0 p-3">
-                <div class="row">
-                  <div class="col-12 d-flex align-items-center">
-                    <h6 class="mb-0">Agoda:${element.RoomTypeName}</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body p-3 pb-0">
-                <ul class="list-group list-group-${element.RoomTypeID}">
-                  ${liData[element.RoomTypeID]}
-                </ul>
-              </div>
-            </div>
-          </div>`
-        }
-      }
-      window.viewBox.innerHTML += tempData
-
-    }
-
-    function creatAgodaHomes(meg) {
-      let tempData = ``
-      let liData = ``
-      for (let index = 0; index < meg.value.calendarDayInfos.length; index++) {
-        const element = meg.value.calendarDayInfos[index];
-        liData += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-            <div class="d-flex flex-column">
-              <h6 class="mb-1 text-dark font-weight-bold text-sm">${element.date.split('T')[0]} （${element.allotmentValue}）</h6>
-              <span class="text-xs">${element.baseRate}</span>
-            </div>
-            <div class="d-flex align-items-center text-sm">
-              
-              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg4('${element.date.split('T')[0]}', '${element.date.split('T')[0]}', '${element.baseRate}', '${meg.value.AgodaHomesID}')">修改</button>
-            </div>
-          </li>`
-      }
-      // 先生成卡片
-      tempData += `<div class="item">
-        <div class="card h-100">
-          <div class="card-header pb-0 p-3">
-            <div class="row">
-              <div class="col-12 d-flex align-items-center">
-                <h6 class="mb-0">Agoda Homes upc:${meg.value.AgodaHomesID}</h6>
-              </div>
-            </div>
-          </div>
-          <div class="card-body p-3 pb-0">
-            <ul class="list-group list-group-${meg.value.AgodaHomesID}">
-              ${liData}
-            </ul>
-          </div>
-        </div>
-      </div>`
-      window.viewBox.innerHTML += tempData
-    }
-    // 遍历取价格
-    function findRoomPriceInfo(obj, results = []) {
-      if (typeof obj === 'object' && obj !== null) {
-        for (let key in obj) {
-          if (key === 'roomPriceInfo') {
-            results.push(obj[key].price);
-          } else {
-            findRoomPriceInfo(obj[key], results);
-          }
-        }
-      }
-      return results;
-    }
-    function queryRoomTypeDetailCtrip (meg) {
-      let tempData2 = ``
-      for (const datesKey in meg.value.rangData) {
-        if (Object.prototype.hasOwnProperty.call(meg.value.rangData, datesKey)) {
-          const element = meg.value.rangData[datesKey];
-          let personNum = 2
-          const IDlist = Object.keys(element.product)
-          if (element.product[IDlist[0]].person) {
-            personNum = Object.keys(element.product[IDlist[0]].person)[0]
-          }
-          // console.log(element, Object.keys(element.product)[0])
-          tempData2 += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-            <div class="d-flex flex-column">
-              <h6 class="mb-1 text-dark font-weight-bold text-sm">${datesKey}（${element.roomToSell.value}）</h6>
-              <span class="text-xs">${findRoomPriceInfo(element.product)}</span>
-            </div>
-            <div class="d-flex align-items-center text-sm">
-              ${element.roomToSell.freeSale}
-              <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg2(${findRoomPriceInfo(element.product)}, '${IDlist[0]}', ${element.basicRoomQuantityInfo.basicRoomId}, '${datesKey}', '${datesKey}', ${personNum}, ${element.roomToSell.value})">修改</button>
-            </div>
-          </li>`
-        }
-      }
-      setTimeout(() => {
-        document.querySelector('.list-group-' + meg.value.roomTypeId).innerHTML = tempData2
-      }, 0);
-    }
-
-    
-
-    function creatExpedia(meg) {
-      let tempData = ``
-      let ratePlanMapName = {}
-      // 生成价格ID对应房屋ID
-      meg.value.roomTypeSummary.forEach(element => {
-        element.ratePlanIds.forEach(element2 => {
-          ratePlanMapName[element2] = element.roomTypeId
-        });
-      });
-      console.log(ratePlanMapName)
-      // 先生成卡片
-      for (const key in meg.value.ratesRestrictionsAndInventory.ratePlanMap) {
-        if (Object.prototype.hasOwnProperty.call(meg.value.ratesRestrictionsAndInventory.ratePlanMap, key)) {
-          const roomID = ratePlanMapName[key]
-          const element = meg.value.ratesRestrictionsAndInventory.ratePlanMap[key];
-          // 生成价格方案ID对应方案名称
-          // 只生成根方案 因为子方案的价格不能改
-          if (element.linkageTree.rootRatePlan.ratePlanId == key) {
-            let ratePlanNameWithType = element.linkageTree.rootRatePlan.ratePlanNameWithType
+        function creatAgodaHomes(meg) {
+            let tempData = ``
             let liData = ``
-            for (const key2 in element.rateAndRestrictionByDate) {
-              if (Object.prototype.hasOwnProperty.call(element.rateAndRestrictionByDate, key2)) {
-                const element2 = element.rateAndRestrictionByDate[key2];
-                const roomNum = meg.value.ratesRestrictionsAndInventory
-                .roomMap[roomID].inventoryDateMap[key2].inventoryInformationModel.inventoryAvailable
-                // console.log(element2)
-                liData += `<li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark font-weight-bold text-sm">${key2} （${roomNum}）</h6>
-                    <span class="text-xs">${element2[0].rateInformation[0].amount}</span>
-                  </div>
-                  <div class="d-flex align-items-center text-sm">
-                    ${element2[0].rateInformation[0].activeStatus}
-                    <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" data-bs-toggle="modal" data-bs-target="#modal-form" onclick="xgjg5('${key2}', '${key}', '${element2[0].rateInformation[0].amount}', ${roomNum}, '${roomID}', '${element.linkageTree.rootRatePlan.associatedRoomTypeName}')">修改</button>
-                  </div>
-                </li>`   
-              }
+            for (let index = 0; index < meg.value.calendarDayInfos.length; index++) {
+                const element = meg.value.calendarDayInfos[index];
+                liData += createCommonListItem(
+                    element.date.split('T')[0],
+                    element.allotmentValue,
+                    element.baseRate,
+                    '',
+                    `xgjg4('${element.date.split('T')[0]}', '${element.date.split('T')[0]}', '${element.baseRate}', '${meg.value.AgodaHomesID}')`
+                );
+            }
+            // Generate card
+            tempData += createCommonCard(
+                "Agoda Homes upc",
+                null,
+                meg.value.AgodaHomesID,
+                meg.value.AgodaHomesID,
+                liData
+            );
+            window.viewBox.innerHTML += tempData
+        }
+        // Traverse to get price
+        function findRoomPriceInfo(obj, results = []) {
+            if (typeof obj === 'object' && obj !== null) {
+                for (let key in obj) {
+                    if (key === 'roomPriceInfo') {
+                        results.push(obj[key].price);
+                    } else {
+                        findRoomPriceInfo(obj[key], results);
+                    }
+                }
+            }
+            return results;
+        }
+        function queryRoomTypeDetailCtrip(meg) {
+            let tempData2 = ``
+            for (const datesKey in meg.value.rangData) {
+                if (Object.prototype.hasOwnProperty.call(meg.value.rangData, datesKey)) {
+                    const element = meg.value.rangData[datesKey];
+                    let personNum = 2
+                    const IDlist = Object.keys(element.product)
+                    if (element.product[IDlist[0]].person) {
+                        personNum = Object.keys(element.product[IDlist[0]].person)[0]
+                    }
+                    // console.log(element, Object.keys(element.product)[0])
+                    tempData2 += createCommonListItem(
+                        datesKey,
+                        element.roomToSell.value,
+                        findRoomPriceInfo(element.product),
+                        element.roomToSell.freeSale,
+                        `xgjg2(${findRoomPriceInfo(element.product)}, '${IDlist[0]}', ${element.basicRoomQuantityInfo.basicRoomId}, '${datesKey}', '${datesKey}', ${personNum}, ${element.roomToSell.value})`
+                    );
+                }
+            }
+            setTimeout(() => {
+                document.querySelector('.list-group-' + meg.value.roomTypeId).innerHTML = tempData2
+            }, 0);
+        }
+
+
+        // Expedia 
+        function creatExpedia(meg) {
+            let tempData = ``
+            let ratePlanMapName = {}
+            // Generate price ID corresponding to room ID
+            meg.value.roomTypeSummary.forEach(element => {
+                element.ratePlanIds.forEach(element2 => {
+                    ratePlanMapName[element2] = element.roomTypeId
+                });
+            });
+            console.log(ratePlanMapName)
+            // Generate card
+            for (const key in meg.value.ratesRestrictionsAndInventory.ratePlanMap) {
+                if (Object.prototype.hasOwnProperty.call(meg.value.ratesRestrictionsAndInventory.ratePlanMap, key)) {
+                    const roomID = ratePlanMapName[key]
+                    const element = meg.value.ratesRestrictionsAndInventory.ratePlanMap[key];
+                    // Generate price plan ID corresponding to price plan name
+                    // Only generate the root plan because the price of the child plan cannot be changed
+                    if (element.linkageTree.rootRatePlan.ratePlanId == key) {
+                        let ratePlanNameWithType = element.linkageTree.rootRatePlan.ratePlanNameWithType
+                        let liData = ``
+                        for (const key2 in element.rateAndRestrictionByDate) {
+                            if (Object.prototype.hasOwnProperty.call(element.rateAndRestrictionByDate, key2)) {
+                                const element2 = element.rateAndRestrictionByDate[key2];
+                                const roomNum = meg.value.ratesRestrictionsAndInventory
+                                    .roomMap[roomID].inventoryDateMap[key2].inventoryInformationModel.inventoryAvailable
+                                // console.log(element2)
+                                liData += createCommonListItem(
+                                    key2,
+                                    roomNum,
+                                    element2[0].rateInformation[0].amount,
+                                    element2[0].rateInformation[0].activeStatus,
+                                    `xgjg5('${key2}', '${key}', '${element2[0].rateInformation[0].amount}', ${roomNum}, '${roomID}', '${element.linkageTree.rootRatePlan.associatedRoomTypeName}')`
+                                );
+                            }
+                        }
+
+                        tempData += createCommonCard(
+                            "Expediap",
+                            element,
+                            key,
+                            element.linkageTree.rootRatePlan.associatedRoomTypeName,
+                            liData
+                        );
+                    }
+                }
+            }
+
+            window.viewBox.innerHTML += tempData
+        }
+
+        // Format date for Agoda API in yyyy-MM-dd format
+        function formatDateForAgodaAPI(dateStr) {
+            // Make sure we have a valid date string in YYYY-MM-DD format
+            if (!dateStr || typeof dateStr !== 'string' || !dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                console.error("Invalid date format:", dateStr);
+                return null;
             }
             
-            tempData += `<div class="item">
-              <div class="card h-100">
-                <div class="card-header pb-0 p-3">
-                  <div class="row">
-                    <div class="col-12 d-flex align-items-center">
-                      <h6 class="mb-0">Expediap:${element.linkageTree.rootRatePlan.associatedRoomTypeName}</h6>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body p-3 pb-0">
-                  <ul class="list-group list-group-${key}">
-                    ${liData}
-                  </ul>
-                </div>
-              </div>
-            </div>`
-          }
-          // element.linkageTree.rootRatePlan.childRatePlans.forEach(element3 => {
-          //   if (element3.ratePlanId == key) ratePlanNameWithType = element3.ratePlanNameWithType
-
-          // });
-          
+            // Return the date in YYYY-MM-DD format without any transformation
+            return dateStr;
         }
-      }
-      
-      window.viewBox.innerHTML += tempData
-    }
-    window.addEventListener('message', function(event) {
-      const meg = event.data
-      console.log(meg)
-      switch (meg.type) {
-        case "inventory":
-          creatCardBooking(meg)
-          break;
-        case "inventoryCtrip":
-          creatCardCtrip(meg)
-          break;
-        case "inventoryAgodaHotel":
-          creatAgodaHotelCtrip(meg)
-          break;
-        case "inventoryAgodaHomes":
-          creatAgodaHomes(meg)
-          break;
-        case "inventoryExpedia":
-          creatExpedia(meg)
-          break;
-        case "updatePriceCallBack":
-          location.reload()
-          break
-        case "queryRoomTypeDetailCtrip":
-          queryRoomTypeDetailCtrip(meg)
-          break
-        default:
-          break;
-      }
-    })
-    
 
-    function search () {
-      location.href = `./inventory.html?hotelID=${getQueryParam('hotelID')}&start=${window.startDate.value}&end=${window.endDate.value}`
-    }
-    function getDateNDaysAgo (n) {
-      const date = new Date();
-      date.setDate(date.getDate() + n); // 获取 N 天前的日期
+        // Format date for DD-MM-YYYY format (used in API URL)
+        function formatDateForAgodaURL(dateStr) {
+            if (!dateStr || typeof dateStr !== 'string' || !dateStr.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                console.error("Invalid date format for URL:", dateStr);
+                return null;
+            }
+            
+            // Convert from YYYY-MM-DD to DD-MM-YYYY
+            const parts = dateStr.split('-');
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0"); // 月份从 0 开始，所以要 +1
-      const day = String(date.getDate()).padStart(2, "0");
+        // Create list items for Agoda Hotel specifically
+        function createAgodaListItem(date, roomQty, price, status, roomId, hotelId, dmcId, ratePlanId, maxGuests, usingMinimumRate = false) {
+            const priceDisplay = usingMinimumRate ? 
+                `<span class="text-xs text-warning" title="Minimum rate (actual rate not set)">${price} (min)</span>` : 
+                `<span class="text-xs">${price}</span>`;
+                
+            return `
+            <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-0 border-radius-lg">
+                <div class="d-flex flex-column">
+                    <h6 class="mb-1 text-dark font-weight-bold text-sm">${date}（${roomQty}）</h6>
+                    ${priceDisplay}
+                </div>
+                <div class="d-flex align-items-center text-sm">
+                    ${status || ''}
+                    <button type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#modal-form" 
+                            onclick="xgjg6('${date}', '${roomId}', ${price}, ${roomQty}, '${hotelId}', ${dmcId}, '${ratePlanId}', '${maxGuests}')">
+                        Edit
+                    </button>
+                </div>
+            </li>`;
+        }
 
-      return `${year}-${month}-${day}`;
-    }
-    if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
-    else window.startDate.value = getDateNDaysAgo(0)
+        // Create Agoda Hotel card from availability data
+        function createAgodaHotelAvailability(meg) {
+            if (!meg.value || !meg.value.data) {
+                console.error("Invalid Agoda Hotel data format", meg);
+                return;
+            }
 
-    if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
-    else window.endDate.value = getDateNDaysAgo(30)
-    function xgjg (oldPrice, room_id, rate_id, from_date, until_date, occupancy, roomNum) {
-      window.startDateC.value = from_date
-      window.endDateC.value = until_date
-      window.roomP.value = oldPrice
-      window.roomN.value = roomNum
-      window.room_id = room_id
-      window.rate_id = rate_id
-      window.occupancy = occupancy
-    }
-    function xgjg2 (oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum) {
-      window.startDateC.value = from_date
-      window.endDateC.value = until_date
-      window.roomP.value = oldPrice
-      window.room_id_ctrip = room_id
-      window.roomN.value = roomNum
-      window.basicRoomId = basicRoomId
-      window.person = person
-    }
-    function xgjg3 (oldPrice, RoomTypeID, StartDateStr, EndDateStr, person, Regular, RateCategoryID) {
-      window.startDateC.value = StartDateStr
-      window.endDateC.value = EndDateStr
-      window.roomP.value = oldPrice
-      window.roomN.value = Regular
-      window.RoomTypeID = RoomTypeID
-      window.RateCategoryID = RateCategoryID
-      
-    }
-    function xgjg4 (StartDateStr, EndDateStr, oldPrice, room_id) {
-      window.startDateC.value = StartDateStr
-      window.endDateC.value = EndDateStr
-      window.roomP.value = oldPrice
-      window.roomN.value = 2
-      window.AgodaHomeslID = room_id
-    }
-    function xgjg5 (StartDateStr, ratePlanId, oldPrice, roomNum, roomID, roomTypeName) {
-      window.startDateC.value = StartDateStr
-      window.endDateC.value = StartDateStr
-      window.roomP.value = oldPrice
-      window.roomN.value = roomNum
-      window.ExpediapID = ratePlanId
-      window.roomID = roomID
-    }
-    function xgxx () {
-      let cipher = {}
-      if (window.cipher && window.room_id_ctrip) {
-        cipher[window.room_id_ctrip] = window.cipher[window.room_id_ctrip]
-        cipher[window.basicRoomId] = window.cipher[window.basicRoomId]
-      }
-      
-      sendMessage('updatePrice', {
-        hotel_id: window.bookingID,
-        ctripID: window.ctripID,
-        room_id: window.room_id,
-        room_id_ctrip: window.room_id_ctrip,
-        room_id_expediap: 325405295,
-        rate_id: window.rate_id,
-        field_value: window.roomP.value,
-        from_date: window.startDateC.value,
-        until_date: window.endDateC.value,
-        occupancy: window.occupancy,
-        roomNum: window.roomN.value,
-        basicRoomId: window.basicRoomId,
-        person: window.person,
-        roomID: window.roomID,
-        cipher: cipher,
-        roomTypeId: window.roomTypeId,
-        AgodaHotelID: window.AgodaHotelID,
-        RateCategoryID: window.RateCategoryID,
-        ExpediapID: window.ExpediapID,
-        ExpediapHtid: window.ExpediaID
-      })
-    }
+            // Store currency information from the response
+            window.AgodaCurrency = meg.value.data.currency || "VND";
+            
+            let tempData = "";
+            
+            // Create a mapping of roomIds to their corresponding room objects for easy lookup
+            const roomsMap = {};
+            if (meg.value.data.availability && Array.isArray(meg.value.data.availability)) {
+                meg.value.data.availability.forEach(room => {
+                    roomsMap[room.roomId] = room;
+                });
+            }
 
-    // 获取房间数据
-    const myHeaders = new Headers();
-    myHeaders.append("content-type", "application/json");
 
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    };
+            
+            // Keep track of processed room-rate combinations
+            const processedCombinations = new Set();
+            
+            // Process each rate plan directly - avoid the intermediate roomsById mapping
+            if (meg.value.data.rates && Array.isArray(meg.value.data.rates)) {
+                meg.value.data.rates.forEach(ratePlan => {
+                    // Only process if we have a valid roomId and can find the room data
+                    if (!ratePlan.roomId || !roomsMap[ratePlan.roomId]) {
+                        return;
+                    }
+                    
+                    // Get the room data
+                    const room = roomsMap[ratePlan.roomId];
+                    
+                    // Generate a unique identifier for this room-rate combination
+                    const combinationKey = `${room.roomId}-${ratePlan.ratePlanId}`;
+                    
+                    // Skip if we've already processed this exact combination
+                    if (processedCombinations.has(combinationKey)) {
+                        return;
+                    }
+                    
+                    // Mark this combination as processed
+                    processedCombinations.add(combinationKey);
+                    
+                    let liData = "";
+                    
+                    // Skip if there's no data for this room
+                    if (!room.days || !Array.isArray(room.days) || room.days.length === 0) {
+                        return;
+                    }
+                    
+                    // Sort days by date
+                    const sortedDays = [...room.days].sort((a, b) => 
+                        new Date(a.date) - new Date(b.date)
+                    );
+                    
+                    // Generate list items for each date
+                    sortedDays.forEach(day => {
+                        const dateStr = day.date.split('T')[0];
+                        const roomsAvailable = day.remainingRoomNightsAvailable;
+                        const status = day.isClosedOut ? "Closed" : "Bookable";
+                        
+                        // Find rate for this room and rate plan on this date
+                        let price = 0;
+                        let usingMinimumRate = false;
+                        
+                        // Find the rate for this specific day in this rate plan
+                        const dayRate = ratePlan.rateByDays.find(rateDay => 
+                            rateDay.date === day.date
+                        );
+                        
+                        if (dayRate && dayRate.occupancyRate) {
+                            // Get the first occupancy rate (usually for 1 person)
+                            const firstOccupancy = Object.keys(dayRate.occupancyRate)[0];
+                            price = dayRate.occupancyRate[firstOccupancy];
+                        } else {
+                            price = ratePlan.minimumRate || 0;
+                            usingMinimumRate = true;
+                        }
+                        
+                        // Use the specialized Agoda list item creator 
+                        liData += createAgodaListItem(
+                            dateStr,
+                            roomsAvailable,
+                            price,
+                            status,
+                            room.roomId,
+                            day.hotelId,
+                            day.dmcId,
+                            ratePlan.ratePlanId,
+                            ratePlan.noOfMaximumGuests,
+                            usingMinimumRate
+                        );
+                    });
+                    
+                    // Create card with full information about the room and rate plan
+                    tempData += createCommonCard(
+                        `Agoda Hotel ${room.days[0].hotelId}: ${ratePlan.ratePlanName || "Default Rate"}`,
+                        room,
+                        combinationKey, // Unique ID for the list group
+                        `${room.roomName} (Rate: ${ratePlan.ratePlanName}, Max Guests: ${ratePlan.noOfMaximumGuests})`,
+                        liData
+                    );
+                });
+            }
+            
+            window.viewBox.innerHTML += tempData;
+        }
 
-    fetch("./room.json", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        window.bookingID = result[getQueryParam('hotelID')].Booking[0]
-        window.ctripID = result[getQueryParam('hotelID')].Trip[0]
-        window.AgodaHotelID= result[getQueryParam('hotelID')]["Agoda Hotel"][0]
-        // window.AgodaHomesID= result[getQueryParam('hotelID')]["Agoda Homes"]
-        window.AgodaHotelID= result[getQueryParam('hotelID')]["Agoda homes upc"][0]
-        window.ExpediaID= result[getQueryParam('hotelID')]["Expedia"][0]
-        // booking
-        sendMessage('getInventory', {
-          page: nowPage - 1,
-          hotelID: bookingID,
-          ebooking: window.ctripID,
-          AgodaHotelID: window.AgodaHotelID,
-          ExpediaID: window.ExpediaID,
-          // AgodaHomesID: window.AgodaHomesID,
-          // AgodaHomesUpcID: window.AgodaHomesUpcID,
-          start:  getQueryParam('start') ? getQueryParam('start'): getDateNDaysAgo(0),
-          end:  getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(30),
+        window.addEventListener('message', function (event) {
+            const meg = event.data
+            console.log(meg)
+            switch (meg.type) {
+                case "inventory":
+                    creatCardBooking(meg)
+                    break;
+                case "inventoryCtrip":
+                    creatCardCtrip(meg)
+                    break;
+                case "inventoryAgodaHotel":
+                    creatAgodaHotelCtrip(meg)
+                    break;
+                case "availabilityHubViewModel":
+                    createAgodaHotelAvailability(meg)
+                    break;
+                case "inventoryAgodaHomes":
+                    creatAgodaHomes(meg)
+                    break;
+                case "inventoryExpedia":
+                    creatExpedia(meg)
+                    break;
+                case "updatePriceCallBack":
+                    if (meg.value && typeof meg.value === 'object') {
+                        const status = meg.value.isSuccess !== false;
+                        const message = meg.value.message || (status ? 'Update successful' : 'Update failed');
+                        
+                        // Show a message with the update result
+                        const messageDiv = document.createElement('div');
+                        messageDiv.className = status ? 'alert alert-success' : 'alert alert-danger';
+                        messageDiv.style.position = 'fixed';
+                        messageDiv.style.top = '20px';
+                        messageDiv.style.left = '50%';
+                        messageDiv.style.transform = 'translateX(-50%)';
+                        messageDiv.style.zIndex = '9999';
+                        messageDiv.innerHTML = message;
+                        document.body.appendChild(messageDiv);
+                        
+                        // Remove the message after 3 seconds
+                        setTimeout(() => {
+                            document.body.removeChild(messageDiv);
+                            // Reload the page if the update was successful
+                            if (status) {
+                                location.reload();
+                            }
+                        }, 3000);
+                    } else {
+                        location.reload();
+                    }
+                    break;
+                case "queryRoomTypeDetailCtrip":
+                    queryRoomTypeDetailCtrip(meg)
+                    break;
+                default:
+                    break;
+            }
         })
+
+
+        function search() {
+            location.href = `./inventory.html?hotelID=${getQueryParam('hotelID')}&start=${window.startDate.value}&end=${window.endDate.value}`
+        }
+        function getDateNDaysAgo(n) {
+            const date = new Date();
+            date.setDate(date.getDate() + n); // Get the date N days ago
+
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0"); // The month starts from 0, so add 1
+            const day = String(date.getDate()).padStart(2, "0");
+
+            return `${year}-${month}-${day}`;
+        }
+        if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
+        else window.startDate.value = getDateNDaysAgo(0)
+
+        if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
+        else window.endDate.value = getDateNDaysAgo(31)
+
         
-      })
-      .catch((error) => console.error(error));
-  </script>
+        function xgjg(oldPrice, room_id, rate_id, from_date, until_date, occupancy, roomNum) {
+            window.startDateC.value = from_date
+            window.endDateC.value = until_date
+            window.roomP.value = oldPrice
+            window.roomN.value = roomNum
+            window.room_id = room_id
+            window.rate_id = rate_id
+            window.occupancy = occupancy
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Booking Room"
+            document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Rate ID: ${rate_id}, Occupancy: ${occupancy}`
+        }
+        function xgjg2(oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum) {
+            window.startDateC.value = from_date
+            window.endDateC.value = until_date
+            window.roomP.value = oldPrice
+            window.room_id_ctrip = room_id
+            window.roomN.value = roomNum
+            window.basicRoomId = basicRoomId
+            window.person = person
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Ctrip Room"
+            document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Basic Room ID: ${basicRoomId}, Person: ${person}`
+        }
+        function xgjg3(oldPrice, RoomTypeID, StartDateStr, EndDateStr, person, Regular, RateCategoryID) {
+            window.startDateC.value = StartDateStr
+            window.endDateC.value = EndDateStr
+            window.roomP.value = oldPrice
+            window.roomN.value = Regular
+            window.RoomTypeID = RoomTypeID
+            window.RateCategoryID = RateCategoryID
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Agoda Hotel Room"
+            document.querySelector('#modal-room-info').textContent = `Room Type ID: ${RoomTypeID}, Rate Category: ${RateCategoryID}`
+        }
+        function xgjg4(StartDateStr, EndDateStr, oldPrice, room_id) {
+            window.startDateC.value = StartDateStr
+            window.endDateC.value = EndDateStr
+            window.roomP.value = oldPrice
+            window.roomN.value = 2
+            window.AgodaHomeslID = room_id
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Agoda Homes Room"
+            document.querySelector('#modal-room-info').textContent = `Agoda Homes ID: ${room_id}`
+        }
+        function xgjg5(StartDateStr, ratePlanId, oldPrice, roomNum, roomID, roomTypeName) {
+            window.startDateC.value = StartDateStr
+            window.endDateC.value = StartDateStr
+            window.roomP.value = oldPrice
+            window.roomN.value = roomNum
+            window.ExpediapID = ratePlanId
+            window.roomID = roomID
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Expedia Room"
+            document.querySelector('#modal-room-info').textContent = `Rate Plan ID: ${ratePlanId}, Room ID: ${roomID}, Type: ${roomTypeName}`
+        }
+        function xgjg6(dateStr, roomId, price, roomNum, hotelId, dmcId, ratePlanId, maxGuests) {
+            console.log("xgjg6 parameters:", { 
+                dateStr, roomId, price, roomNum, hotelId, dmcId, ratePlanId, maxGuests 
+            });
+            
+            window.startDateC.value = dateStr;
+            window.endDateC.value = dateStr;
+            window.roomP.value = price;
+            window.roomN.value = roomNum;
+            window.AgodaHotelRoomID = roomId;
+            window.AgodaHotelID = hotelId;
+            window.AgodaDmcId = dmcId;
+            window.AgodaRatePlanId = ratePlanId;
+            window.AgodaMaxGuests = maxGuests;
+            // Store the original date format for API call
+            window.AgodaDateFormat = dateStr;
+            
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Agoda Hotel Availability";
+            document.querySelector('#modal-room-info').textContent = 
+                `Room ID: ${roomId}, Rate Plan: ${ratePlanId}, Max Guests: ${maxGuests}, Hotel ID: ${hotelId}, DMC ID: ${dmcId}`;
+        }
+        function xgxx() {
+            let cipher = {}
+            if (window.cipher && window.room_id_ctrip) {
+                cipher[window.room_id_ctrip] = window.cipher[window.room_id_ctrip]
+                cipher[window.basicRoomId] = window.cipher[window.basicRoomId]
+            }
+            
+            // If we're editing Agoda Hotel data
+            if (window.AgodaHotelRoomID && window.AgodaDmcId) {
+                // Format the dates properly for the Agoda API
+                const formattedStartDate = formatDateForAgodaAPI(window.startDateC.value);
+                const formattedEndDate = formatDateForAgodaAPI(window.endDateC.value);
+                
+                // Check if dates are valid before proceeding
+                if (!formattedStartDate || !formattedEndDate) {
+                    alert("Invalid date format. Please check your dates.");
+                    return;
+                }
+                
+                // Get dates in DD-MM-YYYY format for the API URLs
+                const startDateFormatted = formatDateForAgodaURL(formattedStartDate);
+                const endDateFormatted = formatDateForAgodaURL(formattedEndDate);
+                
+                // Format request according to the expected structure
+                const request = {
+                    priceConfig: {
+                        hotelId: window.AgodaHotelID,
+                        roomTypeId: window.AgodaHotelRoomID,
+                        dateFrom: formattedStartDate,
+                        dateTo: formattedEndDate,
+                        // Pre-formatted dates for the API URLs
+                        startDateFormatted: startDateFormatted,
+                        endDateFormatted: endDateFormatted,
+                        price: window.roomP.value,
+                        dmcId: parseInt(window.AgodaDmcId),
+                        currency: window.AgodaCurrency || "VND",
+                        ratePlanId: window.AgodaRatePlanId,
+                        maxGuests: window.AgodaMaxGuests,
+                        // Additional parameters needed by updatePriceAgoda
+                        basePrice: window.roomP.value,
+                        // Use ISO format for dates (YYYY-MM-DD)
+                        startDate: formattedStartDate,
+                        endDate: formattedEndDate
+                    },
+                    availabilityConfig: {
+                        roomId: window.AgodaHotelRoomID, // roomId is used in updateAvailabilityAgoda
+                        startDateFormatted: startDateFormatted,
+                        endDateFormatted: endDateFormatted,
+                        totalAvailability: window.roomN.value, // totalAvailability is used in updateAvailabilityAgoda
+                        hotelId: window.AgodaHotelID,
+                        
+                        roomTypeId: window.AgodaHotelRoomID,
+                        dateFrom: formattedStartDate,
+                        dateTo: formattedEndDate,
+                        roomsToSell: window.roomN.value,
+                        dmcId: parseInt(window.AgodaDmcId),
+                        // Use ISO format for dates (YYYY-MM-DD)
+                        startDate: formattedStartDate,
+                        endDate: formattedEndDate
+                    }
+                };
+                
+                console.log("Sending update request:", request);
+                sendMessage('updateAgodaRateAndAvailability', request);
+                
+                // Close the modal after sending the request
+                const modalElement = document.getElementById('modal-form');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+                
+                // Add a temporary success message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'alert alert-success';
+                messageDiv.style.position = 'fixed';
+                messageDiv.style.top = '20px';
+                messageDiv.style.left = '50%';
+                messageDiv.style.transform = 'translateX(-50%)';
+                messageDiv.style.zIndex = '9999';
+                messageDiv.innerHTML = `Updating Agoda Hotel data for Room ${window.AgodaHotelRoomID}, Rate Plan ${window.AgodaRatePlanId}, Date ${formattedStartDate} to ${formattedEndDate}...`;
+                document.body.appendChild(messageDiv);
+                
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 3000);
+                
+                return;
+            }
+
+            // For other hotel types
+            sendMessage('updatePrice', {
+                hotel_id: window.bookingID,
+                ctripID: window.ctripID,
+                room_id: window.room_id,
+                room_id_ctrip: window.room_id_ctrip,
+                room_id_expediap: 325405295,
+                rate_id: window.rate_id,
+                field_value: window.roomP.value,
+                from_date: window.startDateC.value,
+                until_date: window.endDateC.value,
+                occupancy: window.occupancy,
+                roomNum: window.roomN.value,
+                basicRoomId: window.basicRoomId,
+                person: window.person,
+                roomID: window.roomID,
+                cipher: cipher,
+                roomTypeId: window.roomTypeId,
+                AgodaHotelID: window.AgodaHotelID,
+                AgodaHotelRoomID: window.AgodaHotelRoomID,
+                AgodaDmcId: window.AgodaDmcId,
+                RateCategoryID: window.RateCategoryID,
+                ExpediapID: window.ExpediapID,
+                ExpediapHtid: window.ExpediaID
+            })
+        }
+
+        // 获取房间数据
+        const myHeaders = new Headers();
+        myHeaders.append("content-type", "application/json");
+
+        const requestOptions = {
+            method: "GET",
+            headers: myHeaders,
+            redirect: "follow"
+        };
+
+        fetch("./room.json", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                window.bookingID = result[getQueryParam('hotelID')].Booking[0]
+                window.ctripID = result[getQueryParam('hotelID')].Trip[0]
+                window.AgodaHotelID = result[getQueryParam('hotelID')]["Agoda Hotel"]
+                // window.AgodaHomesID= result[getQueryParam('hotelID')]["Agoda Homes"]
+                window.AgodaHomesID = result[getQueryParam('hotelID')]["Agoda homes upc"][0]
+                window.ExpediaID = result[getQueryParam('hotelID')]["Expedia"][0]
+                // booking
+                sendMessage('getInventory', {
+                    page: nowPage - 1,
+                    hotelID: bookingID,
+                    ebooking: window.ctripID,
+                    AgodaHotelID: window.AgodaHotelID,
+                    ExpediaID: window.ExpediaID,
+                    // AgodaHomesID: window.AgodaHomesID,
+                    // AgodaHomesUpcID: window.AgodaHomesUpcID,
+                    start: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
+                    end: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31),
+                })
+
+                // Send request for Agoda Hotel data
+                sendMessage('getInventoryAgodaHotel', {
+                    AgodaHotelID: window.AgodaHotelID,
+                    start: getQueryParam('start') ? formatDateForAgoda(getQueryParam('start')) : formatDateForAgoda(getDateNDaysAgo(0)),
+                    end: getQueryParam('end') ? formatDateForAgoda(getQueryParam('end')) : formatDateForAgoda(getDateNDaysAgo(31)),
+                    getAllDates: true  // Add a flag to indicate we want all dates
+                })
+            })
+            .catch((error) => console.error(error));
+
+        // Function to properly format dates for Agoda API
+        function formatDateForAgoda(dateStr) {
+            // Parse the date in YYYY-MM-DD format
+            const parts = dateStr.split('-');
+            // Return in DD-MM-YYYY format for Agoda
+            return `${parts[2]}-${parts[1]}-${parts[0]}`;
+        }
+    </script>
 </body>
 
 </html>

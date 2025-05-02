@@ -1,0 +1,2658 @@
+{
+    "type": "availabilityHubViewModel",
+    "value": {
+        "isSuccess": true,
+        "message": "success",
+        "status": 1,
+        "data": {
+            "startDate": "2025-05-01T00:00:00",
+            "endDate": "2025-05-31T00:00:00",
+            "availability": [
+                {
+                    "days": [
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": true,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-01T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-02T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-03T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-04T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-05T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-06T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-07T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-08T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-09T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-10T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-11T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-12T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-13T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-14T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-15T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-16T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-17T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-18T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-19T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-20T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-21T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-22T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-23T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-24T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-25T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-26T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-27T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-28T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-29T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-30T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952892321",
+                            "date": "2025-05-31T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        }
+                    ],
+                    "roomId": 952892321,
+                    "roomName": "Deluxe King Studio Apartment",
+                    "noOfRoom": 5
+                },
+                {
+                    "days": [
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": true,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-01T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-02T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-03T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-04T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-05T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-06T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-07T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-08T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-09T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-10T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-11T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-12T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-13T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-14T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-15T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-16T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-17T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-18T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-19T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-20T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-21T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-22T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-23T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-24T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-25T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-26T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-27T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-28T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-29T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-30T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "952894279",
+                            "date": "2025-05-31T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        }
+                    ],
+                    "roomId": 952894279,
+                    "roomName": "Deluxe Two Bedroom Apartment with Balcony",
+                    "noOfRoom": 3
+                },
+                {
+                    "days": [
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": true,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-01T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-02T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-03T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-04T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-05T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-06T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-07T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-08T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-09T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-10T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-11T00:00:00",
+                            "remainingRoomNightsAvailable": 0,
+                            "netRoomNightsBooked": 1,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-12T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-13T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-14T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-15T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-16T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-17T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-18T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-19T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-20T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-21T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-22T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-23T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-24T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-25T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-26T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-27T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-28T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-29T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-30T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        },
+                        {
+                            "allotmentAutoTopup": 0,
+                            "isClosedOut": false,
+                            "isNoArrival": false,
+                            "isNoCheckout": false,
+                            "hotelId": "61484809",
+                            "roomTypeId": "953033512",
+                            "date": "2025-05-31T00:00:00",
+                            "remainingRoomNightsAvailable": 1,
+                            "netRoomNightsBooked": 0,
+                            "guaranteed": 0,
+                            "dmcId": 332
+                        }
+                    ],
+                    "roomId": 953033512,
+                    "roomName": "3-Bedroom Apartment",
+                    "noOfRoom": 3
+                }
+            ],
+            "isAccessibleForChainHotel": true,
+            "currency": "VND",
+            "rates": [
+                {
+                    "ratePlanId": 19080604,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "7 Days Flexibles",
+                    "noOfMaximumGuests": 2,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 952892321,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": {
+                                "1": 3907692,
+                                "2": 3907692
+                            }
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": {
+                                "1": 4396581,
+                                "2": 4396581
+                            }
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 40000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "9999-12-31T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                },
+                {
+                    "ratePlanId": 19080604,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "7 Days Flexibles",
+                    "noOfMaximumGuests": 4,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 952894279,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": {
+                                "1": 6837607,
+                                "2": 6837607,
+                                "3": 6837607,
+                                "4": 6837607
+                            }
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": {
+                                "1": 7326496,
+                                "2": 7326496,
+                                "3": 7326496,
+                                "4": 7326496
+                            }
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 1000000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "9999-12-31T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                },
+                {
+                    "ratePlanId": 19080604,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "7 Days Flexibles",
+                    "noOfMaximumGuests": 6,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 953033512,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735040,
+                                "2": 42735040,
+                                "3": 42735040,
+                                "4": 42735040,
+                                "5": 42735040,
+                                "6": 42735040
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735140,
+                                "2": 42735140,
+                                "3": 42735140,
+                                "4": 42735140,
+                                "5": 42735140,
+                                "6": 42735140
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735140,
+                                "2": 42735140,
+                                "3": 42735140,
+                                "4": 42735140,
+                                "5": 42735140,
+                                "6": 42735140
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735140,
+                                "2": 42735140,
+                                "3": 42735140,
+                                "4": 42735140,
+                                "5": 42735140,
+                                "6": 42735140
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234199,
+                                "2": 11234199,
+                                "3": 11234199,
+                                "4": 11234199,
+                                "5": 11234199,
+                                "6": 11234199
+                            }
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234199,
+                                "2": 11234199,
+                                "3": 11234199,
+                                "4": 11234199,
+                                "5": 11234199,
+                                "6": 11234199
+                            }
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234199,
+                                "2": 11234199,
+                                "3": 11234199,
+                                "4": 11234199,
+                                "5": 11234199,
+                                "6": 11234199
+                            }
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234199,
+                                "2": 11234199,
+                                "3": 11234199,
+                                "4": 11234199,
+                                "5": 11234199,
+                                "6": 11234199
+                            }
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234199,
+                                "2": 11234199,
+                                "3": 11234199,
+                                "4": 11234199,
+                                "5": 11234199,
+                                "6": 11234199
+                            }
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": {
+                                "1": 11234188,
+                                "2": 11234188,
+                                "3": 11234188,
+                                "4": 11234188,
+                                "5": 11234188,
+                                "6": 11234188
+                            }
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": {
+                                "1": 12208547,
+                                "2": 12208547,
+                                "3": 12208547,
+                                "4": 12208547,
+                                "5": 12208547,
+                                "6": 12208547
+                            }
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 1000000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "9999-12-31T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                },
+                {
+                    "ratePlanId": 20178568,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "Non refundable Holiday",
+                    "noOfMaximumGuests": 2,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 952892321,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 15384616,
+                                "2": 15384616
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": null
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 40000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "2025-05-04T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                },
+                {
+                    "ratePlanId": 20178568,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "Non refundable Holiday",
+                    "noOfMaximumGuests": 4,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 952894279,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 25641026,
+                                "2": 25641026,
+                                "3": 25641026,
+                                "4": 25641026
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": null
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 1000000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "2025-05-04T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                },
+                {
+                    "ratePlanId": 20178568,
+                    "rateTypeId": 4,
+                    "ratePlanCode": null,
+                    "ratePlanName": "Non refundable Holiday",
+                    "noOfMaximumGuests": 6,
+                    "hasLinked": false,
+                    "hasConnected": false,
+                    "roomId": 953033512,
+                    "rateByDays": [
+                        {
+                            "date": "2025-05-01T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735040,
+                                "2": 42735040,
+                                "3": 42735040,
+                                "4": 42735040,
+                                "5": 42735040,
+                                "6": 42735040
+                            }
+                        },
+                        {
+                            "date": "2025-05-02T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735040,
+                                "2": 42735040,
+                                "3": 42735040,
+                                "4": 42735040,
+                                "5": 42735040,
+                                "6": 42735040
+                            }
+                        },
+                        {
+                            "date": "2025-05-03T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735040,
+                                "2": 42735040,
+                                "3": 42735040,
+                                "4": 42735040,
+                                "5": 42735040,
+                                "6": 42735040
+                            }
+                        },
+                        {
+                            "date": "2025-05-04T00:00:00",
+                            "occupancyRate": {
+                                "1": 42735040,
+                                "2": 42735040,
+                                "3": 42735040,
+                                "4": 42735040,
+                                "5": 42735040,
+                                "6": 42735040
+                            }
+                        },
+                        {
+                            "date": "2025-05-05T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-06T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-07T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-08T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-09T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-10T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-11T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-12T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-13T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-14T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-15T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-16T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-17T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-18T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-19T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-20T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-21T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-22T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-23T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-24T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-25T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-26T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-27T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-28T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-29T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-30T00:00:00",
+                            "occupancyRate": null
+                        },
+                        {
+                            "date": "2025-05-31T00:00:00",
+                            "occupancyRate": null
+                        }
+                    ],
+                    "maximumRate": 350000000,
+                    "minimumRate": 1000000,
+                    "useMaxMinFromSettingByCountryCurrency": true,
+                    "isViewOnlyForBNRatePlan": false,
+                    "isBNRatePlan": false,
+                    "isActive": true,
+                    "closeOutByDay": [],
+                    "sellEndDate": "2025-05-04T00:00:00+07:00",
+                    "stayByDay": [],
+                    "parentRatePlanId": null,
+                    "parentRatePlanName": null
+                }
+            ],
+            "isChangeNetTypeCmsEnabled": true
+        },
+        "errors": null
+    },
+    "userID": "a31c8c38-2674-11f0-93d5-5254002afdb5"
+}
