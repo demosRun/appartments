@@ -57,6 +57,7 @@
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
@@ -64,7 +65,7 @@
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
                     </tr>
                   </thead>
                   <tbody id="graphqlTable">
@@ -116,6 +117,7 @@
             roomList.push(element.id)
             let orderStatusDesc = element.orderStatusDesc
             tempData2 += `<tr>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.id} n_check"  onclick="getReservationDetails('${element.propertyId}', '${element.bookingToken}')">${element.id}</p></td>
               <td><p class="text-sm font-weight-bold mb-0">${element.guestName}</p></td>
               
               <td><p class="text-sm font-weight-bold mb-0">${element.checkInDate.split('T')[0]}</p></td>
@@ -124,7 +126,7 @@
               <td><p class="text-sm font-weight-bold mb-0">${element.propertyName}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 status_${element.id}">${typeNnme[element.status]}</p></td>
               <td><p class="text-sm font-weight-bold mb-0 booktime_${element.id}">${element.updatedAt.split('T')[0]}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.id} n_check"  onclick="getReservationDetails('${element.propertyId}', '${element.bookingToken}')">${element.id}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element.propertyId}</p></td>
               </tr>`
           }
           window.graphqlTable.innerHTML = tempData2

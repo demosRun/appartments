@@ -57,18 +57,17 @@
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">住宿ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">价格</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间数</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">总房费</th>
-                      
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订日期</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">取消费用</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
                     </tr>
                   </thead>
                   <tbody id="graphqlTable">
@@ -97,111 +96,63 @@
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param) ? urlParams.get(param) : '';
     }
-    function sendMessage (type, data) {
-      window.parent.postMessage({ type: type, data: data }, '*');
+    function getDay (timestampInSeconds) {
+      const date = new Date(timestampInSeconds * 1000); // 转换成毫秒
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // 月份从0开始，要+1
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
     }
-    const nowPage = getQueryParam('page') ? parseInt(getQueryParam('page')) : 1
-    window.addEventListener('message', function(event) {
-      const meg = event.data
-      // console.log(meg)
-      switch (meg.type) {
-        case "searchReservations2":
+    function getTimestamp(dateStr) {
+      return Math.floor(new Date(dateStr).getTime() / 1000);
+    }
+    function getOrder () {
+      const myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        "orderType": "携程"
+      });
+
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+      };
+
+      fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(window.startDate.value)}&endDate=${getTimestamp(window.endDate.value)}&search=${window.propertyId.value}`, requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
           let tempData2 = ``
-          let roomList = []
-          for (let index = 0; index < meg.value.orderList.length; index++) {
-            const element = meg.value.orderList[index];
-            roomList.push(element.orderId)
-            let orderStatusDesc = element.orderStatusDesc
+          // meg.value.bookings.sort((a, b) => new Date(a.checkInDate) - new Date(b.checkInDate));
+          for (let index = 0; index < result.length; index++) {
+            const element = result[index];
             tempData2 += `<tr>
-              <td><p class="text-sm font-weight-bold mb-0">${element.hotel}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.clientName.split(',').join('<br>')}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 phone_${element.orderId}"></p></td>
-              
-              <td><p class="text-sm font-weight-bold mb-0">${element.arrival.split(' ')[0]}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.departure.split(' ')[0]}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.merchantRoomName}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.quantity}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 status_${element.orderId}">${orderStatusDesc}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.amount}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0 n_check_${element.orderId} n_check" onclick="getReservationDetails('${element.orderId}', '${element.hotel}', '${element.formId}')">${element.orderId}</p></td>
-              <td><p class="text-sm font-weight-bold mb-0">${element.orderDate}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[10]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${getDay(element[7])}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${getDay(element[8])}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[2]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[9]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[5]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[4]}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0 booktime_${element[0]}">${getDay(element[6])}</p></td>
+              <td><p class="text-sm font-weight-bold mb-0">${element[11]}</p></td>
               </tr>`
           }
           window.graphqlTable.innerHTML = tempData2
-          // 获取详情
-          getNewData(roomList)
-          // 生成页码
-          const pageNum = Math.ceil(meg.value.total / 10)
-          let pageHtmlStr = ``
-          if (nowPage > 1) {
-            pageHtmlStr += `<li class="page-item">
-          <a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${nowPage - 1}" aria-label="Previous">
-            <span class="material-symbols-rounded">
-              keyboard_arrow_left
-            </span>
-          </a>
-        </li>`
-          }
-          for (let index = 0; index < pageNum; index++) {
-            if (index > nowPage - 10 && index < nowPage + 10) {
-              if (index + 1 == nowPage) {
-                pageHtmlStr += `<li class="page-item"><a class="page-link active" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
-              } else {
-                pageHtmlStr += `<li class="page-item"><a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${index + 1}">${index + 1}</a></li>`
-              }
-            }
-            
-            
-          }
-          if (nowPage < pageNum) {
-            pageHtmlStr += `<li class="page-item">
-          <a class="page-link" href="./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}&page=${pageNum}" aria-label="Next">
-            <span class="material-symbols-rounded">
-              keyboard_arrow_right
-            </span>
-          </a>
-        </li>`
-          }
-          document.querySelector('.pagination').innerHTML = pageHtmlStr
-          break;
-        case "reservationDetails2":
-          console.log(meg.value.orderID)
-          const value = meg.value
-          if (document.querySelector(`.phone_${value.orderID}`)) {
-            const phone = value.clientPhone ? value.clientPhone : ''
-            const penaltyAmount = value.cancelApplyInfo ? value.cancelApplyInfo.penaltyAmount : '0.00'
-            document.querySelector(`.phone_${value.orderID}`).innerText = phone
-            if (penaltyAmount != 0) document.querySelector(`.status_${value.orderID}`).innerText = penaltyAmount
-            addRoom(meg.value.orderID, "携程", phone, meg.value.quantity, penaltyAmount, meg.value.roomName, dateToTimestamp(meg.value.orderDate), dateToTimestamp(meg.value.arrivalDateRange.start), dateToTimestamp(meg.value.departureDateRange.end), meg.value.amount, meg.value.clientName.split(',').join('<br>'), meg.value.clientName, meg.value.roomID, meg.value.orderStatusType)
-            if (document.querySelector(`.n_check_${value.orderID}`)) {
-              document.querySelector(`.n_check_${value.orderID}`).classList.remove('n_check')
-            }
-          } else {
-            console.error(`${value.orderID}不存在!`)
-          }
-          
-          break
-        default:
-          break;
-      }
-    });
-    sendMessage('getSearchReservations2', {
-      page: nowPage - 1,
-      propertyId: getQueryParam('propertyId'),
-      start:  getQueryParam('start'),
-      end:  getQueryParam('end'),
-    })
-    setInterval(() => {
-      sendMessage('getSearchReservations2', {
-        page: nowPage - 1,
-        propertyId: getQueryParam('propertyId'),
-        start:  getQueryParam('start'),
-        end:  getQueryParam('end'),
-      })
-    }, 15000);
+        })
+        .catch((error) => console.error(error));
+    }
+    
     function search () {
       location.href = `./room2.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
     }
+    
+    
     function getDateNDaysAgo (n) {
       const date = new Date();
       date.setDate(date.getDate() + n); // 获取 N 天前的日期
@@ -212,53 +163,22 @@
 
       return `${year}-${month}-${day}`;
     }
-    if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
-    else window.startDate.value = getDateNDaysAgo(0)
+    window.onload = function() {
+      if (getQueryParam('start')) window.startDate.value = getQueryParam('start')
+      else window.startDate.value = getDateNDaysAgo(0)
 
-    if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
-    else window.endDate.value = getDateNDaysAgo(30)
+      if (getQueryParam('end')) window.endDate.value = getQueryParam('end')
+      else window.endDate.value = getDateNDaysAgo(30)
 
-    if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+      if (getQueryParam('propertyId')) window.propertyId.value = getQueryParam('propertyId')
+      getOrder()
+    }
+    
 
-    function getReservationDetails (book_id, hotel_id, formId) {
-      console.log(book_id, hotel_id, formId)
-      sendMessage('getReservationDetails2', {book_id, hotel_id, formId})
+    function getReservationDetails (propertyId, bookingToken) {
+      sendMessage('getReservationDetails3', {propertyId, bookingToken})
     }
 
-    function getNewData (roomList) {
-      const myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-
-      const raw = JSON.stringify({
-        "orderID": roomList.join(',')
-      });
-
-      const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow"
-      };
-
-      fetch("https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/selectRoom", requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          result.forEach(element => {
-            if (document.querySelector(`.phone_${element[0]}`)) {
-              document.querySelector(`.n_check_${element[0]}`).classList.remove('n_check')
-              document.querySelector(`.phone_${element[0]}`).innerText = element[2]
-              if (element[4] != 0) document.querySelector(`.status_${element[0]}`).innerText = element[4]
-            }
-          });
-          setTimeout(() => {
-            if (document.querySelector('.n_check')) {
-              console.log(document.querySelector('.n_check'))
-              document.querySelector('.n_check').click()
-            }
-          }, 1000);
-        })
-        .catch((error) => console.error(error));
-    }
   </script>
 </body>
 
