@@ -132,6 +132,7 @@
     </div>
   </main>
   <!--   Core JS Files   -->
+  <script src="https://cunchu.site/owo/plug/oloading.js" type="text/javascript" charset="UTF-8"></script>
   <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
 
   <script src="https://cunchu.site/puge/ws.js" type="text/javascript" charset="UTF-8"></script>
@@ -147,13 +148,16 @@
     //   iframe.contentWindow.postMessage({ type: 'hello', data: 'Hello from parent!' }, '*');
     // };
     let wsOptions = {
-      isAdmin: true
+      isAdmin: true,
+      onReady: () => {
+        oloading.hide()
+      }
     }
     wsOptions.messageCallBack = (meg) => {
       iframe.contentWindow.postMessage(meg, '*');
     }
     window.owoSocket = new owoSocket('住宿管理', wsOptions)
-
+    oloading.show()
   </script>
 </body>
 
