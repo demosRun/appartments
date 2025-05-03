@@ -176,20 +176,16 @@
                 const rawTotalAmount = element.amountInvoicedOrRoomPriceSum ?? 0;
                 const rawCommission = element.actualCommissionRaw ?? 0;
 
+                // Money tranfrom
+                const TotalForm = rawTotalAmount.trim().split(" ").reverse().join(" ");
+
                 // Chuyển đổi sang số một cách an toàn
-                const totalAmount = Number(rawTotalAmount);
+                const totalAmount = Number(rawTotalAmount.replace(/\D/g, ""));
                 const commission = Number(rawCommission);
 
-                let netAmountDisplay = 'N/A'; // Mặc định là N/A
+                let netAmountDisplay = 0; // Mặc định là N/A
+                const netAmount = totalAmount - commission;
 
-                if (!isNaN(totalAmount)) { // Chỉ tính khi tổng tiền là số hợp lệ
-                    if (isNaN(commission)) { // Nếu hoa hồng không phải số
-                        netAmountDisplay = totalAmount.toFixed(2); // Thực nhận bằng tổng tiền
-                    } else { // Nếu cả hai đều là số hợp lệ
-                        const netAmount = totalAmount - commission;
-                        netAmountDisplay = netAmount.toFixed(2); // Tính và định dạng
-                    }
-                }
 
                 tempData += `<tr>
                   <td><p class="text-sm font-weight-bold mb-0">${element.propertyId ?? ''}</p></td>
@@ -200,11 +196,9 @@
                   <td><p class="text-sm font-weight-bold mb-0 room_info_${element.id ?? ''}"></p></td>
                   <td><p class="text-sm font-weight-bold mb-0 num_rooms_${element.id ?? ''}"></p></td>
                   <td><p class="text-sm font-weight-bold mb-0 room_phone_${element.id ?? ''}"></p></td>
-                  <td><p class="text-sm font-weight-bold mb-0">${rawTotalAmount}</p></td> {/* Giữ giá trị gốc */}
-                  <td><p class="text-sm font-weight-bold mb-0">${rawCommission}</p></td> {/* Giữ giá trị gốc */}
-                  {/* ----- Ô DỮ LIỆU MỚI ----- */}
-                  <td><p class="text-sm font-weight-bold mb-0">${netAmountDisplay}</p></td>
-                  {/* ----------------------- */}
+                  <td><p class="text-sm font-weight-bold mb-0">${TotalForm}</p></td> 
+                  <td><p class="text-sm font-weight-bold mb-0">${commission.toLocaleString("en-US") + " VND"}</p></td> 
+                  <td><p class="text-sm font-weight-bold mb-0">${netAmount.toLocaleString("en-US") + " VND"}</p></td>
                   <td><p class="text-sm font-weight-bold mb-0 n_check n_check_${element.id ?? ''}" onclick="getReservationDetails(${element.id ?? null}, ${element.propertyId ?? null})">${element.id ?? 'N/A'}</p></td>
                   <td><p class="text-sm font-weight-bold mb-0">${(element.createdAt ?? '').split(' ')[0]}</p></td>
                 </tr>`;
@@ -267,7 +261,7 @@
           if (checkEl) {
             checkEl.classList.remove('n_check');
           }
-          break; // Kết thúc case "reservationDetails"
+          break; 
 
         default:
           break;
