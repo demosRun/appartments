@@ -973,7 +973,7 @@
             redirect: "follow"
         };
 
-        fetch("./room.json", requestOptions)
+        fetch("https://cunchu.site/work/storage/appartment/room.json", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 window.bookingID = result[getQueryParam('hotelID')].Booking[0]
