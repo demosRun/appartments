@@ -161,34 +161,34 @@
         }
 
         // Ctrip
-        function creatCardCtrip(meg) {
-            let tempData = ``
-            // Generate card
-            for (const key in meg.value.roomTypeInfo) {
-                if (Object.prototype.hasOwnProperty.call(meg.value.roomTypeInfo, key)) {
-                    const element = meg.value.roomTypeInfo[key];
-                    tempData += createCommonCard(
-                        "Ctrip",
-                        element,
-                        element.id,
-                        element.name,
-                        ""
-                    );
-                    // Get room price detail
-                    window.cipher = meg.value.cipher
-                    sendMessage('queryRoomTypeDetail', {
-                        page: nowPage - 1,
-                        productId: element.productIds[0],
-                        roomTypeId: element.id,
-                        ebooking: window.ctripID,
-                        cipher: meg.value.cipher,
-                        start: window.startDate.value.replaceAll('-', ''),
-                        end: window.endDate.value.replaceAll('-', ''),
-                    })
-                }
-            }
-            window.viewBox.innerHTML += tempData
-        }
+        // function creatCardCtrip(meg) {
+        //     let tempData = ``
+        //     // Generate card
+        //     for (const key in meg.value.roomTypeInfo) {
+        //         if (Object.prototype.hasOwnProperty.call(meg.value.roomTypeInfo, key)) {
+        //             const element = meg.value.roomTypeInfo[key];
+        //             tempData += createCommonCard(
+        //                 "Ctrip",
+        //                 element,
+        //                 element.id,
+        //                 element.name,
+        //                 ""
+        //             );
+        //             // Get room price detail
+        //             window.cipher = meg.value.cipher
+        //             sendMessage('queryRoomTypeDetail', {
+        //                 page: nowPage - 1,
+        //                 productId: element.productIds[0],
+        //                 roomTypeId: element.id,
+        //                 ebooking: window.ctripID,
+        //                 cipher: meg.value.cipher,
+        //                 start: window.startDate.value.replaceAll('-', ''),
+        //                 end: window.endDate.value.replaceAll('-', ''),
+        //             })
+        //         }
+        //     }
+        //     window.viewBox.innerHTML += tempData
+        // }
 
         // Common function to create cards for any platform
         function createCommonCard(platformName, roomData, roomId, roomName, listItems) {
@@ -542,6 +542,102 @@
             window.viewBox.innerHTML += tempData;
         }
 
+        // Display Ctrip room availability 
+        function displayCtripAvailability(meg) {
+            if (!meg.value || !meg.value.availability || !meg.value.roomTypeInfo) {
+                console.error("Invalid Ctrip data format:", meg);
+                return;
+            }
+
+            const roomTypeData = meg.value.roomTypeInfo;
+            const availability = meg.value.availability;
+            const roomTypeId = meg.value.roomTypeId;
+            const roomTypeName = meg.value.roomTypeName;
+            const cipher = meg.value.cipher || {};
+            
+            // Store cipher data for later use
+            window.ctripCipherData = cipher;
+            
+            let tempData = "";
+            let liData = "";
+            
+            // Check if we have rangData which contains the daily availability
+            if (availability.rangData) {
+                // Get dates from rangList and sort them
+                const dates = Array.isArray(availability.rangList) ? 
+                    [...availability.rangList].sort() : 
+                    Object.keys(availability.rangData).sort();
+                
+                // Process each date
+                dates.forEach(dateStr => {
+                    if (!availability.rangData[dateStr]) return;
+                    
+                    const dateData = availability.rangData[dateStr];
+                    
+                    // Get room availability info
+                    const roomToSell = dateData.roomToSell && dateData.roomToSell.value !== undefined ? 
+                        dateData.roomToSell.value : 
+                        (dateData.basicRoomQuantityInfo ? dateData.basicRoomQuantityInfo.canUsedQuantity : 0);
+                    
+                    // Format date from YYYYMMDD to YYYY-MM-DD for display
+                    const formattedDate = dateStr.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+                    
+                    // Get product information (first product is used as an example)
+                    const productIds = Object.keys(dateData.product || {});
+                    if (productIds.length === 0) return;
+                    
+                    const productId = productIds[0];
+                    const productData = dateData.product[productId];
+                    
+                    // Extract basic room ID
+                    const basicRoomId = dateData.basicRoomQuantityInfo ? 
+                        dateData.basicRoomQuantityInfo.basicRoomId : roomTypeId;
+                    
+                    // Get price info - check for person data which contains prices
+                    let price = 0;
+                    let personNum = 0;
+                    
+                    if (productData.person) {
+                        const persons = Object.keys(productData.person);
+                        if (persons.length > 0) {
+                            personNum = persons[0];
+                            const personData = productData.person[personNum];
+                            if (personData && personData.roomPriceInfo) {
+                                price = personData.roomPriceInfo.price;
+                            } else if (personData && personData.value) {
+                                price = personData.value;
+                            }
+                        }
+                    }
+                    
+                    // Get booking status
+                    const status = productData.roomStatus ? 
+                        (productData.roomStatus.value === 1 ? "Bookable" : "Closed") : 
+                        (dateData.roomToSell && dateData.roomToSell.instanctConfirm ? "Bookable" : "On Request");
+                    
+                    // Create list item - properly escape the room name for JavaScript
+                    liData += createCommonListItem(
+                        formattedDate,
+                        roomToSell,
+                        price,
+                        status,
+                        `xgjg2(${price}, '${productId}', ${basicRoomId}, '${dateStr}', '${dateStr}', ${personNum}, ${roomToSell}, '${roomTypeName.replace(/'/g, "\\'")}')`
+                    );
+                });
+                
+                // Create card with the room information
+                tempData = createCommonCard(
+                    `Ctrip ${roomTypeId}`,
+                    roomTypeData,
+                    roomTypeId,
+                    roomTypeName,
+                    liData
+                );
+                
+                window.viewBox.innerHTML += tempData;
+            }
+        }
+
         window.addEventListener('message', function (event) {
             const meg = event.data
             console.log(meg)
@@ -595,6 +691,9 @@
                 case "queryRoomTypeDetailCtrip":
                     queryRoomTypeDetailCtrip(meg)
                     break;
+                case "displayCtripAvailability":
+                    displayCtripAvailability(meg)
+                    break;
                 default:
                     break;
             }
@@ -632,16 +731,24 @@
             document.querySelector('#modal-form .card-header h3').textContent = "Edit Booking Room"
             document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Rate ID: ${rate_id}, Occupancy: ${occupancy}`
         }
-        function xgjg2(oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum) {
-            window.startDateC.value = from_date
-            window.endDateC.value = until_date
-            window.roomP.value = oldPrice
-            window.room_id_ctrip = room_id
-            window.roomN.value = roomNum
-            window.basicRoomId = basicRoomId
-            window.person = person
-            document.querySelector('#modal-form .card-header h3').textContent = "Edit Ctrip Room"
-            document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Basic Room ID: ${basicRoomId}, Person: ${person}`
+        function xgjg2(oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum, roomName) {
+            // Format dates from YYYYMMDD to YYYY-MM-DD if needed
+            const formattedFromDate = from_date.includes('-') ? from_date : from_date.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+            const formattedUntilDate = until_date.includes('-') ? until_date : until_date.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+            
+            window.startDateC.value = formattedFromDate;
+            window.endDateC.value = formattedUntilDate;
+            window.roomP.value = oldPrice;
+            window.room_id_ctrip = room_id;
+            window.roomN.value = roomNum;
+            window.basicRoomId = basicRoomId;
+            window.person = person;
+            
+            // Store the cipher from the earlier API response for use in the update
+            window.roomCipher = window.ctripCipherData;
+            
+            document.querySelector('#modal-form .card-header h3').textContent = "Edit Ctrip Room";
+            document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Basic Room ID: ${basicRoomId}, Person: ${person}, Room Name: ${roomName}`;
         }
         function xgjg3(oldPrice, RoomTypeID, StartDateStr, EndDateStr, person, Regular, RateCategoryID) {
             window.startDateC.value = StartDateStr
@@ -694,10 +801,10 @@
                 `Room ID: ${roomId}, Rate Plan: ${ratePlanId}, Max Guests: ${maxGuests}, Hotel ID: ${hotelId}, DMC ID: ${dmcId}`;
         }
         function xgxx() {
-            let cipher = {}
+            let cipher = window.roomCipher || {};
             if (window.cipher && window.room_id_ctrip) {
-                cipher[window.room_id_ctrip] = window.cipher[window.room_id_ctrip]
-                cipher[window.basicRoomId] = window.cipher[window.basicRoomId]
+                cipher[window.room_id_ctrip] = window.cipher[window.room_id_ctrip];
+                cipher[window.basicRoomId] = window.cipher[window.basicRoomId];
             }
             
             // If we're editing Agoda Hotel data
@@ -783,6 +890,51 @@
                 
                 return;
             }
+            
+            // If we're editing Ctrip room data
+            if (window.room_id_ctrip && window.basicRoomId) {
+                // Format request for Ctrip room update
+                const request = {
+                    hotelId: window.ctripID,
+                    basicRoomId: window.basicRoomId,
+                    roomId: window.room_id_ctrip,
+                    startDate: window.startDateC.value,
+                    endDate: window.endDateC.value,
+                    price: window.roomP.value,
+                    person: window.person || 2,
+                    roomNum: window.roomN.value,
+                    cipher: cipher,
+                    productOperateType: "CALENDAR_MODAL"
+                };
+                
+                console.log("Sending Ctrip update request:", request);
+                sendMessage('updateCtripRoom', request);
+                
+                // Close the modal after sending the request
+                const modalElement = document.getElementById('modal-form');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+                
+                // Add a temporary success message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'alert alert-info';
+                messageDiv.style.position = 'fixed';
+                messageDiv.style.top = '20px';
+                messageDiv.style.left = '50%';
+                messageDiv.style.transform = 'translateX(-50%)';
+                messageDiv.style.zIndex = '9999';
+                messageDiv.innerHTML = `Updating Ctrip room ${window.room_id_ctrip} from ${window.startDateC.value} to ${window.endDateC.value}...`;
+                document.body.appendChild(messageDiv);
+                
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 3000);
+                
+                return;
+            }
 
             // For other hotel types
             sendMessage('updatePrice', {
@@ -849,6 +1001,13 @@
                     start: getQueryParam('start') ? formatDateForAgoda(getQueryParam('start')) : formatDateForAgoda(getDateNDaysAgo(0)),
                     end: getQueryParam('end') ? formatDateForAgoda(getQueryParam('end')) : formatDateForAgoda(getDateNDaysAgo(31)),
                     getAllDates: true  // Add a flag to indicate we want all dates
+                })
+                
+                // Send request for Ctrip data
+                sendMessage('getInventoryCtrip', {
+                    hotelId: window.ctripID,
+                    startDate: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
+                    endDate: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31)
                 })
             })
             .catch((error) => console.error(error));

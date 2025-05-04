@@ -1,0 +1,2347 @@
+{
+    "rangList": [
+        "20250502",
+        "20250503",
+        "20250504",
+        "20250505",
+        "20250506",
+        "20250507",
+        "20250508",
+        "20250509",
+        "20250510",
+        "20250511",
+        "20250512",
+        "20250513",
+        "20250514",
+        "20250515",
+        "20250516",
+        "20250517",
+        "20250518",
+        "20250519"
+    ],
+    "rangData": {
+        "20250502": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 5882353,
+                            "roomPriceInfo": {
+                                "price": 5882353,
+                                "cost": 5000000,
+                                "payType": "PP",
+                                "originalPrice": 5882353,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250503": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 5882353,
+                            "roomPriceInfo": {
+                                "price": 5882353,
+                                "cost": 5000000,
+                                "payType": "PP",
+                                "originalPrice": 5882353,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250504": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250505": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250506": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250507": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250508": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250509": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 4201961,
+                            "roomPriceInfo": {
+                                "price": 4201961,
+                                "cost": 3571667,
+                                "payType": "PP",
+                                "originalPrice": 4201961,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250510": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 4201961,
+                            "roomPriceInfo": {
+                                "price": 4201961,
+                                "cost": 3571667,
+                                "payType": "PP",
+                                "originalPrice": 4201961,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250511": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250512": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250513": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250514": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250515": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250516": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 4201961,
+                            "roomPriceInfo": {
+                                "price": 4201961,
+                                "cost": 3571667,
+                                "payType": "PP",
+                                "originalPrice": 4201961,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250517": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 4201961,
+                            "roomPriceInfo": {
+                                "price": 4201961,
+                                "cost": 3571667,
+                                "payType": "PP",
+                                "originalPrice": 4201961,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250518": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "20250519": {
+            "roomToSell": {
+                "value": 5,
+                "onRequest": false,
+                "instanctConfirm": true,
+                "unLimited": false,
+                "keepRoom": 0,
+                "keepRoomLastBookingTime": -7,
+                "keepRoomRestore": true,
+                "totalQuantity": 5,
+                "freeSale": "F"
+            },
+            "basicRoomQuantityInfo": {
+                "basicRoomId": 499901755,
+                "totalQuantity": 5,
+                "canUsedQuantity": 5,
+                "contractQuantity": 0,
+                "tempAllotment": false,
+                "canOverFlow": -1,
+                "reserveTime": -7,
+                "reStorable": true,
+                "freeSale": "F",
+                "hasSoldOut": false
+            },
+            "product": {
+                "1580473927": {
+                    "continuousLiveRule": {
+                        "min": {
+                            "value": 1
+                        },
+                        "max": {
+                            "value": 999
+                        }
+                    },
+                    "roomStayLimitInfo": {
+                        "cta": false,
+                        "ctd": false,
+                        "cts": false,
+                        "minLOS": 1,
+                        "maxLOS": 999,
+                        "minST": 1,
+                        "maxST": 999
+                    },
+                    "stayRule": {
+                        "minLOS": {
+                            "value": 1
+                        },
+                        "maxLOS": {
+                            "value": 999
+                        }
+                    },
+                    "dayLeaveRule": {
+                        "cta": {
+                            "value": false
+                        },
+                        "ctd": {
+                            "value": false
+                        }
+                    },
+                    "bookingRule": {
+                        "min": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 23988
+                        }
+                    },
+                    "roomStatus": {
+                        "value": 1
+                    },
+                    "roomStatusInfo": {
+                        "payType": "PP",
+                        "roomStatus": "G",
+                        "bookable": 1,
+                        "hasKingSize": "F",
+                        "hasTwinBed": "F",
+                        "freeSale": "F",
+                        "checkType": "S",
+                        "restorable": "T",
+                        "reserveTime": -7,
+                        "lateReserveTime": 0,
+                        "deductType": "F",
+                        "prepayLCT": 6,
+                        "guaranteeType": 7,
+                        "guaranteeLCT": 7,
+                        "holdDeadline": 9999,
+                        "isDefault": false,
+                        "canOverFlow": -1,
+                        "maxAdvReserveTime": 23988
+                    },
+                    "roomToSell": {
+                        "value": null,
+                        "onRequest": false,
+                        "instanctConfirm": true,
+                        "unLimited": false,
+                        "keepRoomLastBookingTime": -7,
+                        "keepRoomRestore": true,
+                        "totalQuantity": null,
+                        "freeSale": "F"
+                    },
+                    "roomQuantityInfo": {
+                        "inventoryId": 0,
+                        "roomQuantityType": "None",
+                        "isImmedConfirm": true,
+                        "canOverFlow": -1,
+                        "reserveTime": -7,
+                        "reStorable": true,
+                        "freeSale": "F",
+                        "hasSoldOut": false,
+                        "totalQuantity": null,
+                        "canUsedQuantity": null
+                    },
+                    "person": {
+                        "4": {
+                            "value": 3921569,
+                            "roomPriceInfo": {
+                                "price": 3921569,
+                                "cost": 3333334,
+                                "payType": "PP",
+                                "originalPrice": 3921569,
+                                "currency": "VND",
+                                "smartPrice": false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "resStatus": {
+        "rcode": 200,
+        "rmsg": ""
+    },
+    "ResponseStatus": {
+        "Timestamp": "/Date(1746190994841+0800)/",
+        "Ack": "Success",
+        "Errors": [],
+        "Extension": [
+            {
+                "Id": "CLOGGING_TRACE_ID",
+                "Value": "811a08e2-41ff-4198-a73e-ddafcc7eede0"
+            },
+            {
+                "Id": "RootMessageId",
+                "Value": "100025527-0a08eab2-485053-223592"
+            }
+        ]
+    }
+}

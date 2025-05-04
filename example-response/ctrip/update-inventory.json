@@ -1,0 +1,50 @@
+{
+    "errorCode": "",
+    "resStatus": {
+        "rcode": 200,
+        "rmsg": ""
+    },
+    "setRoomPriceResultList": [
+        {
+            "hotelId": 123009179,
+            "reqId": 14138650761,
+            "reqStatus": "A",
+            "reqStatusDesc": "Đặt giá thành công"
+        }
+    ],
+    "statusDetail": [
+        {
+            "rcode": "200",
+            "rmsg": ""
+        },
+        {
+            "rcode": "200",
+            "rmsg": ""
+        },
+        {
+            "rcode": "200",
+            "rmsg": ""
+        },
+        {
+            "rcode": "200",
+            "rmsg": ""
+        }
+    ],
+    "disabledSetRoomInfoResultList": [],
+    "setRoomInfoResultList": [],
+    "ResponseStatus": {
+        "Timestamp": "/Date(1746362888322+0800)/",
+        "Ack": "Success",
+        "Errors": [],
+        "Extension": [
+            {
+                "Id": "CLOGGING_TRACE_ID",
+                "Value": "927d757c-8a14-4c71-96c5-4b46ccd528d7"
+            },
+            {
+                "Id": "RootMessageId",
+                "Value": "100025527-0a191b01-485100-3578267"
+            }
+        ]
+    }
+}

@@ -1,0 +1,698 @@
+{
+    "roomTypeIds": [
+        499901754,
+        499901755,
+        499901756
+    ],
+    "hasProduct": true,
+    "currency": "VND",
+    "roomTypeInfo": {
+        "499901754": {
+            "id": 499901754,
+            "name": "Phòng studio Deluxe",
+            "modelType": "subHotelType",
+            "currency": "VND",
+            "ratePlanIds": [
+                1477745121
+            ],
+            "ratePlans": {
+                "1477745121": {
+                    "name": "Standard - Flexible 7 days",
+                    "roomTypeId": 1580473926,
+                    "basicRoomTypeId": 499901754
+                }
+            },
+            "productIds": [
+                1580473926
+            ],
+            "products": {
+                "1580473926": {
+                    "hotelId": 123009179,
+                    "basicRoomTypeId": 499901754,
+                    "ratePlanId": 1477745121,
+                    "vendorId": 0,
+                    "saleLimit": -1,
+                    "roomName": "Deluxe Studio<room only><selling rate mode>",
+                    "payType": "PP",
+                    "currency": "VND",
+                    "resourceType": "B2C",
+                    "isOpen": "T",
+                    "saleModel": 1,
+                    "isCM": false,
+                    "status": "T",
+                    "rateModel": 2,
+                    "subRoomRatePlan": "",
+                    "combo": false,
+                    "ratePlanTagName": [
+                        "Nâng hạng phòng miễn phí",
+                        "Dành riêng cho tuần trăng mật",
+                        "Thành viên Melia",
+                        "Chỉ dành cho khách từ 10–29 tuổi",
+                        "Trip_WSS"
+                    ],
+                    "ebkHidden": 0,
+                    "ratePlanPlatformTags": [],
+                    "productTags": [],
+                    "hasFPLosInfo": false,
+                    "category": 1,
+                    "mealInfo": {
+                        "mealType": 4,
+                        "mealNum": 0
+                    },
+                    "commissionRate": 0.15,
+                    "inventoryTypeAllocated": 1,
+                    "properties": {
+                        "b2B": false,
+                        "b2C": true,
+                        "pp": true,
+                        "fg": false,
+                        "pkg": false,
+                        "preSale": false,
+                        "packages": false,
+                        "sales4Cop": false,
+                        "hour": false,
+                        "cm": false,
+                        "group": false,
+                        "crossUser": false,
+                        "effective": true,
+                        "ineffective": false,
+                        "discard": false,
+                        "direct": false,
+                        "followPrice": false,
+                        "followStatus": false,
+                        "followRestrictions": false,
+                        "gift": false,
+                        "highValuePackage": false
+                    },
+                    "bookStartDate": "",
+                    "bookEndDate": "",
+                    "stayStartDate": "",
+                    "stayEndDate": "",
+                    "cancelPolicyId": "120970933604827253",
+                    "cancelPolicyName": "Flexible-until 7 days before arrival",
+                    "hasExceptionDeriveInfos": false,
+                    "canEditQuantityPolicy": true,
+                    "cmPushInventory": "F",
+                    "name": "Standard - Flexible 7 days",
+                    "displayName": "Standard - Flexible 7 days",
+                    "value": 1580473926,
+                    "pricingMode": 2,
+                    "basePerson": 2,
+                    "relateRoomTypeIds": [],
+                    "isParent": false,
+                    "ratePlanCode": "",
+                    "roomClass": 1580473926,
+                    "roomClassGroup": []
+                }
+            },
+            "basicRoomInfo": {
+                "basicRoomTypeId": 499901754,
+                "roomName": "Phòng studio Deluxe",
+                "masterBasicRoomName": "Deluxe Studio",
+                "roomTypeInfos": [
+                    {
+                        "hotelId": 123009179,
+                        "roomTypeId": 1580473926,
+                        "basicRoomTypeId": 499901754,
+                        "ratePlanId": 1477745121,
+                        "vendorId": 0,
+                        "pricingMode": 2,
+                        "person": 2,
+                        "saleLimit": -1,
+                        "roomName": "Deluxe Studio<room only><selling rate mode>",
+                        "payType": "PP",
+                        "currency": "VND",
+                        "resourceType": "B2C",
+                        "ratePlanName": "Standard - Flexible 7 days",
+                        "isOpen": "T",
+                        "roomRuleEntity": {
+                            "roomId": 1580473926,
+                            "pricingMode": 2,
+                            "isIncludeMeal": false,
+                            "ruleModeEntity": {
+                                "adultRuleModeList": [
+                                    {
+                                        "numOfAdults": 2,
+                                        "isEnabled": true
+                                    },
+                                    {
+                                        "numOfAdults": 1,
+                                        "isEnabled": false
+                                    }
+                                ],
+                                "baseNumOfAdults": 2,
+                                "priceModeType": 2
+                            }
+                        },
+                        "relateRoomTypeIds": [],
+                        "parent": false,
+                        "saleModel": 1,
+                        "ratePlanCode": "",
+                        "isCM": false,
+                        "roomClass": 1580473926,
+                        "status": "T",
+                        "rateModel": 2,
+                        "subRoomRatePlan": "",
+                        "combo": false,
+                        "ratePlanTagName": [
+                            "Nâng hạng phòng miễn phí",
+                            "Dành riêng cho tuần trăng mật",
+                            "Thành viên Melia",
+                            "Chỉ dành cho khách từ 10–29 tuổi",
+                            "Trip_WSS"
+                        ],
+                        "ebkHidden": 0,
+                        "ratePlanPlatformTags": [],
+                        "productTags": [],
+                        "hasFPLosInfo": false,
+                        "category": 1,
+                        "mealInfo": {
+                            "mealType": 4,
+                            "mealNum": 0
+                        },
+                        "commissionRate": 0.15,
+                        "inventoryTypeAllocated": 1,
+                        "properties": {
+                            "b2B": false,
+                            "b2C": true,
+                            "pp": true,
+                            "fg": false,
+                            "pkg": false,
+                            "preSale": false,
+                            "packages": false,
+                            "sales4Cop": false,
+                            "hour": false,
+                            "cm": false,
+                            "group": false,
+                            "crossUser": false,
+                            "effective": true,
+                            "ineffective": false,
+                            "discard": false,
+                            "direct": false,
+                            "followPrice": false,
+                            "followStatus": false,
+                            "followRestrictions": false,
+                            "gift": false,
+                            "highValuePackage": false
+                        },
+                        "bookStartDate": "",
+                        "bookEndDate": "",
+                        "stayStartDate": "",
+                        "stayEndDate": "",
+                        "cancelPolicyId": "120970933604827253",
+                        "cancelPolicyName": "Flexible-until 7 days before arrival",
+                        "hasExceptionDeriveInfos": false,
+                        "canEditQuantityPolicy": true,
+                        "cmPushInventory": "F",
+                        "displayName": "Standard - Flexible 7 days"
+                    }
+                ],
+                "validRatePlanList": [
+                    1477745121
+                ],
+                "invalidRatePlanList": [],
+                "masterBasicRoomId": 494349295,
+                "alternateName": "",
+                "rank": 0,
+                "canEditQuantityPolicy": true,
+                "cmPushInventory": "F"
+            }
+        },
+        "499901755": {
+            "id": 499901755,
+            "name": "Căn hộ Deluxe 2 Phòng Ngủ",
+            "modelType": "subHotelType",
+            "currency": "VND",
+            "ratePlanIds": [
+                1477745121
+            ],
+            "ratePlans": {
+                "1477745121": {
+                    "name": "Standard - Flexible 7 days",
+                    "roomTypeId": 1580473927,
+                    "basicRoomTypeId": 499901755
+                }
+            },
+            "productIds": [
+                1580473927
+            ],
+            "products": {
+                "1580473927": {
+                    "hotelId": 123009179,
+                    "basicRoomTypeId": 499901755,
+                    "ratePlanId": 1477745121,
+                    "vendorId": 0,
+                    "saleLimit": -1,
+                    "roomName": "Deluxe Two-Bedroom Apartment<room only><selling rate mode>",
+                    "payType": "PP",
+                    "currency": "VND",
+                    "resourceType": "B2C",
+                    "isOpen": "T",
+                    "saleModel": 1,
+                    "isCM": false,
+                    "status": "T",
+                    "rateModel": 2,
+                    "subRoomRatePlan": "",
+                    "combo": false,
+                    "ratePlanTagName": [
+                        "Nâng hạng phòng miễn phí",
+                        "Dành riêng cho tuần trăng mật",
+                        "Thành viên Melia",
+                        "Chỉ dành cho khách từ 10–29 tuổi",
+                        "Trip_WSS"
+                    ],
+                    "ebkHidden": 0,
+                    "ratePlanPlatformTags": [],
+                    "productTags": [],
+                    "hasFPLosInfo": false,
+                    "category": 1,
+                    "mealInfo": {
+                        "mealType": 4,
+                        "mealNum": 0
+                    },
+                    "commissionRate": 0.15,
+                    "inventoryTypeAllocated": 1,
+                    "properties": {
+                        "b2B": false,
+                        "b2C": true,
+                        "pp": true,
+                        "fg": false,
+                        "pkg": false,
+                        "preSale": false,
+                        "packages": false,
+                        "sales4Cop": false,
+                        "hour": false,
+                        "cm": false,
+                        "group": false,
+                        "crossUser": false,
+                        "effective": true,
+                        "ineffective": false,
+                        "discard": false,
+                        "direct": false,
+                        "followPrice": false,
+                        "followStatus": false,
+                        "followRestrictions": false,
+                        "gift": false,
+                        "highValuePackage": false
+                    },
+                    "bookStartDate": "",
+                    "bookEndDate": "",
+                    "stayStartDate": "",
+                    "stayEndDate": "",
+                    "cancelPolicyId": "120970933604827253",
+                    "cancelPolicyName": "Flexible-until 7 days before arrival",
+                    "hasExceptionDeriveInfos": false,
+                    "canEditQuantityPolicy": true,
+                    "cmPushInventory": "F",
+                    "name": "Standard - Flexible 7 days",
+                    "displayName": "Standard - Flexible 7 days",
+                    "value": 1580473927,
+                    "pricingMode": 2,
+                    "basePerson": 4,
+                    "relateRoomTypeIds": [],
+                    "isParent": false,
+                    "ratePlanCode": "",
+                    "roomClass": 1580473927,
+                    "roomClassGroup": []
+                }
+            },
+            "basicRoomInfo": {
+                "basicRoomTypeId": 499901755,
+                "roomName": "Căn hộ Deluxe 2 Phòng Ngủ",
+                "masterBasicRoomName": "Deluxe Two-Bedroom Apartment",
+                "roomTypeInfos": [
+                    {
+                        "hotelId": 123009179,
+                        "roomTypeId": 1580473927,
+                        "basicRoomTypeId": 499901755,
+                        "ratePlanId": 1477745121,
+                        "vendorId": 0,
+                        "pricingMode": 2,
+                        "person": 4,
+                        "saleLimit": -1,
+                        "roomName": "Deluxe Two-Bedroom Apartment<room only><selling rate mode>",
+                        "payType": "PP",
+                        "currency": "VND",
+                        "resourceType": "B2C",
+                        "ratePlanName": "Standard - Flexible 7 days",
+                        "isOpen": "T",
+                        "roomRuleEntity": {
+                            "roomId": 1580473927,
+                            "pricingMode": 2,
+                            "isIncludeMeal": false,
+                            "ruleModeEntity": {
+                                "adultRuleModeList": [
+                                    {
+                                        "numOfAdults": 4,
+                                        "isEnabled": true
+                                    },
+                                    {
+                                        "numOfAdults": 3,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 2,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 1,
+                                        "isEnabled": false
+                                    }
+                                ],
+                                "baseNumOfAdults": 4,
+                                "priceModeType": 2
+                            }
+                        },
+                        "relateRoomTypeIds": [],
+                        "parent": false,
+                        "saleModel": 1,
+                        "ratePlanCode": "",
+                        "isCM": false,
+                        "roomClass": 1580473927,
+                        "status": "T",
+                        "rateModel": 2,
+                        "subRoomRatePlan": "",
+                        "combo": false,
+                        "ratePlanTagName": [
+                            "Nâng hạng phòng miễn phí",
+                            "Dành riêng cho tuần trăng mật",
+                            "Thành viên Melia",
+                            "Chỉ dành cho khách từ 10–29 tuổi",
+                            "Trip_WSS"
+                        ],
+                        "ebkHidden": 0,
+                        "ratePlanPlatformTags": [],
+                        "productTags": [],
+                        "hasFPLosInfo": false,
+                        "category": 1,
+                        "mealInfo": {
+                            "mealType": 4,
+                            "mealNum": 0
+                        },
+                        "commissionRate": 0.15,
+                        "inventoryTypeAllocated": 1,
+                        "properties": {
+                            "b2B": false,
+                            "b2C": true,
+                            "pp": true,
+                            "fg": false,
+                            "pkg": false,
+                            "preSale": false,
+                            "packages": false,
+                            "sales4Cop": false,
+                            "hour": false,
+                            "cm": false,
+                            "group": false,
+                            "crossUser": false,
+                            "effective": true,
+                            "ineffective": false,
+                            "discard": false,
+                            "direct": false,
+                            "followPrice": false,
+                            "followStatus": false,
+                            "followRestrictions": false,
+                            "gift": false,
+                            "highValuePackage": false
+                        },
+                        "bookStartDate": "",
+                        "bookEndDate": "",
+                        "stayStartDate": "",
+                        "stayEndDate": "",
+                        "cancelPolicyId": "120970933604827253",
+                        "cancelPolicyName": "Flexible-until 7 days before arrival",
+                        "hasExceptionDeriveInfos": false,
+                        "canEditQuantityPolicy": true,
+                        "cmPushInventory": "F",
+                        "displayName": "Standard - Flexible 7 days"
+                    }
+                ],
+                "validRatePlanList": [
+                    1477745121
+                ],
+                "invalidRatePlanList": [],
+                "masterBasicRoomId": 494349299,
+                "alternateName": "",
+                "rank": 1,
+                "canEditQuantityPolicy": true,
+                "cmPushInventory": "F"
+            }
+        },
+        "499901756": {
+            "id": 499901756,
+            "name": "Căn Hộ Deluxe 3 Phòng Ngủ",
+            "modelType": "subHotelType",
+            "currency": "VND",
+            "ratePlanIds": [
+                1477745121
+            ],
+            "ratePlans": {
+                "1477745121": {
+                    "name": "Standard - Flexible 7 days",
+                    "roomTypeId": 1580473925,
+                    "basicRoomTypeId": 499901756
+                }
+            },
+            "productIds": [
+                1580473925
+            ],
+            "products": {
+                "1580473925": {
+                    "hotelId": 123009179,
+                    "basicRoomTypeId": 499901756,
+                    "ratePlanId": 1477745121,
+                    "vendorId": 0,
+                    "saleLimit": -1,
+                    "roomName": "Deluxe Three-Bedroom Apartment<room only><selling rate mode>",
+                    "payType": "PP",
+                    "currency": "VND",
+                    "resourceType": "B2C",
+                    "isOpen": "T",
+                    "saleModel": 1,
+                    "isCM": false,
+                    "status": "T",
+                    "rateModel": 2,
+                    "subRoomRatePlan": "",
+                    "combo": false,
+                    "ratePlanTagName": [
+                        "Nâng hạng phòng miễn phí",
+                        "Dành riêng cho tuần trăng mật",
+                        "Thành viên Melia",
+                        "Chỉ dành cho khách từ 10–29 tuổi",
+                        "Trip_WSS"
+                    ],
+                    "ebkHidden": 0,
+                    "ratePlanPlatformTags": [],
+                    "productTags": [],
+                    "hasFPLosInfo": false,
+                    "category": 1,
+                    "mealInfo": {
+                        "mealType": 4,
+                        "mealNum": 0
+                    },
+                    "commissionRate": 0.15,
+                    "inventoryTypeAllocated": 1,
+                    "properties": {
+                        "b2B": false,
+                        "b2C": true,
+                        "pp": true,
+                        "fg": false,
+                        "pkg": false,
+                        "preSale": false,
+                        "packages": false,
+                        "sales4Cop": false,
+                        "hour": false,
+                        "cm": false,
+                        "group": false,
+                        "crossUser": false,
+                        "effective": true,
+                        "ineffective": false,
+                        "discard": false,
+                        "direct": false,
+                        "followPrice": false,
+                        "followStatus": false,
+                        "followRestrictions": false,
+                        "gift": false,
+                        "highValuePackage": false
+                    },
+                    "bookStartDate": "",
+                    "bookEndDate": "",
+                    "stayStartDate": "",
+                    "stayEndDate": "",
+                    "cancelPolicyId": "120970933604827253",
+                    "cancelPolicyName": "Flexible-until 7 days before arrival",
+                    "hasExceptionDeriveInfos": false,
+                    "canEditQuantityPolicy": true,
+                    "cmPushInventory": "F",
+                    "name": "Standard - Flexible 7 days",
+                    "displayName": "Standard - Flexible 7 days",
+                    "value": 1580473925,
+                    "pricingMode": 2,
+                    "basePerson": 6,
+                    "relateRoomTypeIds": [],
+                    "isParent": false,
+                    "ratePlanCode": "",
+                    "roomClass": 1580473925,
+                    "roomClassGroup": []
+                }
+            },
+            "basicRoomInfo": {
+                "basicRoomTypeId": 499901756,
+                "roomName": "Căn Hộ Deluxe 3 Phòng Ngủ",
+                "masterBasicRoomName": "Deluxe Three-Bedroom Apartment",
+                "roomTypeInfos": [
+                    {
+                        "hotelId": 123009179,
+                        "roomTypeId": 1580473925,
+                        "basicRoomTypeId": 499901756,
+                        "ratePlanId": 1477745121,
+                        "vendorId": 0,
+                        "pricingMode": 2,
+                        "person": 6,
+                        "saleLimit": -1,
+                        "roomName": "Deluxe Three-Bedroom Apartment<room only><selling rate mode>",
+                        "payType": "PP",
+                        "currency": "VND",
+                        "resourceType": "B2C",
+                        "ratePlanName": "Standard - Flexible 7 days",
+                        "isOpen": "T",
+                        "roomRuleEntity": {
+                            "roomId": 1580473925,
+                            "pricingMode": 2,
+                            "isIncludeMeal": false,
+                            "ruleModeEntity": {
+                                "adultRuleModeList": [
+                                    {
+                                        "numOfAdults": 6,
+                                        "isEnabled": true
+                                    },
+                                    {
+                                        "numOfAdults": 5,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 4,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 3,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 2,
+                                        "isEnabled": false
+                                    },
+                                    {
+                                        "numOfAdults": 1,
+                                        "isEnabled": false
+                                    }
+                                ],
+                                "baseNumOfAdults": 6,
+                                "priceModeType": 2
+                            }
+                        },
+                        "relateRoomTypeIds": [],
+                        "parent": false,
+                        "saleModel": 1,
+                        "ratePlanCode": "",
+                        "isCM": false,
+                        "roomClass": 1580473925,
+                        "status": "T",
+                        "rateModel": 2,
+                        "subRoomRatePlan": "",
+                        "combo": false,
+                        "ratePlanTagName": [
+                            "Nâng hạng phòng miễn phí",
+                            "Dành riêng cho tuần trăng mật",
+                            "Thành viên Melia",
+                            "Chỉ dành cho khách từ 10–29 tuổi",
+                            "Trip_WSS"
+                        ],
+                        "ebkHidden": 0,
+                        "ratePlanPlatformTags": [],
+                        "productTags": [],
+                        "hasFPLosInfo": false,
+                        "category": 1,
+                        "mealInfo": {
+                            "mealType": 4,
+                            "mealNum": 0
+                        },
+                        "commissionRate": 0.15,
+                        "inventoryTypeAllocated": 1,
+                        "properties": {
+                            "b2B": false,
+                            "b2C": true,
+                            "pp": true,
+                            "fg": false,
+                            "pkg": false,
+                            "preSale": false,
+                            "packages": false,
+                            "sales4Cop": false,
+                            "hour": false,
+                            "cm": false,
+                            "group": false,
+                            "crossUser": false,
+                            "effective": true,
+                            "ineffective": false,
+                            "discard": false,
+                            "direct": false,
+                            "followPrice": false,
+                            "followStatus": false,
+                            "followRestrictions": false,
+                            "gift": false,
+                            "highValuePackage": false
+                        },
+                        "bookStartDate": "",
+                        "bookEndDate": "",
+                        "stayStartDate": "",
+                        "stayEndDate": "",
+                        "cancelPolicyId": "120970933604827253",
+                        "cancelPolicyName": "Flexible-until 7 days before arrival",
+                        "hasExceptionDeriveInfos": false,
+                        "canEditQuantityPolicy": true,
+                        "cmPushInventory": "F",
+                        "displayName": "Standard - Flexible 7 days"
+                    }
+                ],
+                "validRatePlanList": [
+                    1477745121
+                ],
+                "invalidRatePlanList": [],
+                "masterBasicRoomId": 495270733,
+                "alternateName": "",
+                "rank": 2,
+                "canEditQuantityPolicy": true,
+                "cmPushInventory": "F"
+            }
+        }
+    },
+    "notSetBasePersonCount": 0,
+    "hasMultiplePrice": true,
+    "cipher": {
+        "499901754": "AAEAAQAONDk5OTAxNzU0LGh1aWTD1e4mViX6u9PvZKqoQdQiUdWZQImA_Weswcpfee1wgQ==-tripsign",
+        "499901755": "AAEAAQAONDk5OTAxNzU1LGh1aWSBnTFYP214A_rg3wacN2QAKPdhuHB4t5V77HQnQeEzRQ==-tripsign",
+        "499901756": "AAEAAQAONDk5OTAxNzU2LGh1aWS0rmfw94q-q11-jdIwMIguMXIVvAZ_GWtgshr3TUjapA==-tripsign",
+        "1477745121": "AAEAAQAPMTQ3Nzc0NTEyMSxodWlkEG3jQrAO6EKSRoeyAFKstrc_kr1PzTQwldWZm9oO0bE=-tripsign",
+        "1580473925": "AAEAAQAPMTU4MDQ3MzkyNSxodWlkNYrtN8Y-toCbb_jqbvMVpbVunLkC3VO4mErAuvAMsgc=-tripsign",
+        "1580473926": "AAEAAQAPMTU4MDQ3MzkyNixodWlk0Mger73n3r8K4_PQm10kMhEFePKa3_iaWx00aZedNvo=-tripsign",
+        "1580473927": "AAEAAQAPMTU4MDQ3MzkyNyxodWlkxW113FCEPBkHdacuroZSMhoVF4DA4U-Kd13-DLkTQ2Y=-tripsign"
+    },
+    "resStatus": {
+        "rcode": 200,
+        "rmsg": ""
+    },
+    "ResponseStatus": {
+        "Timestamp": "/Date(1746190902406+0800)/",
+        "Ack": "Success",
+        "Errors": [],
+        "Extension": [
+            {
+                "Id": "CLOGGING_TRACE_ID",
+                "Value": "90a43520-c04c-41ed-83c1-ce62b65ec3f5"
+            },
+            {
+                "Id": "RootMessageId",
+                "Value": "100025527-0a2d7449-485053-118167"
+            }
+        ]
+    }
+}
