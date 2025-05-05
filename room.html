@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cunchu.site/work/material-dashboard/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="https://cunchu.site/work/material-dashboard/assets/img/favicon.png">
+  <title>
+    酒店后台管理
+  </title>
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+  <style>
+    /* Thêm CSS cho mũi tên và hành vi ẩn/hiện */
+    .table-group-header td {
+        cursor: pointer; /* Biến con trỏ thành bàn tay khi di chuột qua tiêu đề */
+    }
+    .toggle-arrow {
+        display: inline-block;
+        width: 1em; /* Đảm bảo mũi tên chiếm không gian */
+        text-align: center;
+        margin-right: 5px;
+        transition: transform 0.2s ease-in-out; /* Hiệu ứng xoay nhẹ */
+    }
+     .table-group-header.collapsed .toggle-arrow {
+        transform: rotate(-90deg); /* Xoay mũi tên khi thu gọn */
+    }
+    .hidden-row {
+        display: none; /* Lớp CSS để ẩn hàng */
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Phần còn lại của HTML không đổi -->
+    <!-- 日期搜索框 -->
+    <div class="container" style="height: 40px;">
+      <div class="row" style=" display: flex; justify-content: end; ">
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="startDate" class="form-control input-item-1">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="endDate" class="form-control input-item-2">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-outline">
+            <label class="form-label">关键词</label>
+            <input type="text" id="propertyId" class="form-control input-item-3">
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn bg-gradient-info" onclick="search()">搜索</button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="container-box container-fluid py-2">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">平台</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">价格 (VND)</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">取消费用</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
+                    </tr>
+                  </thead>
+                  <tbody id="graphqlTable">
+                    <!-- Nội dung sẽ được tạo bởi JavaScript -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Phân trang và các phần khác không đổi -->
+     <nav aria-label="Page navigation example">
+      <ul class="pagination">
+      </ul>
+    </nav>
+
+  </main>
+  <!--   Core JS Files   -->
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
+  <script src="./main.js"></script>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param) ? urlParams.get(param) : '';
+    }
+    function getDay (timestampInSeconds) {
+      if (!timestampInSeconds) return ''; // Xử lý trường hợp timestamp không hợp lệ
+      const date = new Date(timestampInSeconds * 1000);
+      if (isNaN(date.getTime())) return ''; // Kiểm tra ngày hợp lệ
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    function getTimestamp(dateStr) {
+      const timestamp = new Date(dateStr).getTime();
+      return !isNaN(timestamp) ? Math.floor(timestamp / 1000) : '';
+    }
+
+    function formatCurrency(value) {
+    // Xử lý các trường hợp đầu vào không hợp lệ (null, undefined, rỗng)
+    if (value === null || value === undefined || value === '') {
+        return ''; // Hoặc trả về '0' hoặc '-' tùy bạn muốn
+    }
+
+    // Chuyển đổi giá trị thành số. Cố gắng loại bỏ dấu phẩy nếu có sẵn.
+    const numberValue = parseFloat(String(value).replace(/,/g, ''));
+
+    // Kiểm tra xem chuyển đổi có thành công không
+    if (isNaN(numberValue)) {
+        // Nếu không phải là số hợp lệ, trả về giá trị gốc (hoặc chuỗi rỗng)
+        console.warn("formatCurrency: Giá trị không hợp lệ:", value);
+        return String(value); // Trả về giá trị gốc để người dùng thấy có gì đó không ổn
+        // Hoặc return '';
+    }
+
+    // Sử dụng toLocaleString để định dạng
+    // 'en-US': Sử dụng quy tắc định dạng của Mỹ (dấu phẩy ngăn cách hàng nghìn, dấu chấm cho thập phân)
+    // Bạn có thể đổi thành 'vi-VN' nếu muốn (dấu chấm ngăn cách hàng nghìn, dấu phẩy cho thập phân)
+    // options: { maximumFractionDigits: 0 } để loại bỏ phần thập phân (ví dụ .00) nếu không cần
+    try {
+        return numberValue.toLocaleString('en-US', {
+             maximumFractionDigits: 0 // Bỏ dòng này nếu muốn giữ phần thập phân
+        });
+    } catch (e) {
+        console.error("Lỗi định dạng tiền tệ:", value, e);
+        return String(value); // Trả về giá trị gốc nếu có lỗi xảy ra
+    }
+}
+
+    function getOrder() {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    const raw = JSON.stringify({"orderType": ""});
+    const requestOptions = { method: "POST", headers: myHeaders, body: raw, redirect: "follow" };
+    const graphqlTableBody = document.getElementById('graphqlTable');
+
+    // Đếm số cột từ thead
+    const theadRow = document.querySelector('table thead tr');
+    const columnCount = theadRow ? theadRow.childElementCount : 12;
+
+    fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(window.startDate.value)}&endDate=${getTimestamp(window.endDate.value)}&search=${window.propertyId.value}`, requestOptions)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.json();
+         })
+        .then(result => {
+            if (!result || !Array.isArray(result) || result.length === 0) {
+                graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Không tìm thấy dữ liệu phù hợp.</td></tr>`;
+                return;
+            }
+
+            // 1. Sắp xếp
+            result.sort((a, b) => (a[7] || 0) - (b[7] || 0));
+
+            // 2. Đếm
+            const orderCountsPerDay = {};
+            result.forEach(element => {
+                const checkinDateStr = getDay(element[7]);
+                if (checkinDateStr) {
+                   orderCountsPerDay[checkinDateStr] = (orderCountsPerDay[checkinDateStr] || 0) + 1;
+                }
+            });
+
+            let tempHtml = '';
+            let currentCheckinDate = null;
+
+            // 3. Lặp và tạo HTML
+            for (let index = 0; index < result.length; index++) {
+                const element = result[index];
+                const checkinDateStr = getDay(element[7]);
+
+                if (!checkinDateStr) continue;
+
+                // 4. Tạo tiêu đề nhóm
+                if (checkinDateStr !== currentCheckinDate) {
+                    currentCheckinDate = checkinDateStr;
+                    const countForThisDay = orderCountsPerDay[currentCheckinDate] || 0;
+
+                    tempHtml += `
+                        <tr class="table-group-header" data-group-id="${currentCheckinDate}" onclick="toggleGroup('${currentCheckinDate}')">
+                            <td colspan="${columnCount}" style="font-weight: bold; padding: 0.5rem 0.75rem; background-color: #e9ecef; border-top: 2px solid #dee2e6;">
+                                <span class="toggle-arrow">▼</span>
+                                ${currentCheckinDate} (${countForThisDay} Order)
+                            </td>
+                        </tr>
+                    `;
+                }
+
+                tempHtml += `<tr data-group="${checkinDateStr}">
+                    <td><p class="text-sm font-weight-bold mb-0">${element[1] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${element[10] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${checkinDateStr}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${getDay(element[8])}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${element[2] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${formatCurrency(element[9])}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${element[5] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${element[4] || ''}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0 booktime_${element[0]}">${getDay(element[6])}</p></td>
+                    <td><p class="text-sm font-weight-bold mb-0">${element[11] || ''}</p></td>
+                  </tr>`;
+            }
+
+            graphqlTableBody.innerHTML = tempHtml;
+        })
+        .catch(error => {
+            console.error("Lỗi khi fetch hoặc xử lý dữ liệu:", error);
+            graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Đã xảy ra lỗi: ${error.message}. Vui lòng thử lại.</td></tr>`;
+        });
+}
+    
+
+    // <<< HÀM MỚI ĐỂ THU GỌN/MỞ RỘNG >>>
+    function toggleGroup(groupId) {
+        const headerRow = document.querySelector(`.table-group-header[data-group-id="${groupId}"]`);
+        const dataRows = document.querySelectorAll(`tr[data-group="${groupId}"]`);
+        const arrow = headerRow.querySelector('.toggle-arrow');
+
+        if (headerRow && dataRows.length > 0) {
+            // Kiểm tra trạng thái hiện tại (dựa vào class 'collapsed' hoặc mũi tên)
+            const isCollapsed = headerRow.classList.contains('collapsed');
+
+            if (isCollapsed) {
+                // Mở rộng nhóm
+                headerRow.classList.remove('collapsed');
+                arrow.textContent = '▼';
+                dataRows.forEach(row => {
+                    row.classList.remove('hidden-row'); // Hoặc row.style.display = '';
+                });
+            } else {
+                // Thu gọn nhóm
+                headerRow.classList.add('collapsed');
+                arrow.textContent = '|';
+                 dataRows.forEach(row => {
+                    row.classList.add('hidden-row'); // Hoặc row.style.display = 'none';
+                });
+            }
+        }
+    }
+    // <<< KẾT THÚC HÀM MỚI >>>
+
+
+    function search () {
+      location.href = `./room.html?propertyId=${window.propertyId.value}&start=${window.startDate.value}&end=${window.endDate.value}`
+    }
+
+
+    function getDateNDaysAgo (n) {
+      const date = new Date();
+      date.setDate(date.getDate() + n);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    window.onload = function() {
+      // Đặt giá trị mặc định cho date inputs
+      const startDateInput = document.getElementById('startDate');
+      const endDateInput = document.getElementById('endDate');
+      const propertyIdInput = document.getElementById('propertyId');
+
+      startDateInput.value = getQueryParam('start') || getDateNDaysAgo(0);
+      endDateInput.value = getQueryParam('end') || getDateNDaysAgo(30);
+      propertyIdInput.value = getQueryParam('propertyId') || ''; // Đặt giá trị hoặc chuỗi rỗng
+
+      getOrder(); // Gọi hàm lấy dữ liệu khi trang tải xong
+    }
+
+    // Hàm này dường như không dùng trong trang này nữa, nhưng giữ lại nếu cần
+    function getReservationDetails (propertyId, bookingToken) {
+      sendMessage('getReservationDetails3', {propertyId, bookingToken})
+    }
+
+  </script>
+</body>
+
+</html>
