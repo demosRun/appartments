@@ -35,11 +35,11 @@ function creatPage(totalRecords, pageSize) {
     document.querySelector('.pagination').innerHTML = pageHtmlStr
 }
 
-function addRoom (orderID, orderType, phone, roomNum, cancelMoney, roomInfo, orderTime, checkin, checkout, money, customer, roomID, status) {
+function addRoom (orderID, orderType, phone, roomNum, cancelMoney, roomInfo, orderTime, checkin, checkout, money, customer, roomID, status, account) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
-  const raw = JSON.stringify({orderID, orderType, phone, roomNum, cancelMoney, roomInfo, orderTime, checkin, checkout, money, customer,  roomID, status});
+  const raw = JSON.stringify({orderID, orderType, phone, roomNum, cancelMoney, roomInfo, orderTime, checkin, checkout, money, customer,  roomID, status, account});
 
   const requestOptions = {
     method: "POST",
@@ -53,6 +53,8 @@ function addRoom (orderID, orderType, phone, roomNum, cancelMoney, roomInfo, ord
     .then((result) => console.log(result))
     .catch((error) => console.error(error));
 }
+
+
 
 
 function dateToTimestamp (str) {
