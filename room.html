@@ -28,6 +28,9 @@
     .hidden-row {
         display: none;
     }
+    .text-center-stt {
+        text-align: center !important;
+    }
   </style>
 </head>
 
@@ -70,6 +73,7 @@
                 <table class="table align-items-center justify-content-center mb-0">
                   <thead>
                     <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center-stt">STT</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">平台</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
@@ -135,14 +139,11 @@
         if (value === null || value === undefined || value === '') {
             return '';
         }
-
         const numberValue = parseFloat(String(value).replace(/,/g, ''));
-
         if (isNaN(numberValue)) {
             console.warn("formatCurrency: Giá trị không hợp lệ:", value);
             return String(value);
         }
-
         try {
             return numberValue.toLocaleString('en-US', {
                  maximumFractionDigits: 0
@@ -165,25 +166,16 @@
            console.warn("Invalid date for night calculation:", checkinTimestamp, checkoutTimestamp);
            return '';
         }
-
         checkinDate.setHours(12, 0, 0, 0);
         checkoutDate.setHours(12, 0, 0, 0);
-
-
         const diffTime = checkoutDate.getTime() - checkinDate.getTime();
-
-
         const diffNights = Math.round(diffTime / (1000 * 60 * 60 * 24));
-
-
         return diffNights > 0 ? diffNights : (diffNights === 0 ? 0 : '');
-
       } catch (e) {
         console.error("Error calculating nights:", e);
         return '';
       }
     }
-
 
     function getOrder() {
         const myHeaders = new Headers();
@@ -193,12 +185,15 @@
         const graphqlTableBody = document.getElementById('graphqlTable');
 
         const theadRow = document.querySelector('table thead tr');
-        const columnCount = theadRow ? theadRow.childElementCount : 14; // Adjusted column count to 14
+        const columnCount = theadRow ? theadRow.childElementCount : 15;
 
         graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Đang tải dữ liệu...</td></tr>`;
 
+        const startDateValue = document.getElementById('startDate').value;
+        const endDateValue = document.getElementById('endDate').value;
+        const propertyIdValue = document.getElementById('propertyId').value;
 
-        fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(window.startDate.value)}&endDate=${getTimestamp(window.endDate.value)}&search=${window.propertyId.value}`, requestOptions)
+        fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(startDateValue)}&endDate=${getTimestamp(endDateValue)}&search=${propertyIdValue}`, requestOptions)
             .then(response => {
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 return response.json();
@@ -208,11 +203,7 @@
                     graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Không tìm thấy dữ liệu phù hợp.</td></tr>`;
                     return;
                 }
-
-
-                result.sort((a, b) => (a[7] || 0) - (b[7] || 0));
-
-
+                result.sort((a, b) => (a[7] || 0) - (b[7] || 0)); 
                 const orderCountsPerDay = {};
                 result.forEach(element => {
                     const checkinDateStr = getDay(element[7]);
@@ -223,6 +214,7 @@
 
                 let tempHtml = '';
                 let currentCheckinDate = null;
+                let serialNumber; 
 
                 for (let index = 0; index < result.length; index++) {
                     const element = result[index];
@@ -230,16 +222,15 @@
                     const checkoutTimestamp = element[8];
                     const checkinDateStr = getDay(checkinTimestamp);
                     const checkoutDateStr = getDay(checkoutTimestamp);
-
                     const totalNights = calculateTotalNights(checkinTimestamp, checkoutTimestamp);
-                    const nightlyRate = (totalNights && totalNights > 0) ? formatCurrency(element[9] / totalNights) : ''; // Added check for nightly rate
+                    const nightlyRate = (totalNights && totalNights > 0) ? formatCurrency(element[9] / totalNights) : '';
 
                     if (!checkinDateStr) continue;
 
                     if (checkinDateStr !== currentCheckinDate) {
                         currentCheckinDate = checkinDateStr;
+                        serialNumber = 1; 
                         const countForThisDay = orderCountsPerDay[currentCheckinDate] || 0;
-
                         tempHtml += `
                             <tr class="table-group-header" data-group-id="${currentCheckinDate}" onclick="toggleGroup('${currentCheckinDate}')">
                                 <td colspan="${columnCount}" style="font-weight: bold; padding: 0.5rem 0.75rem; background-color: #e9ecef; border-top: 2px solid #dee2e6;">
@@ -251,6 +242,7 @@
                     }
 
                     tempHtml += `<tr data-group="${checkinDateStr}">
+                        <td class="text-center-stt"><p class="text-sm font-weight-bold mb-0">${serialNumber}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0">${element[1] || ''}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0] || ''}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0">${element[10] || ''}</p></td>
@@ -261,13 +253,13 @@
                         <td><p class="text-sm font-weight-bold mb-0">${formatCurrency(element[9])}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0">${element[5] || ''}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
-                        <td><p class="text-sm font-weight-bold mb-0">${formatCurrency(element[4])}</p></td>
+                        <td style="text-align: center;"><p class="text-sm font-weight-bold mb-0">${ formatCurrency(element[4]) || ''}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0 booktime_${element[0]}">${getDay(element[6])}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0">${element[11] || ''}</p></td>
                         <td><p class="text-sm font-weight-bold mb-0">${nightlyRate}</p></td>
                       </tr>`;
+                    serialNumber++; 
                 }
-
                 graphqlTableBody.innerHTML = tempHtml;
             })
             .catch(error => {
@@ -276,7 +268,6 @@
             });
     }
 
-
     function toggleGroup(groupId) {
         const headerRow = document.querySelector(`.table-group-header[data-group-id="${groupId}"]`);
         const dataRows = document.querySelectorAll(`tr[data-group="${groupId}"]`);
@@ -284,7 +275,6 @@
 
         if (headerRow && dataRows.length > 0) {
             const isCollapsed = headerRow.classList.contains('collapsed');
-
             if (isCollapsed) {
                 headerRow.classList.remove('collapsed');
                 arrow.textContent = '▼';
@@ -301,19 +291,15 @@
         }
     }
 
-
     function search () {
       const startDate = document.getElementById('startDate').value;
       const endDate = document.getElementById('endDate').value;
       const propertyId = document.getElementById('propertyId').value;
       const newUrl = `./room.html?start=${encodeURIComponent(startDate)}&end=${encodeURIComponent(endDate)}&propertyId=${encodeURIComponent(propertyId)}`;
-
       window.location.href = newUrl;
-
     }
 
-
-    function getDateNDaysFromNow (n) { // Renamed function
+    function getDateNDaysFromNow (n) {
       const date = new Date();
       date.setDate(date.getDate() + n);
       const year = date.getFullYear();
@@ -328,12 +314,12 @@
       const propertyIdInput = document.getElementById('propertyId');
       const propertyIdLabel = propertyIdInput.previousElementSibling;
 
-      startDateInput.value = getQueryParam('start') || getDateNDaysFromNow(0); // Use renamed function
-      endDateInput.value = getQueryParam('end') || getDateNDaysFromNow(30);   // Use renamed function
+      startDateInput.value = getQueryParam('start') || getDateNDaysFromNow(0);
+      endDateInput.value = getQueryParam('end') || getDateNDaysFromNow(30);
       propertyIdInput.value = getQueryParam('propertyId') || '';
 
       if (propertyIdInput.value) {
-          propertyIdLabel.style.display = 'none';
+          if(propertyIdLabel) propertyIdLabel.style.display = 'none';
       }
        propertyIdInput.addEventListener('focus', () => {
            if(propertyIdLabel) propertyIdLabel.style.display = 'none';
@@ -344,16 +330,12 @@
         propertyIdInput.addEventListener('input', () => {
            if(propertyIdLabel) propertyIdLabel.style.display = 'none';
        });
-
-
       getOrder();
     }
 
     function getReservationDetails (propertyId, bookingToken) {
       console.log("getReservationDetails called with:", propertyId, bookingToken);
     }
-
   </script>
 </body>
-
 </html>
