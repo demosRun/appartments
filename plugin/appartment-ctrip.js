@@ -418,108 +418,127 @@ setInterval(() => {
 
 
 function getInventoryCtrip(userID, config) {
-    // First fetch to get room information
-    fetch("https://ebooking.ctrip.com/restapi/soa2/30535/queryRoomTypeInfoV2?_fxpcqlniredt=09031014212538082661&x-traceID=09031014212538082661-1746188963635-8231852", {
-        method: "POST",
+    // First fetch to change hotel
+    fetch('https://ebooking.ctrip.com/restapi/soa2/23270/changeHotel?_fxpcqlniredt=09031062412601353955&x-traceID=09031062412601353955-1746658434420-9305200', {
+        method: 'POST',
         headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json',
+            'Origin': 'https://ebooking.ctrip.com',
+            'Referer': 'https://ebooking.ctrip.com/'
         },
-        credentials: "include",
+        credentials: 'include',
         body: JSON.stringify({
-            hotelId: config.hotelId,
-            cipher: {},
-            _hotelId: config.hotelId
+            "hotelId": config.hotelId
         })
     })
-        .then(res => res.json())
-        .then(infoResponse => {
-            console.log("Room Info Response:", infoResponse);
+    .then(response => response.json())
+    .then(changeHotelResponse => {
+        console.log("Change Hotel Response:", changeHotelResponse);
+        
+        // Then fetch to get room information
+        return fetch("https://ebooking.ctrip.com/restapi/soa2/30535/queryRoomTypeInfoV2?_fxpcqlniredt=09031014212538082661&x-traceID=09031014212538082661-1746188963635-8231852", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                hotelId: config.hotelId,
+                cipher: {},
+                _hotelId: config.hotelId
+            })
+        });
+    })
+    .then(res => res.json())
+    .then(infoResponse => {
+        console.log("Room Info Response:", infoResponse);
 
-            if (infoResponse.resStatus && infoResponse.resStatus.rcode === 402) {
-                console.error("Authentication error: ebk login expired");
+        if (infoResponse.resStatus && infoResponse.resStatus.rcode === 402) {
+            console.error("Authentication error: ebk login expired");
+            return;
+        }
+
+        // Store the cipher data globally for use in update requests
+        window.ctripCipherData = infoResponse.cipher || {};
+
+        // Get the current date and date 30 days ahead for availability query
+        const today = new Date();
+        const future = new Date();
+        future.setDate(today.getDate() + 30);
+
+        const startDate = config.startDate || formatDateString(today);
+        const endDate = config.endDate || formatDateString(future);
+
+        // For each room type, collect the necessary data for the second API call
+        const roomTypes = infoResponse.roomTypeIds || [];
+        const cipher = infoResponse.cipher || {};
+
+        // Prepare the second fetch to get room availability and rates
+        roomTypes.forEach(roomTypeId => {
+            // Find the product IDs for this room type
+            const roomTypeInfo = infoResponse.roomTypeInfo[roomTypeId];
+            if (!roomTypeInfo || !roomTypeInfo.productIds || roomTypeInfo.productIds.length === 0) {
                 return;
             }
 
-            // Store the cipher data globally for use in update requests
-            window.ctripCipherData = infoResponse.cipher || {};
-
-            // Get the current date and date 30 days ahead for availability query
-            const today = new Date();
-            const future = new Date();
-            future.setDate(today.getDate() + 30);
-
-            const startDate = config.startDate || formatDateString(today);
-            const endDate = config.endDate || formatDateString(future);
-
-            // For each room type, collect the necessary data for the second API call
-            const roomTypes = infoResponse.roomTypeIds || [];
-            const cipher = infoResponse.cipher || {};
-
-            // Prepare the second fetch to get room availability and rates
-            roomTypes.forEach(roomTypeId => {
-                // Find the product IDs for this room type
-                const roomTypeInfo = infoResponse.roomTypeInfo[roomTypeId];
-                if (!roomTypeInfo || !roomTypeInfo.productIds || roomTypeInfo.productIds.length === 0) {
-                    return;
-                }
-
-                const productIds = roomTypeInfo.productIds;
-                const products = productIds.map(productId => {
-                    return {
-                        productId: productId,
-                        resourceType: "B2C",
-                        rateModel: 2
-                    };
-                });
-
-                // Make the second fetch request for each room type
-                fetch("https://ebooking.ctrip.com/restapi/soa2/30535/queryRoomTypeDetail?_fxpcqlniredt=09031014212538082661&x-traceID=09031014212538082661-1746188963635-8231852", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({
-                        hotelId: config.hotelId,
-                        roomTypeId: roomTypeId,
-                        products: products,
-                        startDate: startDate,
-                        endDate: endDate,
-                        cipher: cipher,
-                        _hotelId: config.hotelId
-                    })
-                })
-                    .then(response => response.json())
-                    .then(detailResponse => {
-                        console.log("Room Detail Response for Room Type " + roomTypeId + ":", detailResponse);
-
-                        if (detailResponse.resStatus && detailResponse.resStatus.rcode === 402) {
-                            console.error("Authentication error in detail request: ebk login expired");
-                            return;
-                        }
-
-                        // Send the combined data to be displayed
-                        const combinedData = {
-                            roomTypeInfo: infoResponse.roomTypeInfo[roomTypeId],
-                            roomTypeId: roomTypeId,
-                            roomTypeName: infoResponse.roomTypeInfo[roomTypeId].name,
-                            availability: detailResponse,
-                            cipher: cipher // Include cipher in the data
-                        };
-
-                        // Send the data to be displayed
-                        owoSocket.send("displayCtripAvailability", combinedData, userID);
-                    })
-                    .catch(error => {
-                        console.error("Error in detail request for Room Type " + roomTypeId + ":", error);
-                    });
+            const productIds = roomTypeInfo.productIds;
+            const products = productIds.map(productId => {
+                return {
+                    productId: productId,
+                    resourceType: "B2C",
+                    rateModel: 2
+                };
             });
-        })
-        .catch(error => {
-            console.error("Error in room info request:", error);
+
+            // Make the second fetch request for each room type
+            fetch("https://ebooking.ctrip.com/restapi/soa2/30535/queryRoomTypeDetail?_fxpcqlniredt=09031014212538082661&x-traceID=09031014212538082661-1746188963635-8231852", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    hotelId: config.hotelId,
+                    roomTypeId: roomTypeId,
+                    products: products,
+                    startDate: startDate,
+                    endDate: endDate,
+                    cipher: cipher,
+                    _hotelId: config.hotelId
+                })
+            })
+                .then(response => response.json())
+                .then(detailResponse => {
+                    console.log("Room Detail Response for Room Type " + roomTypeId + ":", detailResponse);
+
+                    if (detailResponse.resStatus && detailResponse.resStatus.rcode === 402) {
+                        console.error("Authentication error in detail request: ebk login expired");
+                        return;
+                    }
+
+                    // Send the combined data to be displayed
+                    const combinedData = {
+                        roomTypeInfo: infoResponse.roomTypeInfo[roomTypeId],
+                        roomTypeId: roomTypeId,
+                        roomTypeName: infoResponse.roomTypeInfo[roomTypeId].name,
+                        availability: detailResponse,
+                        cipher: cipher // Include cipher in the data
+                    };
+
+                    // Send the data to be displayed
+                    owoSocket.send("displayCtripAvailability", combinedData, userID);
+                })
+                .catch(error => {
+                    console.error("Error in detail request for Room Type " + roomTypeId + ":", error);
+                });
         });
+    })
+    .catch(error => {
+        console.error("Error in room info request:", error);
+    });
 }
 
 function updateCtripRoom(userID, config) {
