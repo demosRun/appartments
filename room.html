@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cunchu.site/work/material-dashboard/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="https://cunchu.site/work/material-dashboard/assets/img/favicon.png">
+  <title>
+    酒店后台管理
+  </title>
+
+  <link id="pagestyle" href="https://cunchu.site/work/material-dashboard/assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
+  <style>
+    .table-group-header td {
+        cursor: pointer;
+    }
+    .toggle-arrow {
+        display: inline-block;
+        width: 1em;
+        text-align: center;
+        margin-right: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+     .table-group-header.collapsed .toggle-arrow {
+        transform: rotate(-90deg);
+    }
+    .hidden-row {
+        display: none;
+    }
+    .text-center-stt {
+        text-align: center !important;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+    <div class="container" style="height: 40px;">
+      <div class="row" style=" display: flex; justify-content: end; ">
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="startDate" class="form-control input-item-1">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-static">
+            <input type="date" id="endDate" class="form-control input-item-2">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="input-group input-group-outline">
+            <label class="form-label">关键词</label>
+            <input type="text" id="propertyId" class="form-control input-item-3">
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn bg-gradient-info" onclick="search()">搜索</button>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="container-box container-fluid py-2">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center-stt">STT</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">平台</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">夜数</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">价格 (VND)</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">取消费用</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">每晚价格 (VND)</th>
+
+                    </tr>
+                  </thead>
+                  <tbody id="graphqlTable">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+     <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+      </ul>
+    </nav>
+
+  </main>
+
+  <script src="https://cunchu.site/work/material-dashboard/assets/js/core/bootstrap.min.js"></script>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param) ? urlParams.get(param) : '';
+    }
+
+    function getDay (timestampInSeconds) {
+      if (!timestampInSeconds) return '';
+      const date = new Date(timestampInSeconds * 1000);
+      if (isNaN(date.getTime())) return '';
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    function getTimestamp(dateStr) {
+      if (!dateStr) return '';
+      const timestamp = new Date(dateStr).getTime();
+      return !isNaN(timestamp) ? Math.floor(timestamp / 1000) : '';
+    }
+
+    function formatCurrency(value) {
+        if (value === null || value === undefined || value === '') {
+            return '';
+        }
+        const numberValue = parseFloat(String(value).replace(/,/g, ''));
+        if (isNaN(numberValue)) {
+            console.warn("formatCurrency: Giá trị không hợp lệ:", value);
+            return String(value);
+        }
+        try {
+            return numberValue.toLocaleString('en-US', {
+                 maximumFractionDigits: 0
+            });
+        } catch (e) {
+            console.error("Lỗi định dạng tiền tệ:", value, e);
+            return String(value);
+        }
+    }
+
+    function calculateTotalNights(checkinTimestamp, checkoutTimestamp) {
+      if (!checkinTimestamp || !checkoutTimestamp) {
+        return '';
+      }
+      try {
+        const checkinDate = new Date(checkinTimestamp * 1000);
+        const checkoutDate = new Date(checkoutTimestamp * 1000);
+
+        if (isNaN(checkinDate.getTime()) || isNaN(checkoutDate.getTime())) {
+           console.warn("Invalid date for night calculation:", checkinTimestamp, checkoutTimestamp);
+           return '';
+        }
+        checkinDate.setHours(12, 0, 0, 0);
+        checkoutDate.setHours(12, 0, 0, 0);
+        const diffTime = checkoutDate.getTime() - checkinDate.getTime();
+        const diffNights = Math.round(diffTime / (1000 * 60 * 60 * 24));
+        return diffNights > 0 ? diffNights : (diffNights === 0 ? 0 : '');
+      } catch (e) {
+        console.error("Error calculating nights:", e);
+        return '';
+      }
+    }
+
+    function getOrder() {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const raw = JSON.stringify({"orderType": ""});
+        const requestOptions = { method: "POST", headers: myHeaders, body: raw, redirect: "follow" };
+        const graphqlTableBody = document.getElementById('graphqlTable');
+
+        const theadRow = document.querySelector('table thead tr');
+        const columnCount = theadRow ? theadRow.childElementCount : 15;
+
+        graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Đang tải dữ liệu...</td></tr>`;
+
+        const startDateValue = document.getElementById('startDate').value;
+        const endDateValue = document.getElementById('endDate').value;
+        const propertyIdValue = document.getElementById('propertyId').value;
+
+        fetch(`https://1256763111-f2tvymu35g.ap-beijing.tencentscf.com/orderList?startDate=${getTimestamp(startDateValue)}&endDate=${getTimestamp(endDateValue)}&search=${propertyIdValue}`, requestOptions)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.json();
+            })
+            .then(result => {
+                if (!result || !Array.isArray(result) || result.length === 0) {
+                    graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Không tìm thấy dữ liệu phù hợp.</td></tr>`;
+                    return;
+                }
+                result.sort((a, b) => (a[7] || 0) - (b[7] || 0)); 
+                const orderCountsPerDay = {};
+                result.forEach(element => {
+                    const checkinDateStr = getDay(element[7]);
+                    if (checkinDateStr) {
+                       orderCountsPerDay[checkinDateStr] = (orderCountsPerDay[checkinDateStr] || 0) + 1;
+                    }
+                });
+
+                let tempHtml = '';
+                let currentCheckinDate = null;
+                let serialNumber; 
+
+                for (let index = 0; index < result.length; index++) {
+                    const element = result[index];
+                    const checkinTimestamp = element[7];
+                    const checkoutTimestamp = element[8];
+                    const checkinDateStr = getDay(checkinTimestamp);
+                    const checkoutDateStr = getDay(checkoutTimestamp);
+                    const totalNights = calculateTotalNights(checkinTimestamp, checkoutTimestamp);
+                    const nightlyRate = (totalNights && totalNights > 0) ? formatCurrency(element[9] / totalNights) : '';
+
+                    if (!checkinDateStr) continue;
+
+                    if (checkinDateStr !== currentCheckinDate) {
+                        currentCheckinDate = checkinDateStr;
+                        serialNumber = 1; 
+                        const countForThisDay = orderCountsPerDay[currentCheckinDate] || 0;
+                        tempHtml += `
+                            <tr class="table-group-header" data-group-id="${currentCheckinDate}" onclick="toggleGroup('${currentCheckinDate}')">
+                                <td colspan="${columnCount}" style="font-weight: bold; padding: 0.5rem 0.75rem; background-color: #e9ecef; border-top: 2px solid #dee2e6;">
+                                    <span class="toggle-arrow">▼</span>
+                                    ${currentCheckinDate} (${countForThisDay} Order)
+                                </td>
+                            </tr>
+                        `;
+                    }
+
+                    tempHtml += `<tr data-group="${checkinDateStr}">
+                        <td class="text-center-stt"><p class="text-sm font-weight-bold mb-0">${serialNumber}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${element[1] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0 n_check_${element[0]} n_check">${element[0] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${element[10] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${checkinDateStr}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${checkoutDateStr}</p></td>
+                        <td style="text-align: center;"><p class="text-sm font-weight-bold mb-0">${ totalNights !== '' ? totalNights : ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${element[2] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${formatCurrency(element[9])}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${element[5] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0 status_${element[0]}">${element[12] ? element[12] : 'Confirmed'}</p></td>
+                        <td style="text-align: center;"><p class="text-sm font-weight-bold mb-0">${ formatCurrency(element[4]) || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0 booktime_${element[0]}">${getDay(element[6])}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${element[11] || ''}</p></td>
+                        <td><p class="text-sm font-weight-bold mb-0">${nightlyRate}</p></td>
+                      </tr>`;
+                    serialNumber++; 
+                }
+                graphqlTableBody.innerHTML = tempHtml;
+            })
+            .catch(error => {
+                console.error("Lỗi khi fetch hoặc xử lý dữ liệu:", error);
+                graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Đã xảy ra lỗi: ${error.message}. Vui lòng thử lại.</td></tr>`;
+            });
+    }
+
+    function toggleGroup(groupId) {
+        const headerRow = document.querySelector(`.table-group-header[data-group-id="${groupId}"]`);
+        const dataRows = document.querySelectorAll(`tr[data-group="${groupId}"]`);
+        const arrow = headerRow.querySelector('.toggle-arrow');
+
+        if (headerRow && dataRows.length > 0) {
+            const isCollapsed = headerRow.classList.contains('collapsed');
+            if (isCollapsed) {
+                headerRow.classList.remove('collapsed');
+                arrow.textContent = '▼';
+                dataRows.forEach(row => {
+                    row.style.display = '';
+                });
+            } else {
+                headerRow.classList.add('collapsed');
+                arrow.textContent = '▶';
+                 dataRows.forEach(row => {
+                    row.style.display = 'none';
+                });
+            }
+        }
+    }
+
+    function search () {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const propertyId = document.getElementById('propertyId').value;
+      const newUrl = `./room.html?start=${encodeURIComponent(startDate)}&end=${encodeURIComponent(endDate)}&propertyId=${encodeURIComponent(propertyId)}`;
+      window.location.href = newUrl;
+    }
+
+    function getDateNDaysFromNow (n) {
+      const date = new Date();
+      date.setDate(date.getDate() + n);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    window.onload = function() {
+      const startDateInput = document.getElementById('startDate');
+      const endDateInput = document.getElementById('endDate');
+      const propertyIdInput = document.getElementById('propertyId');
+      const propertyIdLabel = propertyIdInput.previousElementSibling;
+
+      startDateInput.value = getQueryParam('start') || getDateNDaysFromNow(0);
+      endDateInput.value = getQueryParam('end') || getDateNDaysFromNow(30);
+      propertyIdInput.value = getQueryParam('propertyId') || '';
+
+      if (propertyIdInput.value) {
+          if(propertyIdLabel) propertyIdLabel.style.display = 'none';
+      }
+       propertyIdInput.addEventListener('focus', () => {
+           if(propertyIdLabel) propertyIdLabel.style.display = 'none';
+       });
+       propertyIdInput.addEventListener('blur', () => {
+           if(propertyIdLabel && !propertyIdInput.value) propertyIdLabel.style.display = '';
+       });
+        propertyIdInput.addEventListener('input', () => {
+           if(propertyIdLabel) propertyIdLabel.style.display = 'none';
+       });
+      getOrder();
+    }
+
+    function getReservationDetails (propertyId, bookingToken) {
+      console.log("getReservationDetails called with:", propertyId, bookingToken);
+    }
+  </script>
+</body>
+</html>
