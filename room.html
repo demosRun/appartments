@@ -74,20 +74,20 @@
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center-stt">STT</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">平台</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预订编号</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">客人姓名</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">入住</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">退房</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">夜数</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">电话</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">价格 (VND)</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房型</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">状态</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">取消费用</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">预定时间</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">房间ID</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">每晚价格 (VND)</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Platform</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order Number</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Guest Name</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Check In</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Check Out</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Nights</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Room Type</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Order</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cancellation Fee</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking Time</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Room ID</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price Per Night</th>
 
                     </tr>
                   </thead>
@@ -187,7 +187,7 @@
         const theadRow = document.querySelector('table thead tr');
         const columnCount = theadRow ? theadRow.childElementCount : 15;
 
-        graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Đang tải dữ liệu...</td></tr>`;
+        graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Loading Data...</td></tr>`;
 
         const startDateValue = document.getElementById('startDate').value;
         const endDateValue = document.getElementById('endDate').value;
@@ -200,7 +200,7 @@
             })
             .then(result => {
                 if (!result || !Array.isArray(result) || result.length === 0) {
-                    graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">Không tìm thấy dữ liệu phù hợp.</td></tr>`;
+                    graphqlTableBody.innerHTML = `<tr><td colspan="${columnCount}">No matching data found.</td></tr>`;
                     return;
                 }
                 result.sort((a, b) => (a[7] || 0) - (b[7] || 0)); 
