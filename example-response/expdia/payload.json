@@ -1,0 +1,268 @@
+{
+    "startDate": "2025-05-09",
+    "numberOfDays": 11,
+    "ratePlanIds": [
+        399002061,
+        399002059,
+        399002060,
+        399002125,
+        399002114,
+        399002115,
+        399002026,
+        399002021,
+        399002023
+    ],
+    "roomTypeIds": [
+        325697395,
+        325697403,
+        325697382
+    ],
+    "isFilterOutComplexRates": false,
+    "rateTiers": null,
+    "roomAndRatePlanSummaryModel": {
+        "maxOccupancyForAllRoomTypeIds": 4,
+        "roomTypeIds": [
+            325697395,
+            325697403,
+            325697382
+        ],
+        "connectedRoomTypeIds": [],
+        "nonConnectedRoomTypeIds": [
+            325697395,
+            325697403,
+            325697382
+        ],
+        "lengthOfStayPricingRoomTypeIds": [],
+        "dayOfArrivalPricingRoomTypeIds": [],
+        "iCalConnectedRoomTypeIds": [],
+        "ratePlanIds": [
+            399002061,
+            399002059,
+            399002060,
+            399002125,
+            399002114,
+            399002115,
+            399002026,
+            399002021,
+            399002023
+        ],
+        "linkedChildRatePlanIds": [
+            399002061,
+            399002060,
+            399002125,
+            399002115,
+            399002026,
+            399002023
+        ],
+        "standaloneRatePlanIds": [
+            399002061,
+            399002059,
+            399002125,
+            399002114,
+            399002026,
+            399002021
+        ],
+        "packageRatePlanIds": [
+            399002060,
+            399002115,
+            399002023
+        ],
+        "corporateRatePlanIds": [],
+        "wholesaleRatePlanIds": [],
+        "wholesalePackageRatePlanIds": [],
+        "opaqueRatePlanIds": [],
+        "ratePlanAdvancePurchaseMap": {
+            "399002021": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002023": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002026": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002059": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002060": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002061": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002114": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002115": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            },
+            "399002125": {
+                "advancePurchaseMin": 0,
+                "advancePurchaseMax": 500
+            }
+        },
+        "roomTypeSummary": [
+            {
+                "name": "Căn hộ Deluxe, 1 phòng ngủ, bếp, quang cảnh thành phố",
+                "roomTypeId": 325697395,
+                "roomTypeCode": "RoomCode",
+                "ratePlanIds": [
+                    399002061,
+                    399002059,
+                    399002060
+                ]
+            },
+            {
+                "name": "Căn hộ Deluxe, 2 phòng ngủ, bếp, quang cảnh thành phố",
+                "roomTypeId": 325697403,
+                "roomTypeCode": "RoomCode",
+                "ratePlanIds": [
+                    399002125,
+                    399002114,
+                    399002115
+                ]
+            },
+            {
+                "name": "Căn hộ Superior, 1 phòng ngủ, bếp, quang cảnh thành phố",
+                "roomTypeId": 325697382,
+                "roomTypeCode": "RoomCode",
+                "ratePlanIds": [
+                    399002026,
+                    399002021,
+                    399002023
+                ]
+            }
+        ],
+        "unknownPricingRoomTypeIds": [
+            325697395,
+            325697403,
+            325697382
+        ],
+        "hasConnectedRoomTypeIds": false,
+        "hasNonConnectedRoomTypeIds": true,
+        "hasLengthOfStayPricingSubModels": false,
+        "hasDayOfArrivalPricingSubModels": false,
+        "hasStandaloneRatePlanIds": true,
+        "hasPackageRatePlanIds": true,
+        "hasCorporateRatePlanIds": false,
+        "hasWholesaleRatePlanIds": false,
+        "hasWholesalePackageRatePlanIds": false,
+        "hasOpaqueRatePlanIds": false,
+        "hasUnknownPricingSubModels": true
+    },
+    "ratePlanBasicInfoMap": {
+        "399002021": {
+            "ratePlanName": "Standard-7Flex-Pickup",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697382,
+            "associatedRoomTypeName": "Căn hộ Superior, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002023": {
+            "ratePlanName": "Standard",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Package",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697382,
+            "associatedRoomTypeName": "Căn hộ Superior, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002026": {
+            "ratePlanName": "Standard 7Flex-Net",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697382,
+            "associatedRoomTypeName": "Căn hộ Superior, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002059": {
+            "ratePlanName": "Standard-7Flex-Pickup",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697395,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002060": {
+            "ratePlanName": "Standard",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Package",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697395,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002061": {
+            "ratePlanName": "Standard 7Flex-Net",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697395,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002114": {
+            "ratePlanName": "Standard-7Flex-Pickup",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697403,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 2 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002115": {
+            "ratePlanName": "Standard",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Package",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697403,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 2 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        },
+        "399002125": {
+            "ratePlanName": "Standard 7Flex-Net",
+            "ratePlanCodes": [
+                "RateCode"
+            ],
+            "ratePlanType": "Standalone",
+            "pricingSubModel": "UNKNOWN",
+            "associatedRoomTypeId": 325697403,
+            "associatedRoomTypeName": "Căn hộ Deluxe, 2 phòng ngủ, bếp, quang cảnh thành phố",
+            "isOpaque": false
+        }
+    },
+    "currencyCode": "VND",
+    "rateUIPreferences": {
+        "selectedLOS": 1,
+        "selectedOBP": 1,
+        "isShowAllOBPLevelsEnabled": false
+    }
+}

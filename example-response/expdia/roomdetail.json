@@ -1,0 +1,69 @@
+{
+    "value": [
+        {
+            "roomTypeID": 325697382,
+            "roomTypeContentID": 110883552,
+            "ariEnabled": false,
+            "legacyRoom": false,
+            "activeStatus": "Active",
+            "bedTypeName": "1 giường cỡ queen",
+            "alternateBedTypeName": null,
+            "roomTypeName": "Căn hộ Superior, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "roomTypeCode": "RoomCode",
+            "smokingPreference": "Non-Smoking",
+            "maximumOccupancy": {
+                "total": 2,
+                "adults": 2,
+                "children": 1
+            },
+            "syncBookingStatus": {
+                "syncStatus": null,
+                "updateDate": null
+            }
+        },
+        {
+            "roomTypeID": 325697395,
+            "roomTypeContentID": 110883626,
+            "ariEnabled": false,
+            "legacyRoom": false,
+            "activeStatus": "Active",
+            "bedTypeName": "1 giường cỡ queen",
+            "alternateBedTypeName": null,
+            "roomTypeName": "Căn hộ Deluxe, 1 phòng ngủ, bếp, quang cảnh thành phố",
+            "roomTypeCode": "RoomCode",
+            "smokingPreference": "Non-Smoking",
+            "maximumOccupancy": {
+                "total": 2,
+                "adults": 2,
+                "children": 1
+            },
+            "syncBookingStatus": {
+                "syncStatus": null,
+                "updateDate": null
+            }
+        },
+        {
+            "roomTypeID": 325697403,
+            "roomTypeContentID": 110883675,
+            "ariEnabled": false,
+            "legacyRoom": false,
+            "activeStatus": "Active",
+            "bedTypeName": "2 giường cỡ queen",
+            "alternateBedTypeName": null,
+            "roomTypeName": "Căn hộ Deluxe, 2 phòng ngủ, bếp, quang cảnh thành phố",
+            "roomTypeCode": "RoomCode",
+            "smokingPreference": "Non-Smoking",
+            "maximumOccupancy": {
+                "total": 4,
+                "adults": 4,
+                "children": 3
+            },
+            "syncBookingStatus": {
+                "syncStatus": null,
+                "updateDate": null
+            }
+        }
+    ],
+    "errorDetails": null,
+    "successful": true
+}

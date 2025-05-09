@@ -1,0 +1,1254 @@
+{
+    "success": 1,
+    "params": {
+        "errors": [],
+        "details": {
+            "request": {
+                "value": {
+                    "hotel": {
+                        "rooms": {
+                            "fields": [
+                                "status",
+                                "permissions",
+                                "rooms_to_sell",
+                                "net_booked",
+                                "rates",
+                                "num_guests"
+                            ],
+                            "rates": {
+                                "fields": [
+                                    "default_policygroup_id",
+                                    "name",
+                                    "net_booked",
+                                    "permissions",
+                                    "policy_overrides",
+                                    "price",
+                                    "restrictions",
+                                    "rooms_to_sell",
+                                    "status",
+                                    "xml"
+                                ]
+                            },
+                            "id": [
+                                1365347702
+                            ]
+                        },
+                        "fields": [
+                            "rooms",
+                            "status"
+                        ]
+                    },
+                    "post_process_data_plugins": [
+                        "check_empty_price",
+                        "mlos_status_reason",
+                        "check_dynamic_restrictions"
+                    ],
+                    "status_reason": 1,
+                    "dates": {
+                        "dates": [
+                            "2025-05-08",
+                            "2025-06-07"
+                        ],
+                        "range": "1"
+                    }
+                },
+                "msg": null,
+                "original": "{\"dates\":{\"range\":true,\"dates\":[\"2025-05-08\",\"2025-06-07\"]},\"hotel\":{\"fields\":[\"rooms\",\"status\"],\"rooms\":{\"id\":[1365347702],\"fields\":[\"status\",\"permissions\",\"rooms_to_sell\",\"net_booked\",\"rates\",\"num_guests\"],\"rates\":{\"fields\":[\"default_policygroup_id\",\"name\",\"net_booked\",\"permissions\",\"policy_overrides\",\"price\",\"restrictions\",\"rooms_to_sell\",\"status\",\"xml\"]}}},\"status_reason\":\"1\",\"post_process_data_plugins\":[\"check_empty_price\",\"mlos_status_reason\",\"check_dynamic_restrictions\"]}",
+                "valid": 1
+            },
+            "hotel_id": {
+                "msg": null,
+                "value": "13653477",
+                "original": "13653477",
+                "valid": 1
+            }
+        }
+    },
+    "data": {
+        "restrictions": [
+            "min_stay_through",
+            "min_advance_res"
+        ],
+        "dates": [
+            "2025-05-08",
+            "2025-05-09",
+            "2025-05-10",
+            "2025-05-11",
+            "2025-05-12",
+            "2025-05-13",
+            "2025-05-14",
+            "2025-05-15",
+            "2025-05-16",
+            "2025-05-17",
+            "2025-05-18",
+            "2025-05-19",
+            "2025-05-20",
+            "2025-05-21",
+            "2025-05-22",
+            "2025-05-23",
+            "2025-05-24",
+            "2025-05-25",
+            "2025-05-26",
+            "2025-05-27",
+            "2025-05-28",
+            "2025-05-29",
+            "2025-05-30",
+            "2025-05-31",
+            "2025-06-01",
+            "2025-06-02",
+            "2025-06-03",
+            "2025-06-04",
+            "2025-06-05",
+            "2025-06-06",
+            "2025-06-07"
+        ],
+        "hotel": {
+            "13653477": {
+                "rooms": {
+                    "1365347702": {
+                        "rate_ids": [
+                            52313039,
+                            53537430
+                        ],
+                        "dates": {
+                            "2025-05-25": {
+                                "hidden": 0,
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": []
+                            },
+                            "2025-06-01": {
+                                "hidden": 0,
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": []
+                            },
+                            "2025-05-26": {
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": [],
+                                "hidden": 0
+                            },
+                            "2025-05-27": {
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "hidden": 0
+                            },
+                            "2025-05-24": {
+                                "hidden": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0
+                            },
+                            "2025-05-30": {
+                                "hidden": 0,
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable"
+                            },
+                            "2025-05-19": {
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": [],
+                                "hidden": 0
+                            },
+                            "2025-05-11": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-05-20": {
+                                "hidden": 0,
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable"
+                            },
+                            "2025-05-28": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-05-23": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-05-09": {
+                                "hidden": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0
+                            },
+                            "2025-05-22": {
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "hidden": 0
+                            },
+                            "2025-05-15": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-05-16": {
+                                "hidden": 0,
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": []
+                            },
+                            "2025-06-03": {
+                                "hidden": 0,
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": []
+                            },
+                            "2025-05-14": {
+                                "hidden": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0
+                            },
+                            "2025-05-31": {
+                                "status": "bookable",
+                                "status_reason": [],
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "hidden": 0
+                            },
+                            "2025-05-17": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-06-02": {
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": [],
+                                "hidden": 0
+                            },
+                            "2025-05-18": {
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": [],
+                                "hidden": 0
+                            },
+                            "2025-05-13": {
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "hidden": 0
+                            },
+                            "2025-06-06": {
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "hidden": 0
+                            },
+                            "2025-05-29": {
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "hidden": 0
+                            },
+                            "2025-05-10": {
+                                "hidden": 0,
+                                "status_reason": [],
+                                "status": "bookable",
+                                "rooms_to_sell": "5",
+                                "net_booked": 0
+                            },
+                            "2025-05-21": {
+                                "status": "bookable",
+                                "status_reason": [],
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "hidden": 0
+                            },
+                            "2025-06-05": {
+                                "net_booked": 0,
+                                "rooms_to_sell": "5",
+                                "status": "bookable",
+                                "status_reason": [],
+                                "hidden": 0
+                            },
+                            "2025-05-08": {
+                                "hidden": 0,
+                                "rooms_to_sell": "5",
+                                "net_booked": 0,
+                                "status_reason": [],
+                                "status": "bookable"
+                            },
+                            "2025-05-12": {
+                                "hidden": 0,
+                                "status": "bookable",
+                                "status_reason": [],
+                                "net_booked": 0,
+                                "rooms_to_sell": "5"
+                            },
+                            "2025-06-07": {
+                                "hidden": 0,
+                                "status": "bookable",
+                                "status_reason": [],
+                                "net_booked": 0,
+                                "rooms_to_sell": "5"
+                            },
+                            "2025-06-04": {
+                                "hidden": 0,
+                                "status": "bookable",
+                                "status_reason": [],
+                                "net_booked": 0,
+                                "rooms_to_sell": "5"
+                            }
+                        },
+                        "permissions": {
+                            "hidden": {
+                                "enabled": 1,
+                                "edit": 1
+                            },
+                            "rooms_to_sell": {
+                                "edit": 1,
+                                "enabled": 1
+                            },
+                            "net_booked": {
+                                "enabled": 1,
+                                "edit": 0
+                            },
+                            "status_reason": {
+                                "edit": 1,
+                                "enabled": 1
+                            },
+                            "status": {
+                                "enabled": 1,
+                                "edit": 1
+                            }
+                        },
+                        "num_guests": 4,
+                        "rates": {
+                            "53537430": {
+                                "occupancies": [
+                                    "0"
+                                ],
+                                "name": "Giá theo tuần + đón sân bay 1 chiều",
+                                "defaults": {
+                                    "occupancy": "0",
+                                    "min_advance_res": ""
+                                },
+                                "dates": {
+                                    "2025-06-04": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-08": {
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": 7,
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-12": {
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": 7,
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-06-07": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-29": {
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "closed": 0
+                                    },
+                                    "2025-06-06": {
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status_reason": [],
+                                        "status": "restricted",
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "closed": 0
+                                    },
+                                    "2025-05-10": {
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7
+                                    },
+                                    "2025-05-21": {
+                                        "closed": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted",
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "status_reason": []
+                                    },
+                                    "2025-06-05": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status": "restricted",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-18": {
+                                        "closed": 0,
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-13": {
+                                        "closed": 0,
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-17": {
+                                        "status_reason": [],
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "status": "restricted",
+                                        "closed": 0
+                                    },
+                                    "2025-06-02": {
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "min_stay_through": 7,
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-14": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-31": {
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted"
+                                    },
+                                    "2025-06-03": {
+                                        "closed": 0,
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "status_reason": []
+                                    },
+                                    "2025-05-15": {
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status": "restricted",
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-16": {
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7
+                                    },
+                                    "2025-05-22": {
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-09": {
+                                        "closed": 0,
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "status_reason": [],
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-28": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-23": {
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7
+                                    },
+                                    "2025-05-19": {
+                                        "closed": 0,
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-11": {
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": 7,
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-20": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-24": {
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "status_reason": [],
+                                        "status": "restricted",
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "closed": 0
+                                    },
+                                    "2025-05-30": {
+                                        "price": {
+                                            "0": "3074716"
+                                        },
+                                        "net_booked": 0,
+                                        "status_reason": [],
+                                        "status": "restricted",
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "closed": 0
+                                    },
+                                    "2025-05-27": {
+                                        "min_stay_through": 7,
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status": "restricted"
+                                    },
+                                    "2025-05-25": {
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7,
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "status_reason": [],
+                                        "status": "restricted"
+                                    },
+                                    "2025-06-01": {
+                                        "status": "restricted",
+                                        "status_reason": [],
+                                        "net_booked": 0,
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "closed": 0,
+                                        "min_stay_through": 7,
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-26": {
+                                        "status_reason": [],
+                                        "status": "restricted",
+                                        "price": {
+                                            "0": "2855094"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "min_advance_res": "",
+                                        "min_stay_through": 7
+                                    }
+                                },
+                                "price_permissions": {
+                                    "0": {
+                                        "edit": 0,
+                                        "enabled": 1
+                                    }
+                                },
+                                "permissions": {
+                                    "min_advance_res": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    },
+                                    "min_stay_through": {
+                                        "enabled": 1,
+                                        "edit": 1
+                                    },
+                                    "closed": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    },
+                                    "net_booked": {
+                                        "edit": 0,
+                                        "enabled": 1
+                                    },
+                                    "price": {
+                                        "0": {
+                                            "edit": 0,
+                                            "enabled": 1
+                                        }
+                                    },
+                                    "status_reason": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    },
+                                    "status": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    }
+                                }
+                            },
+                            "52313039": {
+                                "name": "Standard Rate",
+                                "occupancies": [
+                                    "4"
+                                ],
+                                "defaults": {
+                                    "occupancy": 4,
+                                    "min_advance_res": ""
+                                },
+                                "dates": {
+                                    "2025-05-09": {
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-22": {
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-11": {
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-20": {
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "closed": 0
+                                    },
+                                    "2025-05-19": {
+                                        "closed": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-23": {
+                                        "closed": 0,
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "net_booked": 0
+                                    },
+                                    "2025-05-28": {
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-27": {
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status_reason": [],
+                                        "status": "bookable"
+                                    },
+                                    "2025-05-30": {
+                                        "closed": 0,
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        }
+                                    },
+                                    "2025-05-24": {
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "status": "bookable",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        }
+                                    },
+                                    "2025-05-26": {
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-06-01": {
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "closed": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-25": {
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": [],
+                                        "closed": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable"
+                                    },
+                                    "2025-05-12": {
+                                        "closed": 0,
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        }
+                                    },
+                                    "2025-06-07": {
+                                        "closed": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-08": {
+                                        "closed": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-06-04": {
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "closed": 0
+                                    },
+                                    "2025-05-13": {
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "closed": 0
+                                    },
+                                    "2025-05-18": {
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status": "bookable",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "closed": 0
+                                    },
+                                    "2025-05-10": {
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "closed": 0,
+                                        "min_stay_through": "",
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-06-05": {
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "closed": 0
+                                    },
+                                    "2025-05-21": {
+                                        "closed": 0,
+                                        "status": "bookable",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-29": {
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status_reason": [],
+                                        "status": "bookable",
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "closed": 0
+                                    },
+                                    "2025-06-06": {
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "net_booked": 0,
+                                        "status": "bookable",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": ""
+                                    },
+                                    "2025-05-31": {
+                                        "closed": 0,
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "status": "bookable",
+                                        "status_reason": [],
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        }
+                                    },
+                                    "2025-05-14": {
+                                        "status_reason": [],
+                                        "min_stay_through": "",
+                                        "min_advance_res": "",
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "closed": 0
+                                    },
+                                    "2025-05-17": {
+                                        "status": "bookable",
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "net_booked": 0,
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": ""
+                                    },
+                                    "2025-06-02": {
+                                        "closed": 0,
+                                        "status": "bookable",
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "net_booked": 0,
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    },
+                                    "2025-05-16": {
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3236543"
+                                        },
+                                        "status": "bookable",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": ""
+                                    },
+                                    "2025-05-15": {
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "closed": 0,
+                                        "status_reason": [],
+                                        "min_advance_res": "",
+                                        "min_stay_through": ""
+                                    },
+                                    "2025-06-03": {
+                                        "closed": 0,
+                                        "net_booked": 0,
+                                        "price": {
+                                            "4": "3005362"
+                                        },
+                                        "status": "bookable",
+                                        "min_advance_res": "",
+                                        "min_stay_through": "",
+                                        "status_reason": []
+                                    }
+                                },
+                                "permissions": {
+                                    "status_reason": {
+                                        "enabled": 1,
+                                        "edit": 1
+                                    },
+                                    "min_stay_through": {
+                                        "enabled": 1,
+                                        "edit": 1
+                                    },
+                                    "min_advance_res": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    },
+                                    "status": {
+                                        "edit": 1,
+                                        "enabled": 1
+                                    },
+                                    "price": {
+                                        "4": {
+                                            "edit": 1,
+                                            "enabled": 1
+                                        }
+                                    },
+                                    "net_booked": {
+                                        "enabled": 1,
+                                        "edit": 0
+                                    },
+                                    "closed": {
+                                        "enabled": 1,
+                                        "edit": 1
+                                    }
+                                },
+                                "price_permissions": {
+                                    "4": {
+                                        "enabled": 1,
+                                        "edit": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "dates": {
+                    "2025-05-16": {
+                        "status": "bookable"
+                    },
+                    "2025-05-15": {
+                        "status": "bookable"
+                    },
+                    "2025-06-03": {
+                        "status": "bookable"
+                    },
+                    "2025-05-31": {
+                        "status": "bookable"
+                    },
+                    "2025-05-14": {
+                        "status": "bookable"
+                    },
+                    "2025-06-02": {
+                        "status": "bookable"
+                    },
+                    "2025-05-17": {
+                        "status": "bookable"
+                    },
+                    "2025-05-13": {
+                        "status": "bookable"
+                    },
+                    "2025-05-18": {
+                        "status": "bookable"
+                    },
+                    "2025-05-21": {
+                        "status": "bookable"
+                    },
+                    "2025-06-05": {
+                        "status": "bookable"
+                    },
+                    "2025-05-10": {
+                        "status": "bookable"
+                    },
+                    "2025-05-29": {
+                        "status": "bookable"
+                    },
+                    "2025-06-06": {
+                        "status": "bookable"
+                    },
+                    "2025-06-07": {
+                        "status": "bookable"
+                    },
+                    "2025-05-12": {
+                        "status": "bookable"
+                    },
+                    "2025-05-08": {
+                        "status": "bookable"
+                    },
+                    "2025-06-04": {
+                        "status": "bookable"
+                    },
+                    "2025-05-26": {
+                        "status": "bookable"
+                    },
+                    "2025-05-25": {
+                        "status": "bookable"
+                    },
+                    "2025-06-01": {
+                        "status": "bookable"
+                    },
+                    "2025-05-27": {
+                        "status": "bookable"
+                    },
+                    "2025-05-30": {
+                        "status": "bookable"
+                    },
+                    "2025-05-24": {
+                        "status": "bookable"
+                    },
+                    "2025-05-20": {
+                        "status": "bookable"
+                    },
+                    "2025-05-11": {
+                        "status": "bookable"
+                    },
+                    "2025-05-19": {
+                        "status": "bookable"
+                    },
+                    "2025-05-23": {
+                        "status": "bookable"
+                    },
+                    "2025-05-28": {
+                        "status": "bookable"
+                    },
+                    "2025-05-09": {
+                        "status": "bookable"
+                    },
+                    "2025-05-22": {
+                        "status": "bookable"
+                    }
+                },
+                "room_ids": [
+                    "1365347702"
+                ],
+                "misc": {
+                    "ensure_add_price": {
+                        "dates_with_no_price_set": 0,
+                        "dates_with_no_rooms_to_sell": 0
+                    }
+                }
+            }
+        },
+        "returned_from_partner_availability_api": 1,
+        "limits": {
+            "min_stay_through": {
+                "max": 7
+            }
+        }
+    }
+}
