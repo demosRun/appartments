@@ -410,14 +410,14 @@
                     let roomTypeId = null;
                     let roomTypeName = "Standard Room";
                     
-                    if (ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
+                    if (ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
                         roomTypeName = ratePlan.linkageTree.rootRatePlan.associatedRoomTypeName || roomTypeName;
                         
                         // Look for the roomTypeId in all available child rate plans first
                         if (ratePlan.linkageTree.rootRatePlan.childRatePlans && ratePlan.linkageTree.rootRatePlan.childRatePlans.length > 0) {
                             // Try to find any associatedRoomTypeId in the child rate plans
                             for (const childPlan of ratePlan.linkageTree.rootRatePlan.childRatePlans) {
-                                if (childPlan.associatedRoomTypeId) {
+                                if (childPlan && childPlan.associatedRoomTypeId) {
                                     roomTypeId = childPlan.associatedRoomTypeId;
                                     break;
                                 }
@@ -475,9 +475,9 @@
                     // Check if this rate plan is a child rate plan in any other plan's linkage tree
                     for (const otherRatePlanId in ratePlanMap) {
                         const otherRatePlan = ratePlanMap[otherRatePlanId];
-                        if (otherRatePlan.linkageTree && otherRatePlan.linkageTree.rootRatePlan && otherRatePlan.linkageTree.rootRatePlan.childRatePlans) {
+                        if (otherRatePlan && otherRatePlan.linkageTree && otherRatePlan.linkageTree.rootRatePlan && otherRatePlan.linkageTree.rootRatePlan.childRatePlans) {
                             const childPlans = otherRatePlan.linkageTree.rootRatePlan.childRatePlans;
-                            const foundChildPlan = childPlans.find(child => child.ratePlanId === Number(ratePlanId) || child.ratePlanId === ratePlanId);
+                            const foundChildPlan = childPlans.find(child => child && (child.ratePlanId === Number(ratePlanId) || child.ratePlanId === ratePlanId));
                             
                             if (foundChildPlan) {
                                 isChildRatePlan = true;
@@ -489,7 +489,7 @@
                     }
                     
                     // If not a child plan, check if it's a root plan with its own name
-                    if (!isChildRatePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
+                    if (!isChildRatePlan && ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
                         planNameWithType = ratePlan.linkageTree.rootRatePlan.ratePlanNameWithType || null;
                     }
                     
@@ -836,9 +836,9 @@
             const meg = event.data
             console.log(meg)
             switch (meg.type) {
-                // case "inventory":
-                //     creatCardBooking(meg)
-                //     break;
+                case "inventory":
+                    creatCardBooking(meg)
+                    break;
                 case "inventoryCtrip":
                     creatCardCtrip(meg)
                     break;
