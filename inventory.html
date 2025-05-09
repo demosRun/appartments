@@ -123,90 +123,242 @@
 
         // Booking
         function creatCardBooking(meg) {
-            let tempData = ``
             // Generate card
-            if (!meg.value || !meg.value.list || !meg.value.rooms) {
+            if (!meg.value || !meg.value.data) {
                 console.error("Invalid Booking inventory data:", meg);
                 return;
             }
 
-            // Clear viewBox if it's not empty
-            if (window.viewBox.innerHTML.trim() !== '') {
-                window.viewBox.innerHTML = '';
-            }
+            // Clear viewBox if it's not empty - we'll be handling all hotels in one response
+            // if (window.viewBox.innerHTML.trim() !== '') {
+            //     window.viewBox.innerHTML = '';
+            // }
 
-            // Create cards for each room type
-            meg.value.list.forEach(element => {
-                const roomId = element[0];
-                const roomName = element[1];
-                tempData += createCommonCard(
-                    "Booking",
-                    {},
-                    roomId,
-                    roomName,
-                    ""
-                );
-            });
-            window.viewBox.innerHTML += tempData
+            // Check if we have a consolidated response (multiple hotels)
+            const isConsolidatedResponse = meg.value.data.hotels && Array.isArray(meg.value.data.hotels);
+            let tempData = '';
 
-            // Process each room to add daily rates
-            for (const roomId in meg.value.rooms) {
-                if (Object.prototype.hasOwnProperty.call(meg.value.rooms, roomId)) {
-                    let tempData2 = ``
-                    const roomData = meg.value.rooms[roomId];
+            if (isConsolidatedResponse) {
+                // Process consolidated response with multiple hotels
+                // Loop through each hotel in the consolidated response
+                meg.value.data.hotels.forEach(hotelResponse => {
+                    // Extract the actual hotel data, which might be in different locations
+                    let hotelData, hotelId, dates;
+                    
+                    // Case 1: If the hotel response contains data.hotel structure
+                    if (hotelResponse.data && hotelResponse.data.hotel) {
+                        hotelId = Object.keys(hotelResponse.data.hotel)[0];
+                        hotelData = hotelResponse.data.hotel[hotelId];
+                        dates = hotelResponse.data.dates;
+                    } 
+                    // Case 2: If the hotel response directly contains hotel structure
+                    else if (hotelResponse.hotel) {
+                        hotelId = Object.keys(hotelResponse.hotel)[0];
+                        hotelData = hotelResponse.hotel[hotelId];
+                        dates = hotelResponse.dates;
+                    }
+                    // Case 3: If the hotel ID is already in the response
+                    else if (hotelResponse.success && hotelResponse.data) {
+                        // This is the standard single hotel response format
+                        hotelId = Object.keys(hotelResponse.data.hotel)[0];
+                        hotelData = hotelResponse.data.hotel[hotelId];
+                        dates = hotelResponse.data.dates;
+                    }
+                    
+                    if (!hotelData || !hotelData.rooms) {
+                        console.error("No room data found in response for hotel:", hotelId);
+                        return;
+                    }
+
+                    // Create cards for each room type
+                    hotelData.room_ids.forEach(roomId => {
+                        const roomData = hotelData.rooms[roomId];
+                        // Get room name from first rate plan if available
+                        let roomName = `Room ${roomId}`;
+                        if (roomData.num_guests) {
+                            roomName += ` (${roomData.num_guests} guests)`;
+                        }
+                        
+                        tempData += createCommonCard(
+                            `Booking: Hotel ${hotelId}`,
+                            {},
+                            `${hotelId}-${roomId}`, // Use combined ID for unique list group
+                            roomName,
+                            ""
+                        );
+                    });
+
+                    // Process each room to add daily rates
+                    for (const roomId of hotelData.room_ids) {
+                        const roomData = hotelData.rooms[roomId];
+                        let tempData2 = ``;
+
+                        // Find rate plans for this room
+                        if (!roomData.rates || Object.keys(roomData.rates).length === 0) {
+                            continue;
+                        }
+
+                        // Get all dates from the response
+                        const allDates = dates;
+                        if (!allDates) {
+                            console.error("No dates found in hotel response");
+                            continue;
+                        }
+                        
+                        // For each rate plan in the room
+                        for (const rateId of roomData.rate_ids) {
+                            const rateData = roomData.rates[rateId];
+                            const rateName = rateData.name || "Standard Rate";
+
+                            // Add rate plan name as a header for this section
+                            tempData2 += `<li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                <strong>Rate Plan: ${rateName}</strong>
+                            </li>`;
+
+                            // Process each date
+                            allDates.forEach(dateKey => {
+                                // Skip if no data for this date
+                                if (!rateData.dates || !rateData.dates[dateKey]) {
+                                    return;
+                                }
+
+                                const dateData = rateData.dates[dateKey];
+                                
+                                // Get room availability from room data
+                                const roomAvailability = roomData.dates && roomData.dates[dateKey] ?
+                                    roomData.dates[dateKey].rooms_to_sell : '0';
+
+                                // Get price for the date - find first occupancy key
+                                let price = '';
+                                let occupancyKey = '';
+                                
+                                if (dateData.price) {
+                                    occupancyKey = Object.keys(dateData.price)[0];
+                                    price = dateData.price[occupancyKey];
+                                }
+
+                                // Get status (bookable, closed, restricted, etc.)
+                                const status = dateData.status || "unknown";
+
+                                // Create list item with date, availability, price
+                                tempData2 += createCommonListItem(
+                                    dateKey, // Date in YYYY-MM-DD format
+                                    roomAvailability, // Available rooms
+                                    price, // Price for the date and occupancy
+                                    status, // Status (bookable, closed, etc.)
+                                    `xgjg(${price}, '${roomId}', '${rateId}', '${dateKey}', '${dateKey}', '${occupancyKey}', ${roomAvailability}, '${hotelId}')`
+                                );
+                            });
+                        }
+
+                        // Schedule adding the date list to the room card
+                        setTimeout(() => {
+                            const listContainer = document.querySelector(`.list-group-${hotelId}-${roomId}`);
+                            if (listContainer) {
+                                listContainer.innerHTML = tempData2;
+                            }
+                        }, 0);
+                    }
+                });
+            } else {
+                // Process single hotel response (legacy format)
+                const hotelId = Object.keys(meg.value.data.hotel)[0];
+                const hotelData = meg.value.data.hotel[hotelId];
+                
+                if (!hotelData || !hotelData.rooms) {
+                    console.error("No room data found in response");
+                    return;
+                }
+
+                // Create cards for each room type
+                hotelData.room_ids.forEach(roomId => {
+                    const roomData = hotelData.rooms[roomId];
+                    // Get room name from first rate plan if available
+                    let roomName = `Room ${roomId}`;
+                    if (roomData.num_guests) {
+                        roomName += ` (${roomData.num_guests} guests)`;
+                    }
+                    
+                    tempData += createCommonCard(
+                        `Booking: Hotel ${hotelId}`,
+                        {},
+                        `${hotelId}-${roomId}`, // Use combined ID for unique list group
+                        roomName,
+                        ""
+                    );
+                });
+
+                // Process each room to add daily rates
+                for (const roomId of hotelData.room_ids) {
+                    const roomData = hotelData.rooms[roomId];
+                    let tempData2 = ``;
 
                     // Find rate plans for this room
                     if (!roomData.rates || Object.keys(roomData.rates).length === 0) {
                         continue;
                     }
 
-                    // Use the first rate plan (usually Standard Rate)
-                    const rateIds = Object.keys(roomData.rates);
-                    const rateId = rateIds[0]; // Use first rate plan
-                    const rateData = roomData.rates[rateId];
+                    // Get all dates from the response
+                    const allDates = meg.value.data.dates;
+                    
+                    // For each rate plan in the room
+                    for (const rateId of roomData.rate_ids) {
+                        const rateData = roomData.rates[rateId];
+                        const rateName = rateData.name || "Standard Rate";
 
-                    // Get dates from the rate plan
-                    if (!rateData.dates) {
-                        continue;
+                        // Add rate plan name as a header for this section
+                        tempData2 += `<li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                            <strong>Rate Plan: ${rateName}</strong>
+                        </li>`;
+
+                        // Process each date
+                        allDates.forEach(dateKey => {
+                            // Skip if no data for this date
+                            if (!rateData.dates || !rateData.dates[dateKey]) {
+                                return;
+                            }
+
+                            const dateData = rateData.dates[dateKey];
+                            
+                            // Get room availability from room data
+                            const roomAvailability = roomData.dates && roomData.dates[dateKey] ?
+                                roomData.dates[dateKey].rooms_to_sell : '0';
+
+                            // Get price for the date - find first occupancy key
+                            let price = '';
+                            let occupancyKey = '';
+                            
+                            if (dateData.price) {
+                                occupancyKey = Object.keys(dateData.price)[0];
+                                price = dateData.price[occupancyKey];
+                            }
+
+                            // Get status (bookable, closed, restricted, etc.)
+                            const status = dateData.status || "unknown";
+
+                            // Create list item with date, availability, price
+                            tempData2 += createCommonListItem(
+                                dateKey, // Date in YYYY-MM-DD format
+                                roomAvailability, // Available rooms
+                                price, // Price for the date and occupancy
+                                status, // Status (bookable, closed, etc.)
+                                `xgjg(${price}, '${roomId}', '${rateId}', '${dateKey}', '${dateKey}', '${occupancyKey}', ${roomAvailability}, '${hotelId}')`
+                            );
+                        });
                     }
-
-                    // Sort dates chronologically
-                    const dateList = Object.keys(rateData.dates).sort((a, b) => new Date(a) - new Date(b));
-
-                    // Process each date
-                    dateList.forEach(dateKey => {
-                        const dateData = rateData.dates[dateKey];
-                        // Get room availability from room data
-                        const roomAvailability = roomData.dates && roomData.dates[dateKey] ?
-                            roomData.dates[dateKey].rooms_to_sell : '0';
-
-                        // Get price for the date - find first occupancy key
-                        let price = '';
-                        let occupancyKey = '';
-                        if (dateData.price) {
-                            occupancyKey = Object.keys(dateData.price)[0];
-                            price = dateData.price[occupancyKey];
-                        }
-
-                        // Create list item with date, availability, price
-                        tempData2 += createCommonListItem(
-                            dateKey, // Date in YYYY-MM-DD format
-                            roomAvailability, // Available rooms
-                            price, // Price for the date and occupancy
-                            dateData.status, // Status (bookable, closed, etc.)
-                            `xgjg(${price}, '${roomId}', '${rateId}', '${dateKey}', '${dateKey}', '${occupancyKey}', ${roomAvailability})`
-                        );
-                    });
 
                     // Add the date list to the room card
                     setTimeout(() => {
-                        const listContainer = document.querySelector('.list-group-' + roomId);
+                        const listContainer = document.querySelector(`.list-group-${hotelId}-${roomId}`);
                         if (listContainer) {
                             listContainer.innerHTML = tempData2;
                         }
                     }, 0);
                 }
             }
+
+            // Add all the room cards to the view
+            window.viewBox.innerHTML += tempData;
         }
 
         // Ctrip
@@ -382,198 +534,195 @@
 
         // Expedia 
         function creatExpedia(meg) {
-            // if (!meg.value || !meg.value.ratesRestrictionsAndInventory || !meg.value.ratesRestrictionsAndInventory.ratePlanMap) {
-            //     console.error("Invalid Expedia data format:", meg);
-            //     return;
-            // }
+            if (!meg.value || !meg.value.ratesRestrictionsAndInventory || !meg.value.ratesRestrictionsAndInventory.ratePlanMap) {
+                console.error("Invalid Expedia data format:", meg);
+                return;
+            }
 
-            // const ratePlanMap = meg.value.ratesRestrictionsAndInventory.ratePlanMap;
-            // const dateRange = meg.value.dateRange;
-            // const roomMap = meg.value.roomMap || {};
-            // let tempData = "";
+            const ratePlanMap = meg.value.ratesRestrictionsAndInventory.ratePlanMap;
+            const dateRange = meg.value.dateRange;
+            const roomMap = meg.value.roomMap || {};
+            let tempData = "";
             
-            // // Initialize a global map to store rate plan names
-            // window.expediaRatePlans = window.expediaRatePlans || {};
+            // Initialize a global map to store rate plan names
+            window.expediaRatePlans = window.expediaRatePlans || {};
             
-            // // Log room map for debugging purposes
-            // console.log("Room map from response:", roomMap);
+            // Group rate plans by room type for better organization
+            const roomTypeGroups = {};
 
-            // // Group rate plans by room type for better organization
-            // const roomTypeGroups = {};
+            // First pass: organize rate plans by room type and identify child rate plans
+            for (const ratePlanId in ratePlanMap) {
+                if (Object.prototype.hasOwnProperty.call(ratePlanMap, ratePlanId)) {
+                    const ratePlan = ratePlanMap[ratePlanId];
+                    
+                    // Get room information from linkage tree
+                    let roomTypeId = null;
+                    let roomTypeName = "Standard Room";
+                    
+                    if (ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
+                        roomTypeName = ratePlan.linkageTree.rootRatePlan.associatedRoomTypeName || roomTypeName;
+                        
+                        // Look for the roomTypeId in all available child rate plans first
+                        if (ratePlan.linkageTree.rootRatePlan.childRatePlans && ratePlan.linkageTree.rootRatePlan.childRatePlans.length > 0) {
+                            // Try to find any associatedRoomTypeId in the child rate plans
+                            for (const childPlan of ratePlan.linkageTree.rootRatePlan.childRatePlans) {
+                                if (childPlan && childPlan.associatedRoomTypeId) {
+                                    roomTypeId = childPlan.associatedRoomTypeId;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // If still not found, try the root rate plan
+                        if (!roomTypeId && ratePlan.linkageTree.rootRatePlan.associatedRoomTypeId) {
+                            roomTypeId = ratePlan.linkageTree.rootRatePlan.associatedRoomTypeId;
+                        }
+                    }
+                    
+                    // If we couldn't get the roomTypeId directly, check if we can get it from the roomMap
+                    // The roomMap keys are the actual room type IDs we need for inventory updates (e.g., 325697395)
+                    if (!roomTypeId) {
+                        // Find a roomMap entry that corresponds to this rate plan's room
+                        for (const mapRoomTypeId in roomMap) {
+                            if (roomMap[mapRoomTypeId].roomTypeData && 
+                                roomMap[mapRoomTypeId].roomTypeData.name === roomTypeName) {
+                                roomTypeId = mapRoomTypeId;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // If still not found, try to infer it from rate and restriction data
+                    if (!roomTypeId) {
+                        // Look for any date entry that might contain the roomTypeId
+                        const firstDateKey = Object.keys(ratePlan.rateAndRestrictionByDate)[0];
+                        if (firstDateKey && ratePlan.rateAndRestrictionByDate[firstDateKey][0]) {
+                            const firstDateData = ratePlan.rateAndRestrictionByDate[firstDateKey][0];
+                            if (firstDateData.roomTypeId) {
+                                roomTypeId = firstDateData.roomTypeId;
+                            }
+                        }
+                    }
 
-            // // First pass: organize rate plans by room type and identify child rate plans
-            // for (const ratePlanId in ratePlanMap) {
-            //     if (Object.prototype.hasOwnProperty.call(ratePlanMap, ratePlanId)) {
-            //         const ratePlan = ratePlanMap[ratePlanId];
+                    // If we still don't have a roomTypeId, use the ratePlanId as a fallback
+                    roomTypeId = roomTypeId || ratePlanId;
                     
-            //         // Get room information from linkage tree
-            //         let roomTypeId = null;
-            //         let roomTypeName = "Standard Room";
+                    // Initialize group if needed
+                    if (!roomTypeGroups[roomTypeId]) {
+                        roomTypeGroups[roomTypeId] = {
+                            roomTypeId: roomTypeId,
+                            roomTypeName: roomTypeName,
+                            ratePlans: []
+                        };
+                    }
                     
-            //         if (ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
-            //             roomTypeName = ratePlan.linkageTree.rootRatePlan.associatedRoomTypeName || roomTypeName;
-                        
-            //             // Look for the roomTypeId in all available child rate plans first
-            //             if (ratePlan.linkageTree.rootRatePlan.childRatePlans && ratePlan.linkageTree.rootRatePlan.childRatePlans.length > 0) {
-            //                 // Try to find any associatedRoomTypeId in the child rate plans
-            //                 for (const childPlan of ratePlan.linkageTree.rootRatePlan.childRatePlans) {
-            //                     if (childPlan && childPlan.associatedRoomTypeId) {
-            //                         roomTypeId = childPlan.associatedRoomTypeId;
-            //                         break;
-            //                     }
-            //                 }
-            //             }
-                        
-            //             // If still not found, try the root rate plan
-            //             if (!roomTypeId && ratePlan.linkageTree.rootRatePlan.associatedRoomTypeId) {
-            //                 roomTypeId = ratePlan.linkageTree.rootRatePlan.associatedRoomTypeId;
-            //             }
-            //         }
+                    // Find if this is a child rate plan
+                    let isChildRatePlan = false;
+                    let parentRatePlanId = null;
+                    let planNameWithType = null;
                     
-            //         // If we couldn't get the roomTypeId directly, check if we can get it from the roomMap
-            //         // The roomMap keys are the actual room type IDs we need for inventory updates (e.g., 325697395)
-            //         if (!roomTypeId) {
-            //             // Find a roomMap entry that corresponds to this rate plan's room
-            //             for (const mapRoomTypeId in roomMap) {
-            //                 if (roomMap[mapRoomTypeId].roomTypeData && 
-            //                     roomMap[mapRoomTypeId].roomTypeData.name === roomTypeName) {
-            //                     roomTypeId = mapRoomTypeId;
-            //                     break;
-            //                 }
-            //             }
-            //         }
+                    // Check if this rate plan is a child rate plan in any other plan's linkage tree
+                    for (const otherRatePlanId in ratePlanMap) {
+                        const otherRatePlan = ratePlanMap[otherRatePlanId];
+                        if (otherRatePlan && otherRatePlan.linkageTree && otherRatePlan.linkageTree.rootRatePlan && otherRatePlan.linkageTree.rootRatePlan.childRatePlans) {
+                            const childPlans = otherRatePlan.linkageTree.rootRatePlan.childRatePlans;
+                            const foundChildPlan = childPlans.find(child => child && (child.ratePlanId === Number(ratePlanId) || child.ratePlanId === ratePlanId));
+                            
+                            if (foundChildPlan) {
+                                isChildRatePlan = true;
+                                parentRatePlanId = otherRatePlanId;
+                                planNameWithType = foundChildPlan.ratePlanNameWithType || foundChildPlan.ratePlanNameWithTypeAndAdjustment || null;
+                                break;
+                            }
+                        }
+                    }
                     
-            //         // If still not found, try to infer it from rate and restriction data
-            //         if (!roomTypeId) {
-            //             // Look for any date entry that might contain the roomTypeId
-            //             const firstDateKey = Object.keys(ratePlan.rateAndRestrictionByDate)[0];
-            //             if (firstDateKey && ratePlan.rateAndRestrictionByDate[firstDateKey][0]) {
-            //                 const firstDateData = ratePlan.rateAndRestrictionByDate[firstDateKey][0];
-            //                 if (firstDateData.roomTypeId) {
-            //                     roomTypeId = firstDateData.roomTypeId;
-            //                 }
-            //             }
-            //         }
+                    // If not a child plan, check if it's a root plan with its own name
+                    if (!isChildRatePlan && ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
+                        planNameWithType = ratePlan.linkageTree.rootRatePlan.ratePlanNameWithType || null;
+                    }
+                    
+                    // Store the rate plan name for later use in updates
+                    if (planNameWithType) {
+                        window.expediaRatePlans[ratePlanId] = planNameWithType;
+                    }
+                    
+                    // Add rate plan to the group
+                    roomTypeGroups[roomTypeId].ratePlans.push({
+                        ratePlanId: ratePlanId,
+                        ratePlan: ratePlan,
+                        isChildRatePlan: isChildRatePlan,
+                        parentRatePlanId: parentRatePlanId,
+                        planNameWithType: planNameWithType
+                    });
+                }
+            }
 
-            //         // If we still don't have a roomTypeId, use the ratePlanId as a fallback
-            //         roomTypeId = roomTypeId || ratePlanId;
+            // Second pass: create cards for each room type with its rate plans
+            for (const roomTypeId in roomTypeGroups) {
+                if (Object.prototype.hasOwnProperty.call(roomTypeGroups, roomTypeId)) {
+                    const group = roomTypeGroups[roomTypeId];
+                    const roomInventory = roomMap[roomTypeId] || {};
                     
-            //         // Initialize group if needed
-            //         if (!roomTypeGroups[roomTypeId]) {
-            //             roomTypeGroups[roomTypeId] = {
-            //                 roomTypeId: roomTypeId,
-            //                 roomTypeName: roomTypeName,
-            //                 ratePlans: []
-            //             };
-            //         }
-                    
-            //         // Find if this is a child rate plan
-            //         let isChildRatePlan = false;
-            //         let parentRatePlanId = null;
-            //         let planNameWithType = null;
-                    
-            //         // Check if this rate plan is a child rate plan in any other plan's linkage tree
-            //         for (const otherRatePlanId in ratePlanMap) {
-            //             const otherRatePlan = ratePlanMap[otherRatePlanId];
-            //             if (otherRatePlan && otherRatePlan.linkageTree && otherRatePlan.linkageTree.rootRatePlan && otherRatePlan.linkageTree.rootRatePlan.childRatePlans) {
-            //                 const childPlans = otherRatePlan.linkageTree.rootRatePlan.childRatePlans;
-            //                 const foundChildPlan = childPlans.find(child => child && (child.ratePlanId === Number(ratePlanId) || child.ratePlanId === ratePlanId));
+                    // Process each rate plan in this room type
+                    group.ratePlans.forEach(({ratePlanId, ratePlan, isChildRatePlan, parentRatePlanId, planNameWithType}) => {
+                        let liData = "";
+                        
+                        // Use the planNameWithType from childRatePlans or fallback
+                        let ratePlanName = planNameWithType || "Standard Rate";
+                        
+                        // Get all dates from the rate plan
+                        const dates = Object.keys(ratePlan.rateAndRestrictionByDate).sort();
+                        
+                        // Process each date
+                        dates.forEach(dateStr => {
+                            const dateData = ratePlan.rateAndRestrictionByDate[dateStr];
+                            if (!dateData || !dateData[0]) return;
                             
-            //                 if (foundChildPlan) {
-            //                     isChildRatePlan = true;
-            //                     parentRatePlanId = otherRatePlanId;
-            //                     planNameWithType = foundChildPlan.ratePlanNameWithType || foundChildPlan.ratePlanNameWithTypeAndAdjustment || null;
-            //                     break;
-            //                 }
-            //             }
-            //         }
-                    
-            //         // If not a child plan, check if it's a root plan with its own name
-            //         if (!isChildRatePlan && ratePlan && ratePlan.linkageTree && ratePlan.linkageTree.rootRatePlan) {
-            //             planNameWithType = ratePlan.linkageTree.rootRatePlan.ratePlanNameWithType || null;
-            //         }
-                    
-            //         // Store the rate plan name for later use in updates
-            //         if (planNameWithType) {
-            //             window.expediaRatePlans[ratePlanId] = planNameWithType;
-            //         }
-                    
-            //         // Add rate plan to the group
-            //         roomTypeGroups[roomTypeId].ratePlans.push({
-            //             ratePlanId: ratePlanId,
-            //             ratePlan: ratePlan,
-            //             isChildRatePlan: isChildRatePlan,
-            //             parentRatePlanId: parentRatePlanId,
-            //             planNameWithType: planNameWithType
-            //         });
-            //     }
-            // }
+                            const rateInfo = dateData[0];
+                            const isRoomBookable = rateInfo.isRoomTypeBookable ? "Bookable" : "Closed";
+                            
+                            // Get price information
+                            let price = 0;
+                            if (rateInfo.rateInformation && rateInfo.rateInformation.length > 0) {
+                                price = rateInfo.rateInformation[0].amount;
+                            }
+                            
+                            // Get inventory information
+                            let roomToSell = 0;
+                            // Check if we have inventory data for this room and date
+                            if (roomInventory.inventoryDateMap && roomInventory.inventoryDateMap[dateStr]) {
+                                const inventoryInfo = roomInventory.inventoryDateMap[dateStr].inventoryInformationModel;
+                                if (inventoryInfo) {
+                                    roomToSell = inventoryInfo.inventoryAvailable || 0;
+                                }
+                            } else if (!rateInfo.isZeroInventory) {
+                                roomToSell = 10; // Default value when inventory isn't available
+                            }
+                            
+                            // Create list item for this date, making sure to pass the actual roomTypeId from roomMap
+                            liData += createCommonListItem(
+                                dateStr,
+                                roomToSell,
+                                price,
+                                isRoomBookable,
+                                `xgjg5('${dateStr}', '${ratePlanId}', ${price}, ${roomToSell}, '${roomTypeId}', '${group.roomTypeName.replace(/'/g, "\\'")}')`
+                            );
+                        });
+                        
+                        // Create card with the rate plan information, using the proper plan name
+                        tempData += createCommonCard(
+                            "Expedia",
+                            ratePlan,
+                            `${roomTypeId}-${ratePlanId}`,
+                            `${group.roomTypeName} - ${ratePlanName} (Room ID: ${roomTypeId})`,
+                            liData
+                        );
+                    });
+                }
+            }
 
-            // // Second pass: create cards for each room type with its rate plans
-            // for (const roomTypeId in roomTypeGroups) {
-            //     if (Object.prototype.hasOwnProperty.call(roomTypeGroups, roomTypeId)) {
-            //         const group = roomTypeGroups[roomTypeId];
-            //         const roomInventory = roomMap[roomTypeId] || {};
-                    
-            //         // Process each rate plan in this room type
-            //         group.ratePlans.forEach(({ratePlanId, ratePlan, isChildRatePlan, parentRatePlanId, planNameWithType}) => {
-            //             let liData = "";
-                        
-            //             // Use the planNameWithType from childRatePlans or fallback
-            //             let ratePlanName = planNameWithType || "Standard Rate";
-                        
-            //             // Get all dates from the rate plan
-            //             const dates = Object.keys(ratePlan.rateAndRestrictionByDate).sort();
-                        
-            //             // Process each date
-            //             dates.forEach(dateStr => {
-            //                 const dateData = ratePlan.rateAndRestrictionByDate[dateStr];
-            //                 if (!dateData || !dateData[0]) return;
-                            
-            //                 const rateInfo = dateData[0];
-            //                 const isRoomBookable = rateInfo.isRoomTypeBookable ? "Bookable" : "Closed";
-                            
-            //                 // Get price information
-            //                 let price = 0;
-            //                 if (rateInfo.rateInformation && rateInfo.rateInformation.length > 0) {
-            //                     price = rateInfo.rateInformation[0].amount;
-            //                 }
-                            
-            //                 // Get inventory information
-            //                 let roomToSell = 0;
-            //                 // Check if we have inventory data for this room and date
-            //                 if (roomInventory.inventoryDateMap && roomInventory.inventoryDateMap[dateStr]) {
-            //                     const inventoryInfo = roomInventory.inventoryDateMap[dateStr].inventoryInformationModel;
-            //                     if (inventoryInfo) {
-            //                         roomToSell = inventoryInfo.inventoryAvailable || 0;
-            //                     }
-            //                 } else if (!rateInfo.isZeroInventory) {
-            //                     roomToSell = 10; // Default value when inventory isn't available
-            //                 }
-                            
-            //                 // Create list item for this date, making sure to pass the actual roomTypeId from roomMap
-            //                 liData += createCommonListItem(
-            //                     dateStr,
-            //                     roomToSell,
-            //                     price,
-            //                     isRoomBookable,
-            //                     `xgjg5('${dateStr}', '${ratePlanId}', ${price}, ${roomToSell}, '${roomTypeId}', '${group.roomTypeName.replace(/'/g, "\\'")}')`
-            //                 );
-            //             });
-                        
-            //             // Create card with the rate plan information, using the proper plan name
-            //             tempData += createCommonCard(
-            //                 "Expedia",
-            //                 ratePlan,
-            //                 `${roomTypeId}-${ratePlanId}`,
-            //                 `${group.roomTypeName} - ${ratePlanName} (Room ID: ${roomTypeId})`,
-            //                 liData
-            //             );
-            //         });
-            //     }
-            // }
-
-            // window.viewBox.innerHTML += tempData;
+            window.viewBox.innerHTML += tempData;
         }
 
         // Format date for Agoda API in yyyy-MM-dd format
@@ -836,12 +985,12 @@
             const meg = event.data
             console.log(meg)
             switch (meg.type) {
-                case "inventory":
-                    creatCardBooking(meg)
-                    break;
-                case "inventoryCtrip":
-                    creatCardCtrip(meg)
-                    break;
+                // case "inventory":
+                //     creatCardBooking(meg)
+                //     break;
+                // case "inventoryCtrip":
+                //     creatCardCtrip(meg)
+                //     break;
                 case "inventoryAgodaHotel":
                     creatAgodaHotelCtrip(meg)
                     break;
@@ -854,6 +1003,14 @@
                 // case "inventoryExped
                 case "ratesAndAvailabilityExpedia":
                     creatExpedia(meg)
+                    break;
+                    
+                // case "queryRoomTypeDetailCtrip":
+                //     queryRoomTypeDetailCtrip(meg)
+                //     break;
+                    
+                case "displayCtripAvailability":
+                    displayCtripAvailability(meg)
                     break;
                 case "inventoryBooking":
                     creatCardBooking(meg)
@@ -886,12 +1043,6 @@
                         location.reload();
                     }
                     break;
-                case "queryRoomTypeDetailCtrip":
-                    queryRoomTypeDetailCtrip(meg)
-                    break;
-                case "displayCtripAvailability":
-                    displayCtripAvailability(meg)
-                    break;
                 default:
                     break;
             }
@@ -918,7 +1069,7 @@
         else window.endDate.value = getDateNDaysAgo(31)
 
 
-        function xgjg(oldPrice, room_id, rate_id, from_date, until_date, occupancy, roomNum) {
+        function xgjg(oldPrice, room_id, rate_id, from_date, until_date, occupancy, roomNum, hotelId) {
             window.startDateC.value = from_date
             window.endDateC.value = until_date
             window.roomP.value = oldPrice
@@ -926,8 +1077,9 @@
             window.room_id = room_id
             window.rate_id = rate_id
             window.occupancy = occupancy
+            window.currentHotelId = hotelId || ''
             document.querySelector('#modal-form .card-header h3').textContent = "Edit Booking Room"
-            document.querySelector('#modal-room-info').textContent = `Room ID: ${room_id}, Rate ID: ${rate_id}, Occupancy: ${occupancy}`
+            document.querySelector('#modal-room-info').textContent = `Hotel ID: ${hotelId || 'N/A'}, Room ID: ${room_id}, Rate ID: ${rate_id}, Occupancy: ${occupancy}`
         }
         function xgjg2(oldPrice, room_id, basicRoomId, from_date, until_date, person, roomNum, roomName) {
             // Format dates from YYYYMMDD to YYYY-MM-DD if needed
@@ -1143,7 +1295,7 @@
                 return;
             }
 
-            // For Expedia update handling
+            // For Expedia updates - use the bulk update function
             if (window.ExpediapID && window.roomID) {
                 // Format request for Expedia room and rate update
                 const request = {
@@ -1187,9 +1339,64 @@
                 return;
             }
 
+            // For Booking updates - use the bulk update function
+            if (window.room_id && window.rate_id && window.currentHotelId) {
+                // Format request for Booking room and rate update exactly as in the example
+                const priceUpdate = {
+                    room_id: parseInt(window.room_id),
+                    rate_id: parseInt(window.rate_id),
+                    from_date: window.startDateC.value,
+                    until_date: window.endDateC.value,
+                    field_name: "price",
+                    field_value: parseInt(window.roomP.value),
+                    occupancy: parseInt(window.occupancy)
+                };
+                
+                const availabilityUpdate = {
+                    room_id: parseInt(window.room_id),
+                    from_date: window.startDateC.value,
+                    until_date: window.endDateC.value,
+                    field_name: "rooms_to_sell",
+                    field_value: parseInt(window.roomN.value)
+                };
+                
+                const request = {
+                    hotelId: window.currentHotelId,
+                    updates: [priceUpdate, availabilityUpdate]
+                };
+
+                console.log("Sending Booking bulk update request:", request);
+                sendMessage('updateBulkRoomPrice', request);
+
+                // Close the modal after sending the request
+                const modalElement = document.getElementById('modal-form');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+
+                // Add a temporary success message
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'alert alert-info';
+                messageDiv.style.position = 'fixed';
+                messageDiv.style.top = '20px';
+                messageDiv.style.left = '50%';
+                messageDiv.style.transform = 'translateX(-50%)';
+                messageDiv.style.zIndex = '9999';
+                messageDiv.innerHTML = `Updating Booking room ${window.room_id} and rate plan ${window.rate_id} from ${window.startDateC.value} to ${window.endDateC.value}...`;
+                document.body.appendChild(messageDiv);
+
+                // Remove the message after 3 seconds
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 3000);
+
+                return;
+            }
+
             // For other hotel types
             sendMessage('updatePrice', {
-                hotel_id: window.bookingID,
+                hotel_id: window.currentHotelId || window.bookingID,
                 ctripID: window.ctripID,
                 room_id: window.room_id,
                 room_id_ctrip: window.room_id_ctrip,
@@ -1227,59 +1434,54 @@
         fetch("https://cunchu.site/work/storage/appartment/room.json", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                window.bookingID = result[getQueryParam('hotelID')].Booking[0]
-                window.ctripID = result[getQueryParam('hotelID')].Trip[0]
+                window.bookingID = result[getQueryParam('hotelID')]["Booking"]
+                window.ctripID = result[getQueryParam('hotelID')]["Trip"]
                 window.AgodaHotelID = result[getQueryParam('hotelID')]["Agoda Hotel"]
                 // window.AgodaHomesID= result[getQueryParam('hotelID')]["Agoda Homes"]
                 window.AgodaHomesID = result[getQueryParam('hotelID')]["Agoda homes upc"][0]
-                window.ExpediaID = result[getQueryParam('hotelID')]["Expedia"][0]
-                // booking
-                // sendMessage('getInventory', {
-                //     page: nowPage - 1,
-                //     hotelID: bookingID,
-                //     ebooking: window.ctripID,
-                //     AgodaHotelID: window.AgodaHotelID,
-                //     ExpediaID: window.ExpediaID,
-                //     // AgodaHomesID: window.AgodaHomesID,
-                //     // AgodaHomesUpcID: window.AgodaHomesUpcID,
-                //     start: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
-                //     end: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31),
-                // })
+                window.ExpediaID = result[getQueryParam('hotelID')]["Expedia"]
+                
+                console.log(window.AgodaHotelID)
 
                 // Send request for Agoda Hotel data
-                if (window.AgodaHotelId) {
+                // if () {
+                // for (let i = 0; i < window.AgodaHotelID.length; i++) {
                     sendMessage('getInventoryAgodaHotel', {
                         AgodaHotelID: window.AgodaHotelID,
                         start: getQueryParam('start') ? formatDateForAgoda(getQueryParam('start')) : formatDateForAgoda(getDateNDaysAgo(0)),
                         end: getQueryParam('end') ? formatDateForAgoda(getQueryParam('end')) : formatDateForAgoda(getDateNDaysAgo(31)),
                         getAllDates: true  // Add a flag to indicate we want all dates
                     })
-                }
+                // }
 
                 // Send request for Ctrip data
-                if (window.ctripID) {
+                // if (window.ctripID && window.ctripID.length > 0) {
+                for (let i = 0; i < window.ctripID.length; i++) {
                     sendMessage('getInventoryCtrip', {
-                        hotelId: window.ctripID,
+                        hotelId: window.ctripID[i],
                         startDate: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
                         endDate: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31)
                     })
                 }
 
                 // Send request for Expedia rate plans
-                if (window.ExpediaID) {
+                // if (window.ExpediaID && window.ExpediaID.length > 0) {
+                for (let i = 0; i < window.ExpediaID.length; i++) {
                     sendMessage('getRatePlans', {
-                        ExpediaID: window.ExpediaID,
+                        ExpediaID: window.ExpediaID[i],
                         start: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
                         end: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31)
                     })
                 }
+                // }
 
-                // Send request for Booking inventory
+                // Send request for Booking inventory - with consolidated mode
                 if (window.bookingID) {
                     sendMessage('inventoryBooking', {
                         hotelID: window.bookingID,
                         startDate: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
-                        endDate: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31)
+                        endDate: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31),
+                        consolidateResponses: true // Flag to indicate we want a consolidated response with all hotels
                     })
                 }
             })
