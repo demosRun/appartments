@@ -612,6 +612,7 @@ function inventoryBooking(userID, value) {
             });
         })
         .then(data => {
+            console.log("data", data);
             if (consolidateResponses) {
                 // Add this hotel's data to the consolidated response
                 // Make sure to preserve the full response structure for each hotel

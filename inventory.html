@@ -1476,14 +1476,14 @@
                 // }
 
                 // Send request for Booking inventory - with consolidated mode
-                if (window.bookingID) {
+                // if (window.bookingID) {
                     sendMessage('inventoryBooking', {
                         hotelID: window.bookingID,
                         startDate: getQueryParam('start') ? getQueryParam('start') : getDateNDaysAgo(0),
                         endDate: getQueryParam('end') ? getQueryParam('end') : getDateNDaysAgo(31),
                         consolidateResponses: true // Flag to indicate we want a consolidated response with all hotels
                     })
-                }
+                // }
             })
             .catch((error) => console.error(error));
 
