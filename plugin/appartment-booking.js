@@ -620,7 +620,7 @@ function inventoryBooking(userID, value) {
                 processedHotels++;
                 
                 // If we've processed all hotels, send the consolidated response
-                if (processedHotels === totalHotels) {
+                // if (processedHotels === totalHotels) {
                     // Create a properly formatted consolidated response
                     const consolidatedResponse = {
                         success: 1,
@@ -637,7 +637,7 @@ function inventoryBooking(userID, value) {
                     };
                     
                     owoSocket.send("inventoryBooking", consolidatedResponse, userID);
-                }
+                // }
             } else {
                 // Send individual response for this hotel
                 owoSocket.send("inventoryBooking", data, userID);
